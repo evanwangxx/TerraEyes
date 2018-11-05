@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <meta name="application-name" content="Terra_Eyes v1.0.0">
+        <meta name="author" content="neptunewang">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Terra Eyes</title>
+        <link rel="stylesheet" href="css/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+        <link rel="icon" href="css/homepage/start.png" type="icon">
+        <link rel="shortcut icon" href="css/homepage/start.png" type="icon">
+        <script src="bin/jquery.min.js"></script>
+        <script src="css/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+        <style>
+        .row.content {height: 800px}
+
+        .sidenav {
+            background-color: #f1f1f1;
+            height: 100%;
+        }
+
+        footer {
+            background-color: #555;
+            color: white;
+            padding: 15px;
+        }
+
+        @media screen and (max-width: 767px) {
+            .sidenav {
+            height: auto;
+            padding: 15px;
+            }
+            .row.content {height: auto;} 
+        }
+        </style>
+
+    </head>
+
+    <body>
+
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" title="Terra Eyes">Terra Eyes</a>
+                    
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="terraeyes.html">主页</a></li>
+                        <li><a href="html/pointermap.html">地图打点</a></li>
+                        <li><a href="html/heatmap.html">热力图</a></li>
+                        <li><a href="html/bubblemap.html">泡泡图</a></li>
+                        <li><a href="html/locationdecision.html">辅助选址</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="html/about.html"><span class="glyphicon glyphicon-log-in"></span>关于</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container-fluid text-center">     
+            <div class="row content">
+                <div class="col-sm-2 sidenav">
+                    <p><a href="#">Link</a></p>
+                    <p><a href="#">Link</a></p>
+                    <p><a href="#">Link</a></p>
+                </div>
+
+                <div class="col-sm-8 text-left"> 
+                    <div id="myCarousel" class="carousel slide" data-ride="carousel" style="margin:30px;">
+                        <!-- Indicators -->
+                        <ol class="carousel-indicators">
+                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#myCarousel" data-slide-to="1"></li>
+                        </ol>
+
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner">
+                            <div class="item active">
+                              <img src="css/homepage/heatmap.jpg" alt="heat">
+                              <div class="carousel-caption">
+                                <h3>热力图</h3>
+                                <p>添加热力图到地图上, 适用于做热力、数据分析等场景。</p>
+                              </div>
+                            </div>
+
+                            <div class="item">
+                              <img src="css/homepage/pointmap.png" alt="bubble">
+                              <div class="carousel-caption">
+                                <h3 style="color: black">气泡图</h3>
+                                <p style="color: black">添加热力图到地图上, 可以使用气泡的大小和颜色来判断在这些位置的数据值。</p>
+                              </div>
+                            </div>
+                        </div>
+
+                        <!-- Left and right controls -->
+                        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-sm-2 sidenav">
+                    <div class="well">
+                        <p>ADS</p>
+                    </div>
+                    <div class="well">
+                        <p>ADS</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+    <footer class="container-fluid text-center">
+        <p>Copyright © 1998 - 2018 Tencent. All Rights Reserved.</p>
+        <p> 腾讯公司 版权所有 </p>
+    </footer>
+</html>
