@@ -3,6 +3,7 @@ var STORE_JSON;
 var COMPA_JSON;
 var COMPA_JSON2;
 var LOCATION_SELECT;
+let GEOHASH_JSON;
 
 
 // ************************* basic data loader/decoder *****************************
@@ -108,6 +109,28 @@ function csvCompaLoader2() {
 }
 
 
+function csvGeohash() {
+
+	$("#geohash_data").change( function() {
+
+		var fileSelector = $("#geohash_data")[0].files;
+		var file = fileSelector[0];
+
+		console.log(fileSelector);
+
+		$("fileNamesDes").text(fileSelector[0].name);
+
+		var reader = new FileReader();
+
+		reader.onload = function() {
+			GEOHASH_JSON = processDataToJSON(this.result, header=["geohash","分数"], split=',');
+		};
+
+		reader.readAsText(file);
+	});
+}
+
+
 function processDataToJSON(csv, header=["lng", 'lat', "分数"], split=',') {
 
 	var allTextLines = csv.split(/\r\n|\n/);
@@ -205,7 +228,7 @@ var CURRENT_PCC = {
 
 
 function showProvince() {
-	BTN.disabled = false;
+	// BTN.disabled = false;
 
 	for (var i=0; i<PROVINCE_CITY_COUNTRY.length; i++) {
 		var province_option = document.createElement("option");
@@ -295,7 +318,6 @@ function getPasteText() {
 
 		if (text != "") {
 			let json = processDataToJSON(text, header=["lng", 'lat', '详细'], split=',');
-
 			jsonToTable(json, "#trans_data", 10)
 			console.log(json);
 			TEXT_DATA = json;
@@ -316,7 +338,7 @@ function quickSort(data) {
 	var right = [];
 
 	for (var i=0; i<data.length; ++i) {
-		if (data[i]['分数'] >= pivot['分数']) {
+		if (parseInt(data[i]['分数']) >= parseInt(pivot['分数'])) {
 			left.push(data[i]);
 		} else {
 			right.push(data[i]);

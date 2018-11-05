@@ -1,4 +1,3 @@
-
 var MAP;
 var ZOOM;
 
@@ -27,6 +26,7 @@ function addMarker(map, point, text, color="http://webapi.amap.com/theme/v1.3/ma
     });
 }
 
+
 function layerOfMarker(map, data) {
 
 	for (var i=0; i<data.length; i++) {
@@ -35,6 +35,7 @@ function layerOfMarker(map, data) {
 	}
 	console.log("Layer label Done");
 }
+
 
 function addCircle(map, point, radius, color='#FA5858', bubble=false) {
 
@@ -64,6 +65,7 @@ function addCircle(map, point, radius, color='#FA5858', bubble=false) {
 	var circle = new qq.maps.Circle(option);
 }
 
+
 function addLabel(map, point, text, offsetOrNot, color="#242424", backgroundColor="") {
 
 	var cssC = {
@@ -90,9 +92,10 @@ function addLabel(map, point, text, offsetOrNot, color="#242424", backgroundColo
 	}
 }
 
-function layerOfHeat(map, data, valueField="分数", radius=1, maxOpacity=0.8) {
-	qq.maps.event.addListenerOnce(map, "idle", function() {
 
+function layerOfHeat(map, data, valueField="分数", radius=1, maxOpacity=0.8) {
+
+	qq.maps.event.addListenerOnce(map, "idle", function() {
 		if (QQMapPlugin.isSupportCanvas) {
 			options = {
 				"radius": radius,
@@ -110,6 +113,33 @@ function layerOfHeat(map, data, valueField="分数", radius=1, maxOpacity=0.8) {
 	});
 }
 
+function addPolygon(map, polygon_array, strokecolor, strokeWeight, fillcolor, fillOpacity) {
+    
+    var polygon = new qq.maps.Polygon({
+    	map: map,
+        path: polygon_array,
+        strokeColor: strokecolor,
+        strokeWeight: strokeWeight,
+        fillColor: qq.maps.Color.fromHex(fillcolor, fillOpacity)
+    });
+}
+
+function layerOfGeohash(map, geohash, score){
+
+    this.box = decodeGeoHash(geohash);
+    color = getColr(score);
+
+    var polygonArr = new Array(
+        new qq.maps.LatLng(this.box.latitude[1]*1.0, this.box.longitude[0]*1.0), 
+        new qq.maps.LatLng(this.box.latitude[1]*1.0, this.box.longitude[1]*1.0),
+        new qq.maps.LatLng(this.box.latitude[0]*1.0, this.box.longitude[1]*1.0),
+        new qq.maps.LatLng(this.box.latitude[0]*1.0, this.box.longitude[0]*1.0)
+        );
+
+    addPolygon(map, polygonArr, color, 0, color, 0.6);
+}
+
+
 function addressToLatLng (address) {
 	geocoder = new qq.maps.Geocoder();
 
@@ -118,6 +148,7 @@ function addressToLatLng (address) {
 		ADDRESS_POINT = result.detail.location;
 	});
 }
+
 
 function loadMap(point, zoom=3, mapTypeId=qq.maps.MapTypeId.ROADMAP){
 
@@ -180,7 +211,7 @@ function run(pointer=false, data=HEAT_JSON) {
 }
 
 
-function run_point(data=TEXT_DATA) {
+function run_point (data=TEXT_DATA) {
 
 	var point = new qq.maps.LatLng(data[0].lat, data[0].lng);
 	loadMap(point, zoom=14);
@@ -188,9 +219,7 @@ function run_point(data=TEXT_DATA) {
 }
 
 
-function run_bubble(pointer=false, data=HEAT_JSON, length=100) {
-
-	console.log(HEAT_JSON);
+function run_bubble (pointer=false, data=HEAT_JSON, length=100) {
 
 	if (pointer) {
 		console.log("pointer map");
@@ -209,17 +238,45 @@ function run_bubble(pointer=false, data=HEAT_JSON, length=100) {
 	var data_min = data_sort[data_sort.length-1]["分数"]
 	var radius_max = 800;
 	var radius_min = 400;
-
 	console.log(data_sort);
-	console.log(data_max, data_min);
 
-	for(var i=0; i<data_sort.length && i<length; i++) {
+	for(var i=0; i<data_sort.length && i<length; ++i) {
 
 		let point = new qq.maps.LatLng(data_sort[i]["lat"], data_sort[i]["lng"]);
-		var radius = ((parseInt(data_sort[i]["分数"])-data_min)/(data_max-data_min))*(radius_max-radius_min)+radius_min
+		var radius = ((parseInt(data_sort[i]["分数"])-data_min)/(data_max-data_min))*(radius_max-radius_min)+radius_min;
 		if (radius != NaN) {
-			console.log(radius);
 			addCircle(MAP, point, radius);
 		}
 	}
+}
+
+
+function run_geohash (pointer=false, data=GEOHASH_JSON) {
+
+    var data_sort = quickSort(data);
+	data_sort.pop();
+	var data_max = data_sort[0]["分数"];
+	var data_min = data_sort[data_sort.length-1]["分数"];
+	var radius_max = 1.1;
+	var radius_min = 0.0;
+
+	if (pointer) {
+		console.log("pointer map");
+		let latlng = userInputLatLng();
+    	let point = new qq.maps.LatLng(latlng[0], latlng[1]);
+    	loadMap(point, zoom=14);
+	} else {
+		var point = decodeGeoHash(data_sort[0]['geohash'])
+		var center = new qq.maps.LatLng(point.latitude[1], point.longitude[1]); 
+	    loadMap(center, zoom=13);
+	}
+
+    for (var i=0; i<data.length; ++i) {
+
+    	var geohash = data[i]["geohash"];
+    	var score = ((parseInt(data_sort[i]["分数"])-data_min)/(data_max-data_min))*(radius_max-radius_min)+radius_min;
+    	if (score >= 0.5) {
+    		layerOfGeohash(MAP, geohash, score);
+    	}
+    }
 }
