@@ -12,7 +12,7 @@ function userInputLatLng() {
 
 	var lat = prompt("Please enter latitude: ", "22.627453");
 	var lng = prompt("Please enter longtitude: ", "114.030207");
-	
+
 	if (lat != null && lng != null) {
 		alert("latitude: " + lat + " | longtitude: " + lng);
 	} else if (lat == null) {
@@ -22,14 +22,14 @@ function userInputLatLng() {
 	} else {
 		alert("cancel");
 	}
-	
+
 	return [Number(lat), Number(lng)];
 }
 
 
 function csvHeatLoader() {
 
-	$("#heat_data").change( function() {
+	$("#heat_data").change(function() {
 
 		var fileSelector = $("#heat_data")[0].files;
 		var file = fileSelector[0];
@@ -51,7 +51,7 @@ function csvHeatLoader() {
 
 function csvStoreLoader() {
 
-	$("#store_data").change( function() {
+	$("#store_data").change(function() {
 
 		var fileSelector = $("#store_data")[0].files;
 		var file = fileSelector[0];
@@ -61,7 +61,7 @@ function csvStoreLoader() {
 		var reader = new FileReader();
 
 		reader.onload = function() {
-			STORE_JSON = processDataToJSON(this.result, header=["store", "lng", "lat", "省份", "城市", "具体地址"], split=',');
+			STORE_JSON = processDataToJSON(this.result, header = ["store", "lng", "lat", "省份", "城市", "具体地址"], split = ',');
 		};
 
 		reader.readAsText(file);
@@ -71,7 +71,7 @@ function csvStoreLoader() {
 
 function csvCompaLoader() {
 
-	$("#compa_data").change( function() {
+	$("#compa_data").change(function() {
 
 		var fileSelector = $("#compa_data")[0].files;
 		var file = fileSelector[0];
@@ -81,7 +81,7 @@ function csvCompaLoader() {
 		var reader = new FileReader();
 
 		reader.onload = function() {
-			COMPA_JSON = processDataToJSON(this.result, header=["省份","城市","lng","lat","store"], split=',');
+			COMPA_JSON = processDataToJSON(this.result, header = ["省份", "城市", "lng", "lat", "store"], split = ',');
 		};
 
 		reader.readAsText(file);
@@ -91,7 +91,7 @@ function csvCompaLoader() {
 
 function csvCompaLoader2() {
 
-	$("#compa_data2").change( function() {
+	$("#compa_data2").change(function() {
 
 		var fileSelector = $("#compa_data2")[0].files;
 		var file = fileSelector[0];
@@ -101,7 +101,7 @@ function csvCompaLoader2() {
 		var reader = new FileReader();
 
 		reader.onload = function() {
-			COMPA_JSON2 = processDataToJSON(this.result, header=["省份","城市","lng","lat","store","具体地址"], split=',');
+			COMPA_JSON2 = processDataToJSON(this.result, header = ["省份", "城市", "lng", "lat", "store", "具体地址"], split = ',');
 		};
 
 		reader.readAsText(file);
@@ -111,7 +111,7 @@ function csvCompaLoader2() {
 
 function csvGeohash() {
 
-	$("#geohash_data").change( function() {
+	$("#geohash_data").change(function() {
 
 		var fileSelector = $("#geohash_data")[0].files;
 		var file = fileSelector[0];
@@ -123,7 +123,7 @@ function csvGeohash() {
 		var reader = new FileReader();
 
 		reader.onload = function() {
-			GEOHASH_JSON = processDataToJSON(this.result, header=["geohash","分数"], split=',');
+			GEOHASH_JSON = processDataToJSON(this.result, header = ["geohash", "分数"], split = ',');
 		};
 
 		reader.readAsText(file);
@@ -131,18 +131,18 @@ function csvGeohash() {
 }
 
 
-function processDataToJSON(csv, header=["lng", 'lat', "分数"], split=',') {
+function processDataToJSON(csv, header = ["lng", 'lat', "分数"], split = ',') {
 
 	var allTextLines = csv.split(/\r\n|\n/);
-	var lines =[];
+	var lines = [];
 
-	for (var i=0; i<allTextLines.length; i++) {
+	for (var i = 0; i < allTextLines.length; i++) {
 
 		var data = allTextLines[i].split(split);
 		var tmp_dict = {};
 
-		for (var j=0; j<data.length; j++) {
-			 tmp_dict[header[j]] = data[j];
+		for (var j = 0; j < data.length; j++) {
+			tmp_dict[header[j]] = data[j];
 		}
 
 		lines.push(tmp_dict);
@@ -151,25 +151,25 @@ function processDataToJSON(csv, header=["lng", 'lat', "分数"], split=',') {
 }
 
 
-function jsonToTable(json, id, num=10) {
+function jsonToTable(json, id, num = 10) {
 
 	var html = "";
 	var json_headLine = json.slice(0, num);
 
-	$.each(json_headLine, function (index, item) {
-					
-	if (index === 0) {
-		html += "<tr>";
-		$.each(item, function (vlaIndex) {
-			html += "<td><font face=\"Arial\" size=3>";
-			html += vlaIndex;
-			html += "</font></td>";
-		});
-		html += "</tr>";
+	$.each(json_headLine, function(index, item) {
+
+		if (index === 0) {
+			html += "<tr>";
+			$.each(item, function(vlaIndex) {
+				html += "<td><font face=\"Arial\" size=3>";
+				html += vlaIndex;
+				html += "</font></td>";
+			});
+			html += "</tr>";
 		}
 
 		html += "<tr>";
-		$.each(item, function (vlaIndex, valItem) {
+		$.each(item, function(vlaIndex, valItem) {
 			html += "<td><font face=\"Arial\" size=2>";
 			html += valItem;
 			html += "</td>";
@@ -184,8 +184,8 @@ function jsonToTable(json, id, num=10) {
 
 function clickCityList() {
 
-	var myselect=document.getElementById("province_dropdown");
-	var index=myselect.selectedIndex;
+	var myselect = document.getElementById("province_dropdown");
+	var index = myselect.selectedIndex;
 
 	var city_list = myselect.options[index];
 	var province = myselect.options[index].text;
@@ -199,8 +199,8 @@ function clickCityList() {
 
 function clickCircleList(id) {
 
-	var myselect=document.getElementById(id);
-	var index=myselect.selectedIndex;
+	var myselect = document.getElementById(id);
+	var index = myselect.selectedIndex;
 	var distance = myselect.options[index].value;
 
 	return Number(distance);
@@ -210,11 +210,11 @@ function clickCircleList(id) {
 // ************************* Dropdown Province-City-Country *****************************
 
 function $$(str) {
-    return document.getElementById(str);
+	return document.getElementById(str);
 }
 
 
-var ADDRESS_PROV_CITY_COUN = $$("pcc_show");   // selected area
+var ADDRESS_PROV_CITY_COUN = $$("pcc_show"); // selected area
 var BTN = document.getElementsByClassName('met1')[0];
 var PROV_DROPDOWN = $$("province_dropdown1");
 var CITY_DROPDOWN = $$("city_dropdown");
@@ -230,7 +230,7 @@ var CURRENT_PCC = {
 function showProvince() {
 	// BTN.disabled = false;
 
-	for (var i=0; i<PROVINCE_CITY_COUNTRY.length; i++) {
+	for (var i = 0; i < PROVINCE_CITY_COUNTRY.length; i++) {
 		var province_option = document.createElement("option");
 		province_option.innerText = PROVINCE_CITY_COUNTRY[i]["name"];
 		province_option.value = i;
@@ -253,7 +253,7 @@ function showCity(object) {
 	if (value != null) {
 		CITY_DROPDOWN.length = 1;
 
-		for (var i=0; i<PROVINCE_CITY_COUNTRY[value]["city"].length; i++) {
+		for (var i = 0; i < PROVINCE_CITY_COUNTRY[value]["city"].length; i++) {
 			var city_option = document.createElement("option");
 			city_option.innerText = PROVINCE_CITY_COUNTRY[value]["city"][i].name;
 			city_option.value = i;
@@ -266,7 +266,7 @@ function showCity(object) {
 
 function showCountry(object) {
 
-	var value = object.options[object.selectedIndex].value; 
+	var value = object.options[object.selectedIndex].value;
 	CURRENT_PCC.city = value;
 
 	if (value != null) {
@@ -274,11 +274,11 @@ function showCountry(object) {
 		var length = PROVINCE_CITY_COUNTRY[CURRENT_PCC.prov]["city"][value].districtAndCounty.length;
 
 		if (length == 0) {
-			ADDRESS_PROV_CITY_COUN.value = PROVINCE_CITY_COUNTRY[CURRENT_PCC.prov].name 
-			+ PROVINCE_CITY_COUNTRY[CURRENT_PCC.prov]["city"][CURRENT_PCC.city].name
+			ADDRESS_PROV_CITY_COUN.value = PROVINCE_CITY_COUNTRY[CURRENT_PCC.prov].name +
+				PROVINCE_CITY_COUNTRY[CURRENT_PCC.prov]["city"][CURRENT_PCC.city].name
 			return;
 		}
-		for (var i=0; i<length; i++) {
+		for (var i = 0; i < length; i++) {
 			var country_option = document.createElement("option");
 			country_option.innerText = PROVINCE_CITY_COUNTRY[CURRENT_PCC.prov]["city"][value].districtAndCounty[i];
 			country_option.value = i;
@@ -291,10 +291,10 @@ function showCountry(object) {
 
 function selectCountry(object) {
 
-    CURRENT_PCC.country = object.options[object.selectedIndex].value;
-    if ((CURRENT_PCC.city != null)) {
-        BTN.disabled = false;
-    }
+	CURRENT_PCC.country = object.options[object.selectedIndex].value;
+	if ((CURRENT_PCC.city != null)) {
+		BTN.disabled = false;
+	}
 }
 
 
@@ -303,7 +303,7 @@ function showAdderss() {
 	ADDRESS_PROV_CITY_COUN.value = PROVINCE_CITY_COUNTRY[CURRENT_PCC.prov].name;
 
 	LOCATION_SELECT = ADDRESS_PROV_CITY_COUN.value +
-	 PROVINCE_CITY_COUNTRY[CURRENT_PCC.prov]["city"][0].name;
+		PROVINCE_CITY_COUNTRY[CURRENT_PCC.prov]["city"][0].name;
 }
 
 
@@ -313,11 +313,11 @@ var TEXT_DATA;
 
 function getPasteText() {
 
-	$("text-input").ready(function () {
+	$("text-input").ready(function() {
 		var text = $.trim($("textarea").val());
 
 		if (text != "") {
-			let json = processDataToJSON(text, header=["lng", 'lat', '详细'], split=',');
+			let json = processDataToJSON(text, header = ["lng", 'lat', '详细'], split = ',');
 			jsonToTable(json, "#trans_data", 10)
 			console.log(json);
 			TEXT_DATA = json;
@@ -330,14 +330,16 @@ function getPasteText() {
 
 function quickSort(data) {
 
-	if (data.length <= 1) { return data; }
+	if (data.length <= 1) {
+		return data;
+	}
 
 	var pivotIndex = Math.floor(data.length / 2);
 	var pivot = data.splice(pivotIndex, 1)[0]
 	var left = [];
 	var right = [];
 
-	for (var i=0; i<data.length; ++i) {
+	for (var i = 0; i < data.length; ++i) {
 		if (parseInt(data[i]['分数']) >= parseInt(pivot['分数'])) {
 			left.push(data[i]);
 		} else {

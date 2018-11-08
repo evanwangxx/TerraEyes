@@ -30,7 +30,7 @@ function hslToRgb(h, s, l) {
 
 	// return [ Math.round(r * 255), Math.round(g * 255), Math.round(b * 255) ];
 	var ret = showRGB(Math.round(r * 255), Math.round(g * 255), Math
-			.round(b * 255));
+		.round(b * 255));
 	return ret;
 
 }
@@ -41,10 +41,11 @@ function getColr(value) {
 
 	h = (1 - value);
 	s = 1.0;
-	l = 1-value * 0.5;
+	l = 1 - value * 0.5;
 	var ret = hslToRgb(h * 1, s * 1, l * 1);
 	return ret;
 }
+
 function showRGB(r, g, b) {
 
 	red = r;
@@ -402,4 +403,3 @@ function showRGB(r, g, b) {
 	return hexcode;
 
 }
-
