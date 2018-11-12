@@ -129,7 +129,7 @@ function csvGeohash() {
 		var reader = new FileReader();
 
 		reader.onload = function() {
-			GEOHASH_JSON = processDataToJSON(this.result, header = ["geohash", "分数"], split = ',');
+			GEOHASH_JSON = quickSort(processDataToJSON(this.result, header = ["geohash", "分数"], split = ','));
 		};
 
 		reader.readAsText(file);
@@ -334,7 +334,7 @@ function getPasteText() {
 }
 
 
-function quickSort(data) {
+function quickSort(data, by = '分数') {
 
 	if (data.length <= 1) {
 		return data;
@@ -346,7 +346,7 @@ function quickSort(data) {
 	var right = [];
 
 	for (var i = 0; i < data.length; ++i) {
-		if (parseInt(data[i]['分数']) >= parseInt(pivot['分数'])) {
+		if (parseInt(data[i][by]) >= parseInt(pivot[by])) {
 			left.push(data[i]);
 		} else {
 			right.push(data[i]);
@@ -354,4 +354,32 @@ function quickSort(data) {
 	}
 
 	return quickSort(left).concat([pivot], quickSort(right));
+}
+
+
+function standardDeviation(values){
+  var avg = average(values);
+  
+  var squareDiffs = values.map(function(value){
+    var diff = value - avg;
+    var sqrDiff = diff * diff;
+    return sqrDiff;
+  });
+  
+  var avgSquareDiff = average(squareDiffs);
+
+  var stdDev = Math.sqrt(avgSquareDiff);
+  return stdDev;
+}
+
+
+function average(data){
+  var sum = data.reduce(function(sum, value){
+    return sum + value;
+  }, 0);
+
+  console.log(sum);
+
+  var avg = sum / data.length;
+  return avg;
 }

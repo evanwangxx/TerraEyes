@@ -175,7 +175,6 @@ function loadMap(point, zoom = 3, mapTypeId = qq.maps.MapTypeId.ROADMAP) {
 	};
 
 	MAP = new qq.maps.Map(mapContainer, options);
-	return MAP;
 }
 
 
@@ -263,22 +262,22 @@ function run_bubble(pointer = false, data = HEAT_JSON, length = 100) {
 }
 
 
-function run_geohash(pointer = false, data_raw = GEOHASH_JSON, filter = 30) {
+function run_geohash(pointer = false, data_raw = GEOHASH_JSON, filter = 30, gaussian=true) {
 
 	let data = [];
+	let score_array = [];
 	for (var i = 0; i < data_raw.length; ++i) {
-		var tmp_score = data_raw[i]["分数"];
+		var tmp_score = parseInt(data_raw[i]["分数"]);
 		if (tmp_score >= filter) {
 			data.push(data_raw[i]);
+			score_array.push(tmp_score);
 		}
 	}
+	let mean = average(score_array);
+	let std = standardDeviation(score_array)
 
 	var data_sort = quickSort(data);
 	data_sort.pop();
-	var data_max = data_sort[0]["分数"];
-	var data_min = data_sort[data_sort.length - 1]["分数"];
-	var radius_max = 1.00;
-	var radius_min = 0.05;
 
 	if (pointer) {
 		console.log("pointer map");
@@ -291,11 +290,32 @@ function run_geohash(pointer = false, data_raw = GEOHASH_JSON, filter = 30) {
 		loadMap(center, zoom = 13);
 	}
 
-	for (var i = 0; i < data_sort.length; ++i) {
-		var geohash = data_sort[i]["geohash"];
-		var score = ((parseInt(data_sort[i]["分数"]) - data_min) / (data_max - data_min)) * (radius_max - radius_min) + radius_min;
-		if (score >= 0.0) {
-			layerOfGeohash(MAP, geohash, score);
+	if (gaussian) {
+		var data_max = (parseInt(data_sort[0]["分数"]) - mean) / std;
+		var data_min = (parseInt(data_sort[data_sort.length - 1]["分数"] - mean)) / std;
+		var radius_max = 1.00;
+		var radius_min = 0.05;
+
+		for (var i = 0; i < data_sort.length; ++i) {
+			var geohash = data_sort[i]["geohash"];
+			var normal_score = ((parseInt(data_sort[i]["分数"]) - mean) / std);
+			var score = ((normal_score - data_min) / (data_max - data_min)) * (radius_max - radius_min) + radius_min;
+			if (score >= 0.0) {
+				layerOfGeohash(MAP, geohash, score);
+			}
 		}
-	}
+	} else {
+		var data_max = data_sort[0]["分数"];
+		var data_min = data_sort[data_sort.length - 1]["分数"];
+		var radius_max = 1.00;
+		var radius_min = 0.05;
+
+		for (var i = 0; i < data_sort.length; ++i) {
+			var geohash = data_sort[i]["geohash"];
+			var score = ((parseInt(data_sort[i]["分数"]) - data_min) / (data_max - data_min)) * (radius_max - radius_min) + radius_min;
+			if (score >= 0.0) {
+				layerOfGeohash(MAP, geohash, score);
+			}
+		}
+	}	
 }
