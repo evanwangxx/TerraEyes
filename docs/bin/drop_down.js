@@ -1,3 +1,9 @@
+// DropDown.js
+// Dropdown library for Terra Eyes
+// (c) 2018 Hongbo Wang
+// Copyright © 1998 - 2018 Tencent. All Rights Reserved.
+
+
 var CIRCLE_DROP_DOWN = [{
         name: "100m",
         length: 100,

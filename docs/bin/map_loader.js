@@ -1,3 +1,8 @@
+// MapLoader.js
+// Map library for Terra Eyes
+// (c) 2018 Hongbo Wang
+// Copyright © 1998 - 2018 Tencent. All Rights Reserved.
+
 var MAP;
 var ZOOM;
 
@@ -258,14 +263,22 @@ function run_bubble(pointer = false, data = HEAT_JSON, length = 100) {
 }
 
 
-function run_geohash(pointer = false, data = GEOHASH_JSON) {
+function run_geohash(pointer = false, data_raw = GEOHASH_JSON, filter = 30) {
+
+	let data = [];
+	for (var i = 0; i < data_raw.length; ++i) {
+		var tmp_score = data_raw[i]["分数"];
+		if (tmp_score >= filter) {
+			data.push(data_raw[i]);
+		}
+	}
 
 	var data_sort = quickSort(data);
 	data_sort.pop();
 	var data_max = data_sort[0]["分数"];
 	var data_min = data_sort[data_sort.length - 1]["分数"];
-	var radius_max = 1.1;
-	var radius_min = 0.0;
+	var radius_max = 1.00;
+	var radius_min = 0.05;
 
 	if (pointer) {
 		console.log("pointer map");
@@ -278,11 +291,10 @@ function run_geohash(pointer = false, data = GEOHASH_JSON) {
 		loadMap(center, zoom = 13);
 	}
 
-	for (var i = 0; i < data.length; ++i) {
-
-		var geohash = data[i]["geohash"];
+	for (var i = 0; i < data_sort.length; ++i) {
+		var geohash = data_sort[i]["geohash"];
 		var score = ((parseInt(data_sort[i]["分数"]) - data_min) / (data_max - data_min)) * (radius_max - radius_min) + radius_min;
-		if (score >= 0.5) {
+		if (score >= 0.0) {
 			layerOfGeohash(MAP, geohash, score);
 		}
 	}

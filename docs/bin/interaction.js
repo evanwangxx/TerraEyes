@@ -1,3 +1,9 @@
+// Interaction.js
+// user interaction library for Terra Eyes
+// (c) 2018 Hongbo Wang
+// Copyright © 1998 - 2018 Tencent. All Rights Reserved.
+
+
 var HEAT_JSON;
 var STORE_JSON;
 var COMPA_JSON;
