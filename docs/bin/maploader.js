@@ -10,7 +10,6 @@ var ADDRESS_POINT;
 var ADDRESS;
 
 function addMarker(map, point, text, color = "http://webapi.amap.com/theme/v1.3/markers/n/mark_b.png") {
-
 	var icon = new qq.maps.MarkerImage(color);
 	var marker = new qq.maps.Marker({
 		position: point,
@@ -22,7 +21,6 @@ function addMarker(map, point, text, color = "http://webapi.amap.com/theme/v1.3/
 	marker.setShadow(null);
 
 	qq.maps.event.addListener(marker, 'click', function() {
-
 		var info = new qq.maps.InfoWindow({
 			map: map
 		});
@@ -35,7 +33,6 @@ function addMarker(map, point, text, color = "http://webapi.amap.com/theme/v1.3/
 
 
 function layerOfMarker(map, data) {
-
 	for (var i = 0; i < data.length; i++) {
 		var point = new qq.maps.LatLng(data[i].lat, data[i].lng);
 		addMarker(map, point, data[i].详细);
@@ -45,7 +42,6 @@ function layerOfMarker(map, data) {
 
 
 function addCircle(map, point, radius, color = '#FA5858', bubble = false) {
-
 	if (bubble) {
 		var option = {
 			map: map,
@@ -68,18 +64,15 @@ function addCircle(map, point, radius, color = '#FA5858', bubble = false) {
 			strokeWeight: 0.000001
 		}
 	}
-
 	var circle = new qq.maps.Circle(option);
 }
 
 
 function addLabel(map, point, text, offsetOrNot, color = "#242424", backgroundColor = "") {
-
 	var cssC = {
 		color: color,
 		fontWeight: "bold",
 	}
-
 	if (offsetOrNot) {
 		var label = new qq.maps.Label({
 			map: map,
@@ -100,7 +93,6 @@ function addLabel(map, point, text, offsetOrNot, color = "#242424", backgroundCo
 
 
 function layerOfHeat(map, data, valueField = "分数", radius = 1, maxOpacity = 0.8) {
-
 	qq.maps.event.addListenerOnce(map, "idle", function() {
 		if (QQMapPlugin.isSupportCanvas) {
 			options = {
@@ -119,7 +111,6 @@ function layerOfHeat(map, data, valueField = "分数", radius = 1, maxOpacity = 
 }
 
 function addPolygon(map, polygon_array, strokecolor, strokeWeight, fillcolor, fillOpacity) {
-
 	var polygon = new qq.maps.Polygon({
 		map: map,
 		path: polygon_array,
@@ -130,7 +121,6 @@ function addPolygon(map, polygon_array, strokecolor, strokeWeight, fillcolor, fi
 }
 
 function layerOfGeohash(map, geohash, score) {
-
 	this.box = decodeGeoHash(geohash);
 	color = getColr(score);
 
@@ -140,14 +130,12 @@ function layerOfGeohash(map, geohash, score) {
 		new qq.maps.LatLng(this.box.latitude[0] * 1.0, this.box.longitude[1] * 1.0),
 		new qq.maps.LatLng(this.box.latitude[0] * 1.0, this.box.longitude[0] * 1.0)
 	);
-
 	addPolygon(map, polygonArr, color, 0, color, 0.6);
 }
 
 
 function addressToLatLng(address) {
 	geocoder = new qq.maps.Geocoder();
-
 	geocoder.getLocation(address);
 	geocoder.setComplete(function(result) {
 		ADDRESS_POINT = result.detail.location;
@@ -156,7 +144,6 @@ function addressToLatLng(address) {
 
 
 function loadMap(point, zoom = 3, mapTypeId = qq.maps.MapTypeId.ROADMAP) {
-
 	mapContainer = document.getElementById("map-canvas");
 	options = {
 		center: point,
@@ -173,7 +160,6 @@ function loadMap(point, zoom = 3, mapTypeId = qq.maps.MapTypeId.ROADMAP) {
 			position: qq.maps.ControlPosition.BOTTOM_RIGHT
 		}
 	};
-
 	MAP = new qq.maps.Map(mapContainer, options);
 }
 
@@ -182,7 +168,6 @@ function loadMap(point, zoom = 3, mapTypeId = qq.maps.MapTypeId.ROADMAP) {
 
 
 function run(pointer = false, data = HEAT_JSON) {
-
 	var js = document.scripts;
 	console.log(js[js.length - 2].src);
 	let path = js[js.length - 1].src.substring(0, js[js.length - 1].src.lastIndexOf("/"))
@@ -201,7 +186,6 @@ function run(pointer = false, data = HEAT_JSON) {
 		let point = new qq.maps.LatLng(latlng[0], latlng[1]);
 		loadMap(point, zoom = 14);
 		addMarker(MAP, point, "Marker", color = path + "pointer.png");
-
 	} else {
 		addressToLatLng(LOCATION_SELECT);
 		MAP = loadMap(ADDRESS_POINT, zoom = 10);
@@ -223,7 +207,6 @@ function run(pointer = false, data = HEAT_JSON) {
 
 
 function run_point(data = TEXT_DATA) {
-
 	var point = new qq.maps.LatLng(data[0].lat, data[0].lng);
 	loadMap(point, zoom = 14);
 	layerOfMarker(MAP, data);
@@ -231,7 +214,6 @@ function run_point(data = TEXT_DATA) {
 
 
 function run_bubble(pointer = false, data = HEAT_JSON, length = 100) {
-
 	if (pointer) {
 		console.log("pointer map");
 		let latlng = userInputLatLng();
@@ -262,8 +244,7 @@ function run_bubble(pointer = false, data = HEAT_JSON, length = 100) {
 }
 
 
-function run_geohash(pointer = false, data_raw = GEOHASH_JSON, filter = 30, gaussian=true) {
-
+function run_geohash(pointer = false, data_raw = GEOHASH_JSON, filter = 30, gaussian = true) {
 	let data = [];
 	let score_array = [];
 	for (var i = 0; i < data_raw.length; ++i) {
@@ -317,5 +298,5 @@ function run_geohash(pointer = false, data_raw = GEOHASH_JSON, filter = 30, gaus
 				layerOfGeohash(MAP, geohash, score);
 			}
 		}
-	}	
+	}
 }

@@ -15,7 +15,6 @@ let GEOHASH_JSON;
 // ************************* basic data loader/decoder *****************************
 
 function userInputLatLng() {
-
 	var lat = prompt("Please enter latitude: ", "22.627453");
 	var lng = prompt("Please enter longtitude: ", "114.030207");
 
@@ -34,18 +33,12 @@ function userInputLatLng() {
 
 
 function csvHeatLoader() {
-
 	$("#heat_data").change(function() {
-
 		var fileSelector = $("#heat_data")[0].files;
 		var file = fileSelector[0];
 
 		$("fileNamesDes").text(fileSelector[0].name);
-		console.log($("#heat_data"));
-		console.log(fileSelector[0].name);
-
 		var reader = new FileReader();
-
 		reader.onload = function() {
 			HEAT_JSON = processDataToJSON(this.result);
 		};
@@ -56,56 +49,42 @@ function csvHeatLoader() {
 
 
 function csvStoreLoader() {
-
 	$("#store_data").change(function() {
-
 		var fileSelector = $("#store_data")[0].files;
 		var file = fileSelector[0];
 
 		$("fileNamesDes").text(fileSelector[0].name);
-
 		var reader = new FileReader();
-
 		reader.onload = function() {
 			STORE_JSON = processDataToJSON(this.result, header = ["store", "lng", "lat", "省份", "城市", "具体地址"], split = ',');
 		};
-
 		reader.readAsText(file);
 	});
 }
 
 
 function csvCompaLoader() {
-
 	$("#compa_data").change(function() {
-
 		var fileSelector = $("#compa_data")[0].files;
 		var file = fileSelector[0];
 
 		$("fileNamesDes").text(fileSelector[0].name);
-
 		var reader = new FileReader();
-
 		reader.onload = function() {
 			COMPA_JSON = processDataToJSON(this.result, header = ["省份", "城市", "lng", "lat", "store"], split = ',');
 		};
-
 		reader.readAsText(file);
 	});
 }
 
 
 function csvCompaLoader2() {
-
 	$("#compa_data2").change(function() {
-
 		var fileSelector = $("#compa_data2")[0].files;
 		var file = fileSelector[0];
 
 		$("fileNamesDes").text(fileSelector[0].name);
-
 		var reader = new FileReader();
-
 		reader.onload = function() {
 			COMPA_JSON2 = processDataToJSON(this.result, header = ["省份", "城市", "lng", "lat", "store", "具体地址"], split = ',');
 		};
@@ -116,18 +95,12 @@ function csvCompaLoader2() {
 
 
 function csvGeohash() {
-
 	$("#geohash_data").change(function() {
-
 		var fileSelector = $("#geohash_data")[0].files;
 		var file = fileSelector[0];
 
-		console.log(fileSelector);
-
 		$("fileNamesDes").text(fileSelector[0].name);
-
 		var reader = new FileReader();
-
 		reader.onload = function() {
 			GEOHASH_JSON = quickSort(processDataToJSON(this.result, header = ["geohash", "分数"], split = ','));
 		};
@@ -138,19 +111,16 @@ function csvGeohash() {
 
 
 function processDataToJSON(csv, header = ["lng", 'lat', "分数"], split = ',') {
-
 	var allTextLines = csv.split(/\r\n|\n/);
 	var lines = [];
 
 	for (var i = 0; i < allTextLines.length; i++) {
-
 		var data = allTextLines[i].split(split);
 		var tmp_dict = {};
 
 		for (var j = 0; j < data.length; j++) {
 			tmp_dict[header[j]] = data[j];
 		}
-
 		lines.push(tmp_dict);
 	}
 	return lines;
@@ -158,7 +128,6 @@ function processDataToJSON(csv, header = ["lng", 'lat', "分数"], split = ',') 
 
 
 function jsonToTable(json, id, num = 10) {
-
 	var html = "";
 	var json_headLine = json.slice(0, num);
 
@@ -189,7 +158,6 @@ function jsonToTable(json, id, num = 10) {
 
 
 function clickCityList() {
-
 	var myselect = document.getElementById("province_dropdown");
 	var index = myselect.selectedIndex;
 
@@ -204,7 +172,6 @@ function clickCityList() {
 
 
 function clickCircleList(id) {
-
 	var myselect = document.getElementById(id);
 	var index = myselect.selectedIndex;
 	var distance = myselect.options[index].value;
@@ -218,7 +185,6 @@ function clickCircleList(id) {
 function $$(str) {
 	return document.getElementById(str);
 }
-
 
 var ADDRESS_PROV_CITY_COUN = $$("pcc_show"); // selected area
 var BTN = document.getElementsByClassName('met1')[0];
@@ -235,7 +201,6 @@ var CURRENT_PCC = {
 
 function showProvince() {
 	// BTN.disabled = false;
-
 	for (var i = 0; i < PROVINCE_CITY_COUNTRY.length; i++) {
 		var province_option = document.createElement("option");
 		province_option.innerText = PROVINCE_CITY_COUNTRY[i]["name"];
@@ -247,7 +212,6 @@ function showProvince() {
 
 
 function showCity(object) {
-
 	var value = object.options[object.selectedIndex].value;
 
 	if (value != CURRENT_PCC.prov) {
@@ -255,7 +219,6 @@ function showCity(object) {
 		ADDRESS_PROV_CITY_COUN.value = "";
 		BTN.disabled = false;
 	}
-
 	if (value != null) {
 		CITY_DROPDOWN.length = 1;
 
@@ -271,7 +234,6 @@ function showCity(object) {
 
 
 function showCountry(object) {
-
 	var value = object.options[object.selectedIndex].value;
 	CURRENT_PCC.city = value;
 
@@ -296,7 +258,6 @@ function showCountry(object) {
 
 
 function selectCountry(object) {
-
 	CURRENT_PCC.country = object.options[object.selectedIndex].value;
 	if ((CURRENT_PCC.city != null)) {
 		BTN.disabled = false;
@@ -305,11 +266,9 @@ function selectCountry(object) {
 
 
 function showAdderss() {
-
 	ADDRESS_PROV_CITY_COUN.value = PROVINCE_CITY_COUNTRY[CURRENT_PCC.prov].name;
-
-	LOCATION_SELECT = ADDRESS_PROV_CITY_COUN.value +
-		PROVINCE_CITY_COUNTRY[CURRENT_PCC.prov]["city"][0].name;
+	LOCATION_SELECT = ADDRESS_PROV_CITY_COUN.value + 
+	PROVINCE_CITY_COUNTRY[CURRENT_PCC.prov]["city"][0].name;
 }
 
 
@@ -318,7 +277,6 @@ function showAdderss() {
 var TEXT_DATA;
 
 function getPasteText() {
-
 	$("text-input").ready(function() {
 		var text = $.trim($("textarea").val());
 
@@ -335,11 +293,9 @@ function getPasteText() {
 
 
 function quickSort(data, by = '分数') {
-
 	if (data.length <= 1) {
 		return data;
 	}
-
 	var pivotIndex = Math.floor(data.length / 2);
 	var pivot = data.splice(pivotIndex, 1)[0]
 	var left = [];
@@ -357,29 +313,25 @@ function quickSort(data, by = '分数') {
 }
 
 
-function standardDeviation(values){
-  var avg = average(values);
-  
-  var squareDiffs = values.map(function(value){
-    var diff = value - avg;
-    var sqrDiff = diff * diff;
-    return sqrDiff;
-  });
-  
-  var avgSquareDiff = average(squareDiffs);
+function standardDeviation(values) {
+	var avg = average(values);
+	var squareDiffs = values.map(function(value) {
+		var diff = value - avg;
+		var sqrDiff = diff * diff;
+		return sqrDiff;
+	});
 
-  var stdDev = Math.sqrt(avgSquareDiff);
-  return stdDev;
+	var avgSquareDiff = average(squareDiffs);
+	var stdDev = Math.sqrt(avgSquareDiff);
+	return stdDev;
 }
 
 
-function average(data){
-  var sum = data.reduce(function(sum, value){
-    return sum + value;
-  }, 0);
+function average(data) {
+	var sum = data.reduce(function(sum, value) {
+		return sum + value;
+	}, 0);
 
-  console.log(sum);
-
-  var avg = sum / data.length;
-  return avg;
+	var avg = sum / data.length;
+	return avg;
 }
