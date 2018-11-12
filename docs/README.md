@@ -15,6 +15,13 @@ Terra Eyes:  https://evanwangxx.github.io/terra_eyes/
 * location-decision helper
 
 
+### Version Control
+1.4.0: geohash map
+1.3.0: bubble map
+1.2.0: decision helper (based on Tuhu)
+1.1.0: heatmap
+
+
 ### License
 Copyright (C) 2018 Hongbo Wang 
 
