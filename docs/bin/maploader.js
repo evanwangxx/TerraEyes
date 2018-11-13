@@ -110,13 +110,28 @@ function layerOfHeat(map, data, valueField = "分数", radius = 1, maxOpacity = 
 	});
 }
 
-function addPolygon(map, polygon_array, strokecolor, strokeWeight, fillcolor, fillOpacity) {
+function addPolygon(map, polygon_array, strokecolor, strokeWeight, fillcolor, fillOpacity, score, center) {
 	var polygon = new qq.maps.Polygon({
 		map: map,
 		path: polygon_array,
 		strokeColor: strokecolor,
 		strokeWeight: strokeWeight,
-		fillColor: qq.maps.Color.fromHex(fillcolor, fillOpacity)
+		fillColor: qq.maps.Color.fromHex(fillcolor, fillOpacity),
+		title: '测试'
+	});
+
+	qq.maps.event.addListener(polygon, 'mouseover', function() {
+		var info = new qq.maps.InfoWindow({
+			map: map
+		});
+		info.open();
+		info.setContent('<div style="text-align:center;white-space:nowrap;' +
+			'margin:10px;">' + score + '</div>');
+		info.setPosition(center);
+
+		qq.maps.event.addListener(polygon, 'mouseout', function() {
+			info.close();
+		});
 	});
 }
 
@@ -130,7 +145,9 @@ function layerOfGeohash(map, geohash, score) {
 		new qq.maps.LatLng(this.box.latitude[0] * 1.0, this.box.longitude[1] * 1.0),
 		new qq.maps.LatLng(this.box.latitude[0] * 1.0, this.box.longitude[0] * 1.0)
 	);
-	addPolygon(map, polygonArr, color, 0, color, 0.6);
+	var center = new qq.maps.LatLng((this.box.latitude[1] + this.box.latitude[0]) / 2.0,
+		(this.box.longitude[1] + this.box.longitude[0]) / 2);
+	addPolygon(map, polygonArr, color, 0, color, 0.6, score, center);
 }
 
 
