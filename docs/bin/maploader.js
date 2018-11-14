@@ -110,14 +110,13 @@ function layerOfHeat(map, data, valueField = "分数", radius = 1, maxOpacity = 
 	});
 }
 
-function addPolygon(map, polygon_array, strokecolor, strokeWeight, fillcolor, fillOpacity, score, center) {
+function addPolygon(map, polygon_array, color, score, raw_score, center) {
 	var polygon = new qq.maps.Polygon({
 		map: map,
 		path: polygon_array,
-		strokeColor: strokecolor,
-		strokeWeight: strokeWeight,
-		fillColor: qq.maps.Color.fromHex(fillcolor, fillOpacity),
-		title: '测试'
+		strokeColor: color,
+		strokeWeight: 0,
+		fillColor: qq.maps.Color.fromHex(color, score)
 	});
 
 	qq.maps.event.addListener(polygon, 'mouseover', function() {
@@ -126,7 +125,7 @@ function addPolygon(map, polygon_array, strokecolor, strokeWeight, fillcolor, fi
 		});
 		info.open();
 		info.setContent('<div style="text-align:center;white-space:nowrap;' +
-			'margin:10px;">' + score + '</div>');
+			'margin:10px;">' + "量级：" + raw_score + "<br>浓度：" + score.toFixed(2) + '</div>');
 		info.setPosition(center);
 
 		qq.maps.event.addListener(polygon, 'mouseout', function() {
@@ -135,9 +134,9 @@ function addPolygon(map, polygon_array, strokecolor, strokeWeight, fillcolor, fi
 	});
 }
 
-function layerOfGeohash(map, geohash, score) {
+function layerOfGeohash(map, geohash, level, concentration, raw_score) {
 	this.box = decodeGeoHash(geohash);
-	color = getColr(score);
+	color = getColr(level);
 
 	var polygonArr = new Array(
 		new qq.maps.LatLng(this.box.latitude[1] * 1.0, this.box.longitude[0] * 1.0),
@@ -147,7 +146,7 @@ function layerOfGeohash(map, geohash, score) {
 	);
 	var center = new qq.maps.LatLng((this.box.latitude[1] + this.box.latitude[0]) / 2.0,
 		(this.box.longitude[1] + this.box.longitude[0]) / 2);
-	addPolygon(map, polygonArr, color, 0, color, 0.6, score, center);
+	addPolygon(map, polygonArr, color, concentration, raw_score, center);
 }
 
 
@@ -261,13 +260,13 @@ function run_bubble(pointer = false, data = HEAT_JSON, length = 100) {
 }
 
 
-function run_geohash(pointer = false, data_raw = GEOHASH_JSON, filter = 30, gaussian = true) {
+function run_geohash(data_geohash = GEOHASH_JSON, pointer = false, filter = 30, gaussian = true) {
 	let data = [];
 	let score_array = [];
-	for (var i = 0; i < data_raw.length; ++i) {
-		var tmp_score = parseInt(data_raw[i]["分数"]);
+	for (var i = 0; i < data_geohash.length; ++i) {
+		var tmp_score = parseInt(data_geohash[i]["分数"]);
 		if (tmp_score >= filter) {
-			data.push(data_raw[i]);
+			data.push(data_geohash[i]);
 			score_array.push(tmp_score);
 		}
 	}
@@ -296,11 +295,10 @@ function run_geohash(pointer = false, data_raw = GEOHASH_JSON, filter = 30, gaus
 
 		for (var i = 0; i < data_sort.length; ++i) {
 			var geohash = data_sort[i]["geohash"];
-			var normal_score = ((parseInt(data_sort[i]["分数"]) - mean) / std);
+			var raw_score = data_sort[i]["分数"];
+			var normal_score = ((parseInt(raw_score) - mean) / std);
 			var score = ((normal_score - data_min) / (data_max - data_min)) * (radius_max - radius_min) + radius_min;
-			if (score >= 0.0) {
-				layerOfGeohash(MAP, geohash, score);
-			}
+			layerOfGeohash(MAP, geohash, 0.92, score, raw_score);
 		}
 	} else {
 		var data_max = data_sort[0]["分数"];
@@ -310,10 +308,13 @@ function run_geohash(pointer = false, data_raw = GEOHASH_JSON, filter = 30, gaus
 
 		for (var i = 0; i < data_sort.length; ++i) {
 			var geohash = data_sort[i]["geohash"];
-			var score = ((parseInt(data_sort[i]["分数"]) - data_min) / (data_max - data_min)) * (radius_max - radius_min) + radius_min;
-			if (score >= 0.0) {
-				layerOfGeohash(MAP, geohash, score);
-			}
+			var raw_score = data_sort[i]["分数"];
+			var score = ((parseInt(raw_score) - data_min) / (data_max - data_min)) * (radius_max - radius_min) + radius_min;
+			layerOfGeohash(MAP, geohash, 0.92, score, raw_score);
 		}
+	}
+
+	if (STORE_JSON !== undefined) {
+		layerOfMarker(MAP, STORE_JSON);
 	}
 }

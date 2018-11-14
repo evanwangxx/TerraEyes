@@ -3,13 +3,14 @@
 // (c) 2018 Hongbo Wang
 // Copyright © 1998 - 2018 Tencent. All Rights Reserved.
 
-
 var HEAT_JSON;
 var STORE_JSON;
 var COMPA_JSON;
 var COMPA_JSON2;
 var LOCATION_SELECT;
 let GEOHASH_JSON;
+
+let STORE_HEADER = ["详细", "lat", "lng"];
 
 
 // ************************* basic data loader/decoder *****************************
@@ -47,8 +48,8 @@ function csvHeatLoader() {
 	});
 }
 
-
-function csvStoreLoader() {
+// TODO: Combine csvLoader to one general
+function csvStoreLoader(header = ["store", "lng", "lat", "省份", "城市", "具体地址"]) {
 	$("#store_data").change(function() {
 		var fileSelector = $("#store_data")[0].files;
 		var file = fileSelector[0];
@@ -56,7 +57,7 @@ function csvStoreLoader() {
 		$("fileNamesDes").text(fileSelector[0].name);
 		var reader = new FileReader();
 		reader.onload = function() {
-			STORE_JSON = processDataToJSON(this.result, header = ["store", "lng", "lat", "省份", "城市", "具体地址"], split = ',');
+			STORE_JSON = processDataToJSON(this.result, header = header, split = ',');
 		};
 		reader.readAsText(file);
 	});
@@ -267,8 +268,8 @@ function selectCountry(object) {
 
 function showAdderss() {
 	ADDRESS_PROV_CITY_COUN.value = PROVINCE_CITY_COUNTRY[CURRENT_PCC.prov].name;
-	LOCATION_SELECT = ADDRESS_PROV_CITY_COUN.value + 
-	PROVINCE_CITY_COUNTRY[CURRENT_PCC.prov]["city"][0].name;
+	LOCATION_SELECT = ADDRESS_PROV_CITY_COUN.value +
+		PROVINCE_CITY_COUNTRY[CURRENT_PCC.prov]["city"][0].name;
 }
 
 

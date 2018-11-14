@@ -1,8 +1,6 @@
 function hslToRgb(h, s, l) {
 	var r, g, b;
-
 	if (s == 0) {
-
 		r = g = b = l; // achromatic
 	} else {
 		function hue2rgb(p, q, t) {
@@ -18,27 +16,20 @@ function hslToRgb(h, s, l) {
 				return p + (q - p) * (2 / 3 - t) * 6;
 			return p;
 		}
-
 		var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
 		var p = 2 * l - q;
 		r = hue2rgb(p, q, h + 1 / 3);
 		g = hue2rgb(p, q, h);
-
 		b = hue2rgb(p, q, h - 1 / 3);
-
 	}
-
 	// return [ Math.round(r * 255), Math.round(g * 255), Math.round(b * 255) ];
 	var ret = showRGB(Math.round(r * 255), Math.round(g * 255), Math
 		.round(b * 255));
 	return ret;
-
 }
-
 
 //0-1转化为颜色代代码
 function getColr(value) {
-
 	h = (1 - value);
 	s = 1.0;
 	l = 1 - value * 0.5;
@@ -47,11 +38,8 @@ function getColr(value) {
 }
 
 function showRGB(r, g, b) {
-
 	red = r;
-
 	green = g;
-
 	blue = b;
 
 	var hexarray = new Array(256);
@@ -401,5 +389,4 @@ function showRGB(r, g, b) {
 	hexcode = "#" + hexarray[red] + hexarray[green] + hexarray[blue];
 
 	return hexcode;
-
 }
