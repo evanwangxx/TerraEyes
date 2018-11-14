@@ -32,16 +32,21 @@ function addMarker(map, point, text, color = "http://webapi.amap.com/theme/v1.3/
 }
 
 
-function layerOfMarker(map, data) {
+function layerOfMarker(map, data, circle = false, radius=[3000]) {
 	for (var i = 0; i < data.length; i++) {
 		var point = new qq.maps.LatLng(data[i].lat, data[i].lng);
 		addMarker(map, point, data[i].详细);
+		if (circle) {
+			for (var j=0; j<radius.length; ++j) {
+				addCircle(map, point, radius[j], fillWeight = 0.04);
+			}	
+		}
 	}
 	console.log("Layer label Done");
 }
 
 
-function addCircle(map, point, radius, color = '#FA5858', bubble = false) {
+function addCircle(map, point, radius, fillWeight = 0.05, color = '#FA5858', bubble = false) {
 	if (bubble) {
 		var option = {
 			map: map,
@@ -60,8 +65,8 @@ function addCircle(map, point, radius, color = '#FA5858', bubble = false) {
 			center: point,
 			radius: radius,
 			strokeColor: color,
-			fillColor: qq.maps.Color.fromHex('#FF8000', 0.35),
-			strokeWeight: 0.000001
+			fillColor: qq.maps.Color.fromHex('#0040FF', fillWeight),
+			strokeWeight: 0.1
 		}
 	}
 	var circle = new qq.maps.Circle(option);
@@ -287,6 +292,10 @@ function run_geohash(data_geohash = GEOHASH_JSON, pointer = false, filter = 30, 
 		loadMap(center, zoom = 13);
 	}
 
+	if (STORE_JSON !== undefined) {
+		layerOfMarker(MAP, STORE_JSON, circle = true);
+	}
+
 	if (gaussian) {
 		var data_max = (parseInt(data_sort[0]["分数"]) - mean) / std;
 		var data_min = (parseInt(data_sort[data_sort.length - 1]["分数"] - mean)) / std;
@@ -312,9 +321,5 @@ function run_geohash(data_geohash = GEOHASH_JSON, pointer = false, filter = 30, 
 			var score = ((parseInt(raw_score) - data_min) / (data_max - data_min)) * (radius_max - radius_min) + radius_min;
 			layerOfGeohash(MAP, geohash, 0.92, score, raw_score);
 		}
-	}
-
-	if (STORE_JSON !== undefined) {
-		layerOfMarker(MAP, STORE_JSON);
 	}
 }
