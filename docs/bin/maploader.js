@@ -64,9 +64,10 @@ function addCircle(map, point, radius, fillWeight = 0.05, color = '#FA5858', bub
 			map: map,
 			center: point,
 			radius: radius,
-			strokeColor: color,
+			strokeColor: '#5858FA',
 			fillColor: qq.maps.Color.fromHex('#0040FF', fillWeight),
-			strokeWeight: 0.1
+			strokeDashStyle: 'dash',
+			strokeWeight: 1.0
 		}
 	}
 	var circle = new qq.maps.Circle(option);
