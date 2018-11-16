@@ -210,7 +210,7 @@ function run(pointer = false, data = HEAT_JSON) {
 		addMarker(MAP, point, "Marker", color = path + "pointer.png");
 	} else {
 		addressToLatLng(LOCATION_SELECT);
-		MAP = loadMap(ADDRESS_POINT, zoom = 10);
+		loadMap(ADDRESS_POINT, zoom = 10);
 	}
 
 	if (map_data.data !== undefined) {
