@@ -111,7 +111,7 @@ function csvGeohash() {
 }
 
 
-function processDataToJSON(csv, header = ["lng", 'lat', "分数"], split = ',') {
+function processDataToJSON(csv, header = ['lat', "lng", "分数"], split = ',') {
 	var allTextLines = csv.split(/\r\n|\n/);
 	var lines = [];
 
@@ -277,14 +277,34 @@ function showAdderss() {
 
 var TEXT_DATA;
 
+
 function getPasteText() {
 	$("text-input").ready(function() {
 		var text = $.trim($("textarea").val());
 
 		if (text != "") {
-			let json = processDataToJSON(text, header = ["lng", 'lat', '详细'], split = ',');
-			jsonToTable(json, "#trans_data", 10)
-			console.log(json);
+			let json = processDataToJSON(text, header = ['lat', "lng", '详细'], split = ',');
+			var myselect = document.getElementById("lat-lng-convert").selectedIndex;
+			console.log(myselect);
+
+			if (myselect == 2) {
+				for (var i=0; i<json.length; i++) {
+					var lat_lng = convert_gcj02_bd09(json[i].lat, json[i].lng);
+					json[i].lat = lat_lng[0];
+					json[i].lng = lat_lng[1];
+				}
+				console.log("INFO: To Baidu Map");
+			} else if (myselect == 1) {
+				for (var i=0; i<json.length; i++) {
+					var lat_lng = convert_bd09_gcj02(json[i].lat, json[i].lng);
+					json[i].lat = lat_lng[0];
+					json[i].lng = lat_lng[1];
+				}
+				console.log("INFO: To Tencent/Gaode Map");
+			} else {
+				console.log("INFO: Stay");
+			}
+			jsonToTable(json, "#trans_data", 10);
 			TEXT_DATA = json;
 		} else {
 			alert("输入的字符是空的哦~~")

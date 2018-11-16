@@ -7,7 +7,7 @@
 // Map Latitude, Longitude converter
 // GCJ02 (Tencent, Alibaba) <--> BD09 (Baidu)
 function convert_gcj02_bd09(lat, lng) {
-    var x_pi = 3.14159265358979324 * 3000.0 / 180.0;
+    var x_pi = 3.14159265358979323846264 * 3000.0 / 180.0;
     var x = parseFloat(lng);
     var y = parseFloat(lat);
     var z = Math.sqrt(x * x + y * y) + 0.00002 * Math.sin(y * x_pi);
@@ -18,9 +18,8 @@ function convert_gcj02_bd09(lat, lng) {
 }
 
 
-// Geohash Converter
 function convert_bd09_gcj02(lat, lng) {
-	var x_pi = 3.14159265358979324 * 3000.0 / 180.0;
+	var x_pi = 3.14159265358979323846264 * 3000.0 / 180.0;
     var x = parseFloat(lng) - 0.0065;
     var y = parseFloat(lat) - 0.006;
     var z = Math.sqrt(x * x + y * y) + 0.00002 * Math.sin(y * x_pi);
@@ -30,6 +29,8 @@ function convert_bd09_gcj02(lat, lng) {
     return [lat, lng];
 }
 
+
+// Geohash Converter
 BITS = [16, 8, 4, 2, 1];
 
 BASE32 = "0123456789bcdefghjkmnpqrstuvwxyz";
