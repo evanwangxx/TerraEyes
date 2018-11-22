@@ -7,26 +7,26 @@
 // Map Latitude, Longitude converter
 // GCJ02 (Tencent, Alibaba) <--> BD09 (Baidu)
 function convert_gcj02_bd09(lat, lng) {
-    var x_pi = 3.14159265358979323846264 * 3000.0 / 180.0;
-    var x = parseFloat(lng);
-    var y = parseFloat(lat);
-    var z = Math.sqrt(x * x + y * y) + 0.00002 * Math.sin(y * x_pi);
-    var theta = Math.atan2(y,x) + 0.000003 * Math.cos(x * x_pi); 
-    lat = z * Math.sin(theta) + 0.006;
-    lng = z * Math.cos(theta) + 0.0065;
-    return [lat, lng];
+	var x_pi = 3.14159265358979323846264 * 3000.0 / 180.0;
+	var x = parseFloat(lng);
+	var y = parseFloat(lat);
+	var z = Math.sqrt(x * x + y * y) + 0.00002 * Math.sin(y * x_pi);
+	var theta = Math.atan2(y, x) + 0.000003 * Math.cos(x * x_pi);
+	lat = z * Math.sin(theta) + 0.006;
+	lng = z * Math.cos(theta) + 0.0065;
+	return [lat, lng];
 }
 
 
 function convert_bd09_gcj02(lat, lng) {
 	var x_pi = 3.14159265358979323846264 * 3000.0 / 180.0;
-    var x = parseFloat(lng) - 0.0065;
-    var y = parseFloat(lat) - 0.006;
-    var z = Math.sqrt(x * x + y * y) + 0.00002 * Math.sin(y * x_pi);
-    var theta = Math.atan2(y,x) + 0.000003 * Math.cos(x * x_pi); 
-    lat = z * Math.sin(theta)
-    lng = z * Math.cos(theta)
-    return [lat, lng];
+	var x = parseFloat(lng) - 0.0065;
+	var y = parseFloat(lat) - 0.006;
+	var z = Math.sqrt(x * x + y * y) + 0.00002 * Math.sin(y * x_pi);
+	var theta = Math.atan2(y, x) + 0.000003 * Math.cos(x * x_pi);
+	lat = z * Math.sin(theta)
+	lng = z * Math.cos(theta)
+	return [lat, lng];
 }
 
 

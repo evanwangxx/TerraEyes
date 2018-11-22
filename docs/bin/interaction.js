@@ -288,14 +288,14 @@ function getPasteText() {
 			console.log(myselect);
 
 			if (myselect == 2) {
-				for (var i=0; i<json.length; i++) {
+				for (var i = 0; i < json.length; i++) {
 					var lat_lng = convert_gcj02_bd09(json[i].lat, json[i].lng);
 					json[i].lat = lat_lng[0];
 					json[i].lng = lat_lng[1];
 				}
 				console.log("INFO: To Baidu Map");
 			} else if (myselect == 1) {
-				for (var i=0; i<json.length; i++) {
+				for (var i = 0; i < json.length; i++) {
 					var lat_lng = convert_bd09_gcj02(json[i].lat, json[i].lng);
 					json[i].lat = lat_lng[0];
 					json[i].lng = lat_lng[1];

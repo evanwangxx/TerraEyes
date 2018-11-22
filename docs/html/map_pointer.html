@@ -80,16 +80,23 @@
                 <div class="col-sm-1 sidenav"></div>
 
                 <div class="col-sm-10 text-center">
-                    <div class="col-sm-2 text-left">
-                        <label for="inputlg">输入文本数据</label><span class="glyphicon glyphicon-info-sign" title="粘贴数据至输入框"></span>
+                    <div class="col-sm-4 text-left">
+                        <label>输入文本数据</label><span class="glyphicon glyphicon-info-sign" title="粘贴数据至输入框"></span>
+                        <h5><small>数据格式： 经度，纬度，详细信息（可选）</small></h5>
                     </div>
-                    <div class="col-sm-10"></div>
+                    <div class="col-sm-8"></div>
 
                     <textarea class="form-control" rows="10" id="text-input"></textarea>
 
                     <table class="table table-striped" id="trans_data"></table>
-                    <div class="col-sm-7"></div>
-                    <div class="col-sm-5">
+                    <div class="col-sm-6">
+                        <label for="inputlg">半径</label>
+                        <select id="circle_1"></select>
+                        <select id="circle_2"></select>
+                        <select id="circle_3"></select>
+                        <span class="glyphicon glyphicon-info-sign" title="打点覆盖半径"></span>
+                    </div>  
+                    <div class="col-sm-6">
                         <select id="lat-lng-convert">
                             <option>不转化</option>
                             <option>转化为腾讯高德系（GCJ02）</option>
@@ -114,8 +121,9 @@
     </footer>
     
 <script src="https://d3js.org/d3.v5.min.js"></script>
-
+<script src="../bin/dropdown.js"></script>
 <script src="../bin/maploader.js"></script>
 <script src="../bin/interaction.js"> </script>
 <script src="../bin/converter.js"></script>
+<script src="../bin/initial/circledropdown.js"></script>
 </html>

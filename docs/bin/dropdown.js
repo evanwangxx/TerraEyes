@@ -5,50 +5,36 @@
 
 
 var CIRCLE_DROP_DOWN = [{
-        name: "100m",
-        length: 100,
-    },
-
-    {
-        name: "300m",
-        length: 300,
-    },
-
-    {
-        name: "500m",
-        length: 500,
-    },
-
-    {
-        name: "1000m",
-        length: 1000,
-    },
-
-    {
-        name: "1500m",
-        length: 1500,
-    },
-
-    {
-        name: "2000m",
-        length: 2000,
-    },
-
-    {
-        name: "2500m",
-        length: 2500,
-    },
-
-    {
-        name: "3000m",
-        length: 3000,
-    },
-
-    {
-        name: "5000m",
-        length: 5000,
-    }
-]
+    name: "无",
+    length: 0
+}, {
+    name: "100m",
+    length: 100,
+}, {
+    name: "300m",
+    length: 300,
+}, {
+    name: "500m",
+    length: 500,
+}, {
+    name: "1000m",
+    length: 1000,
+}, {
+    name: "1500m",
+    length: 1500,
+}, {
+    name: "2000m",
+    length: 2000,
+}, {
+    name: "2500m",
+    length: 2500,
+}, {
+    name: "3000m",
+    length: 3000,
+}, {
+    name: "5000m",
+    length: 5000,
+}]
 
 var PROVINCE_CITY_COUNTRY = [{
     name: "北京市",

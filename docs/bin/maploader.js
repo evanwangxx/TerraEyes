@@ -32,14 +32,21 @@ function addMarker(map, point, text, color = "http://webapi.amap.com/theme/v1.3/
 }
 
 
-function layerOfMarker(map, data, circle = false, radius=[3000]) {
+function layerOfMarker(map, data, radius = null, circle = false) {
+
+	if (radius === null) {
+		radius = [3000];
+		console.log("in null");
+	}
+
+	console.log(radius);
 	for (var i = 0; i < data.length; i++) {
 		var point = new qq.maps.LatLng(data[i].lat, data[i].lng);
 		addMarker(map, point, data[i].详细);
 		if (circle) {
-			for (var j=0; j<radius.length; ++j) {
+			for (var j = 0; j < radius.length; ++j) {
 				addCircle(map, point, radius[j], fillWeight = 0.04);
-			}	
+			}
 		}
 	}
 	console.log("Layer label Done");
@@ -230,8 +237,15 @@ function run(pointer = false, data = HEAT_JSON) {
 
 function run_point(data = TEXT_DATA) {
 	var point = new qq.maps.LatLng(data[0].lat, data[0].lng);
+	let circle_length_1 = clickCircleList("circle_1");
+	let circle_length_2 = clickCircleList("circle_2");
+	let circle_length_3 = clickCircleList("circle_3");
+
+	let radius = [circle_length_1, circle_length_2, circle_length_3];
+	console.log(radius);
+
 	loadMap(point, zoom = 14);
-	layerOfMarker(MAP, data);
+	layerOfMarker(MAP, data, radius = radius, circle = true);
 }
 
 
@@ -280,7 +294,9 @@ function run_geohash(data_geohash = GEOHASH_JSON, pointer = false, filter = 30, 
 	let std = standardDeviation(score_array)
 
 	var data_sort = quickSort(data);
-	data_sort.pop();
+	data_sort.pop(data_sort);
+
+	console.log(data_sort);
 
 	if (pointer) {
 		console.log("pointer map");
