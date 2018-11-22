@@ -36,6 +36,38 @@ var CIRCLE_DROP_DOWN = [{
     length: 5000,
 }]
 
+var CORLOR_DROP_DOWN = [{
+    name: "红色",
+    length: "#FE2E2E"
+}, {
+    name: "橙色",
+    length: "#FE9A2E"
+}, {
+    name: "黄色",
+    length: "#F7FE2E"
+}, {
+    name: "绿色",
+    length: "#64FE2E"
+}, {
+    name: "天蓝色",
+    length: "#2EFEF7"
+}, {
+    name: "海蓝色",
+    length: "#0040FF"
+}, {
+    name: "紫色",
+    length: "#9A2EFE"
+}, {
+    name: "粉色",
+    length: "#FA58F4"
+}, {
+    name: "樱桃色",
+    length: "#FE2E64"
+}, {
+    name: "灰色",
+    length: "#A4A4A4"
+}]
+
 var PROVINCE_CITY_COUNTRY = [{
     name: "北京市",
     city: [{

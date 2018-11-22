@@ -181,6 +181,14 @@ function clickCircleList(id) {
 }
 
 
+function clickColorList(id) {
+	var myselect = document.getElementById(id);
+	var index = myselect.selectedIndex;
+	var distance = myselect.options[index].value;
+
+	return distance;
+}
+
 // ************************* Dropdown Province-City-Country *****************************
 
 function $$(str) {

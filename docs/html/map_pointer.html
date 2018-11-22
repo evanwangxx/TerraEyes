@@ -89,13 +89,17 @@
                     <textarea class="form-control" rows="10" id="text-input"></textarea>
 
                     <table class="table table-striped" id="trans_data"></table>
-                    <div class="col-sm-6">
+                    <div class="col-sm-3">
                         <label for="inputlg">半径</label>
                         <select id="circle_1"></select>
                         <select id="circle_2"></select>
                         <select id="circle_3"></select>
                         <span class="glyphicon glyphicon-info-sign" title="打点覆盖半径"></span>
-                    </div>  
+                    </div>
+                    <div class="col-sm-3">
+                        <label for="inputlg">颜色</label>
+                        <select id="color-dd"></select>
+                    </div>
                     <div class="col-sm-6">
                         <select id="lat-lng-convert">
                             <option>不转化</option>
@@ -125,5 +129,7 @@
 <script src="../bin/maploader.js"></script>
 <script src="../bin/interaction.js"> </script>
 <script src="../bin/converter.js"></script>
+
+<script src="../bin/initial/colordropdown.js"></script>
 <script src="../bin/initial/circledropdown.js"></script>
 </html>

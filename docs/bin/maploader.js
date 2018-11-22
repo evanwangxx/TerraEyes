@@ -32,12 +32,14 @@ function addMarker(map, point, text, color = "http://webapi.amap.com/theme/v1.3/
 }
 
 
-function layerOfMarker(map, data, radius = null, circle = false) {
+function layerOfMarker(map, data, radius = null, circle = false, color = '#FA5858') {
 
 	if (radius === null) {
 		radius = [3000];
 		console.log("in null");
 	}
+
+	console.log("a" + color);
 
 	console.log(radius);
 	for (var i = 0; i < data.length; i++) {
@@ -45,7 +47,8 @@ function layerOfMarker(map, data, radius = null, circle = false) {
 		addMarker(map, point, data[i].详细);
 		if (circle) {
 			for (var j = 0; j < radius.length; ++j) {
-				addCircle(map, point, radius[j], fillWeight = 0.04);
+				console.log("b" + color);
+				addCircle(map, point, radius[j], fillWeight = 0.04, color = color);
 			}
 		}
 	}
@@ -72,7 +75,7 @@ function addCircle(map, point, radius, fillWeight = 0.05, color = '#FA5858', bub
 			center: point,
 			radius: radius,
 			strokeColor: '#5858FA',
-			fillColor: qq.maps.Color.fromHex('#0040FF', fillWeight),
+			fillColor: qq.maps.Color.fromHex(color, fillWeight),
 			strokeDashStyle: 'dash',
 			strokeWeight: 1.0
 		}
@@ -241,11 +244,11 @@ function run_point(data = TEXT_DATA) {
 	let circle_length_2 = clickCircleList("circle_2");
 	let circle_length_3 = clickCircleList("circle_3");
 
+	let color = clickColorList("color-dd");
 	let radius = [circle_length_1, circle_length_2, circle_length_3];
-	console.log(radius);
 
 	loadMap(point, zoom = 14);
-	layerOfMarker(MAP, data, radius = radius, circle = true);
+	layerOfMarker(MAP, data, radius = radius, circle = true, color = color);
 }
 
 
