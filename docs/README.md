@@ -1,6 +1,8 @@
 ### Terra Eyes
-Version Now: 1.4.4 latest
 Terra Eyes:  https://evanwangxx.github.io/terra_eyes/
+
+Version Now: 1.4.5 latest
+Last Update: heatmap maintenance
 
 
 ### Terra

@@ -56,8 +56,8 @@ function layerOfMarker(map, data, radius = null, circle = false, color = '#FA585
 }
 
 
-function addCircle(map, point, radius, fillWeight = 0.05, color = '#FA5858', bubble = false) {
-	if (bubble) {
+function addCircle(map, point, radius, fillWeight = 0.05, color = '#FA5858', option = "other") {
+	if (option == "bubble") {
 		var option = {
 			map: map,
 			center: point,
@@ -68,6 +68,18 @@ function addCircle(map, point, radius, fillWeight = 0.05, color = '#FA5858', bub
 			cursor: 'pointer',
 			visible: true,
 			fillColor: qq.maps.Color.fromHex(color, 0.0000001)
+		}
+	} else if (option == "circle") {
+		var option = {
+			map: map,
+			center: point,
+			radius: radius,
+			strokeWeight: 3,
+			strokeDashStyle: 'dash',
+			cursor: 'pointer',
+			visible: true,
+			fillColor: qq.maps.Color.fromHex(color, 0.0000001),
+			zIndex: 1000
 		}
 	} else {
 		var option = {
@@ -126,6 +138,7 @@ function layerOfHeat(map, data, valueField = "分数", radius = 1, maxOpacity = 
 	});
 }
 
+
 function addPolygon(map, polygon_array, color, score, raw_score, center) {
 	var polygon = new qq.maps.Polygon({
 		map: map,
@@ -149,6 +162,7 @@ function addPolygon(map, polygon_array, color, score, raw_score, center) {
 		});
 	});
 }
+
 
 function layerOfGeohash(map, geohash, level, concentration, raw_score) {
 	this.box = decodeGeoHash(geohash);
@@ -238,6 +252,45 @@ function run(pointer = false, data = HEAT_JSON) {
 }
 
 
+function runHeat(pointer = false, data = HEAT_JSON) {
+	var power = parseInt(document.getElementById("heat-power").value);
+	var m_name = document.getElementById("marker-name").value;
+	console.log(power);
+
+	let circle_length_1 = clickCircleList("circle_1");
+	let circle_length_2 = clickCircleList("circle_2");
+	let circle_length_3 = clickCircleList("circle_3");
+	let radius = [circle_length_1, circle_length_2, circle_length_3];
+
+	console.log(radius);
+
+	map_data = {
+		max: power,
+		data: data
+	};
+
+	console.log(map_data);
+
+	if (pointer) {
+		console.log("pointer map");
+		let latlng = userInputLatLng();
+		var point = new qq.maps.LatLng(latlng[0], latlng[1]);
+		loadMap(point, zoom = 14);
+	} else {
+		addressToLatLng(LOCATION_SELECT);
+		loadMap(ADDRESS_POINT, zoom = 10);
+	}
+	layerOfHeat(MAP, map_data);
+
+	if (pointer) {
+		addMarker(MAP, point, m_name);
+		for (var j = 0; j < radius.length; ++j) {
+			addCircle(MAP, point, radius[j], fillWeight = 0.04, color = "#0040FF", option = "circle");
+		}
+	} 
+}
+
+
 function run_point(data = TEXT_DATA) {
 	var point = new qq.maps.LatLng(data[0].lat, data[0].lng);
 	let circle_length_1 = clickCircleList("circle_1");
@@ -298,8 +351,6 @@ function run_geohash(data_geohash = GEOHASH_JSON, pointer = false, filter = 30, 
 
 	var data_sort = quickSort(data);
 	data_sort.pop(data_sort);
-
-	console.log(data_sort);
 
 	if (pointer) {
 		console.log("pointer map");
