@@ -1,8 +1,7 @@
 ### Terra Eyes
 Terra Eyes:  https://evanwangxx.github.io/terra_eyes/
 
-Version Now: 1.4.5 latest
-Last Update: heatmap maintenance
+Version Now: 1.4.6 latest
 
 
 ### Terra
@@ -33,3 +32,19 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+### History
+1.4.6  | bubble maintenance
+1.4.5  | Heatmap maintenance
+1.4.4  | pointer map add circle and color option
+1.4.3  | pointer add map lat-lng converter
+1.4.2  | Geohash Store Add Marker and Info Window
+1.4.1  | Geohash Map Info Listener
+1.4.0  | Geohash Map
+
+1.3.0  | Bubble map
+
+1.2.0  | Decision helper (based on Tuhu)
+
+1.1.0  | Heatmap

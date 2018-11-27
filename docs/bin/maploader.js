@@ -62,12 +62,11 @@ function addCircle(map, point, radius, fillWeight = 0.05, color = '#FA5858', opt
 			map: map,
 			center: point,
 			radius: radius,
-			strokeDashStyle: 'dash',
-			strokeWeight: 3,
+			strokeWeight: 0,
 			strokeColor: color,
 			cursor: 'pointer',
 			visible: true,
-			fillColor: qq.maps.Color.fromHex(color, 0.0000001)
+			fillColor: qq.maps.Color.fromHex(color, 0.5)
 		}
 	} else if (option == "circle") {
 		var option = {
@@ -93,6 +92,37 @@ function addCircle(map, point, radius, fillWeight = 0.05, color = '#FA5858', opt
 		}
 	}
 	var circle = new qq.maps.Circle(option);
+	return circle;
+}
+
+
+function layerOfBubble(data, max_bubble = 500) {
+
+	var data_sort = quickSort(data);
+	data_sort.pop();
+	var data_max = data_sort[0]["分数"]
+	var data_min = data_sort[data_sort.length - 1]["分数"]
+	var radius_max = 800;
+	var radius_min = 50;
+
+	for (var i = 0; i < data_sort.length && i < max_bubble; ++i) {
+		let point = new qq.maps.LatLng(data_sort[i]["lat"], data_sort[i]["lng"]);
+		var radius = ((parseInt(data_sort[i]["分数"]) - data_min) /
+			(data_max - data_min)) * (radius_max - radius_min) + radius_min;
+		if (radius != NaN) {
+			var circle = addCircle(MAP, point, radius, fillWeight = 0.5, color = '#FA5858', option = "bubble");
+			qq.maps.event.addListener(circle, 'click', function() {
+				var info = new qq.maps.InfoWindow({
+					map: MAP
+				});
+				info.open();
+				info.setContent('<div style="text-align:center;white-space:nowrap;' +
+					'margin:10px;">' + "量级：" + data_sort[i]["分数"] +
+					"<br>半径：" + radius.toFixed(2) + '</div>');
+				info.setPosition(point);
+			});
+		}
+	}
 }
 
 
@@ -153,8 +183,9 @@ function addPolygon(map, polygon_array, color, score, raw_score, center) {
 			map: map
 		});
 		info.open();
-		info.setContent('<div style="text-align:center;white-space:nowrap;' +
-			'margin:10px;">' + "量级：" + raw_score + "<br>浓度：" + score.toFixed(2) + '</div>');
+		info.setContent('<div style="text-align:center;white-space:nowrap;' + 'margin:10px;">' +
+			"量级：" + raw_score +
+			"<br>浓度：" + score.toFixed(2) + '</div>');
 		info.setPosition(center);
 
 		qq.maps.event.addListener(polygon, 'mouseout', function() {
@@ -285,9 +316,10 @@ function runHeat(pointer = false, data = HEAT_JSON) {
 	if (pointer) {
 		addMarker(MAP, point, m_name);
 		for (var j = 0; j < radius.length; ++j) {
-			addCircle(MAP, point, radius[j], fillWeight = 0.04, color = "#0040FF", option = "circle");
+			addCircle(MAP, point, radius[j], fillWeight = 0.04,
+				color = "#0040FF", option = "circle");
 		}
-	} 
+	}
 }
 
 
@@ -314,25 +346,10 @@ function run_bubble(pointer = false, data = HEAT_JSON, length = 100) {
 
 	} else {
 		addressToLatLng(LOCATION_SELECT);
-		MAP = loadMap(ADDRESS_POINT, zoom = 10);
+		loadMap(ADDRESS_POINT, zoom = 10);
 	}
 
-	var data_sort = quickSort(data);
-	data_sort.pop();
-	var data_max = data_sort[0]["分数"]
-	var data_min = data_sort[data_sort.length - 1]["分数"]
-	var radius_max = 800;
-	var radius_min = 400;
-	console.log(data_sort);
-
-	for (var i = 0; i < data_sort.length && i < length; ++i) {
-
-		let point = new qq.maps.LatLng(data_sort[i]["lat"], data_sort[i]["lng"]);
-		var radius = ((parseInt(data_sort[i]["分数"]) - data_min) / (data_max - data_min)) * (radius_max - radius_min) + radius_min;
-		if (radius != NaN) {
-			addCircle(MAP, point, radius);
-		}
-	}
+	layerOfBubble(data);
 }
 
 
@@ -377,7 +394,8 @@ function run_geohash(data_geohash = GEOHASH_JSON, pointer = false, filter = 30, 
 			var geohash = data_sort[i]["geohash"];
 			var raw_score = data_sort[i]["分数"];
 			var normal_score = ((parseInt(raw_score) - mean) / std);
-			var score = ((normal_score - data_min) / (data_max - data_min)) * (radius_max - radius_min) + radius_min;
+			var score = ((normal_score - data_min) /
+				(data_max - data_min)) * (radius_max - radius_min) + radius_min;
 			layerOfGeohash(MAP, geohash, 0.92, score, raw_score);
 		}
 	} else {
@@ -389,7 +407,8 @@ function run_geohash(data_geohash = GEOHASH_JSON, pointer = false, filter = 30, 
 		for (var i = 0; i < data_sort.length; ++i) {
 			var geohash = data_sort[i]["geohash"];
 			var raw_score = data_sort[i]["分数"];
-			var score = ((parseInt(raw_score) - data_min) / (data_max - data_min)) * (radius_max - radius_min) + radius_min;
+			var score = ((parseInt(raw_score) - data_min) /
+				(data_max - data_min)) * (radius_max - radius_min) + radius_min;
 			layerOfGeohash(MAP, geohash, 0.92, score, raw_score);
 		}
 	}
