@@ -1,7 +1,7 @@
 ### Terra Eyes
 Terra Eyes:  https://evanwangxx.github.io/terra_eyes/
 
-Version Now: 1.4.6 latest
+Version Now: 1.4.7
 
 
 ### Terra
@@ -35,6 +35,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 
 ### History
+1.4.7  | data parser in Heatmap & Bubblemap
 1.4.6  | bubble maintenance
 1.4.5  | Heatmap maintenance
 1.4.4  | pointer map add circle and color option

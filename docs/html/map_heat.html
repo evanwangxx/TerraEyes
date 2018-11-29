@@ -84,20 +84,40 @@
         <div class="col-sm-1 sidenav"></div>
 
         <div class="col-sm-10 text-left"> 
-  
             <div class="col-sm-12" style="background: #F2F2F2; margin-top: 20px;">
-                <h4 style="text-align: left;">数据导入</h4>
-                <h4 style="text-align: left;"><small>数据格式： 经度，维度，分值</small></h4>
-                <div class="col-sm-4">
+                <div class="col-sm-6" style="margin-top: 20px;">
+                    <label>输入热力图数据</label>
+                    <h5 style="text-align: left;">
+                        <small>数据格式： 经度，维度，分值</small>
+                    </h5>
                     <input type="file" id="heat_data" style="display:inline-block;" onclick="csvHeatLoader()">
                     <button type="button" class="btn btn-default btn-sm" style="display:inline-block;" onclick="jsonToTable(HEAT_JSON, id='#table1')">显示</button>
                 </div>
+
+                <div class="col-sm-6" style="background: #F2F2F2; margin-top: 20px;">
+                    <label>输入地点数据</label><span class="glyphicon glyphicon-info-sign" title="粘贴数据至输入框"></span>
+                    <h5><small>数据格式： 经度，纬度，详细信息（可选）</small></h5>
+                    <textarea class="form-control" rows="10" id="text-input"></textarea>
+                    <div class="col-sm-8">
+                        <select id="lat-lng-convert">
+                            <option>不转化</option>
+                            <option>转化为腾讯高德系（GCJ02）</option>
+                            <option>转化为百度系（BD09）</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-4">
+                        <button type="button" class="btn btn-primary btn-sm" onclick="getPasteText('#table1')"><span class="glyphicon glyphicon-share-alt"></span>转化数据</button>
+                    </div>
+                </div>
+
+                <br>
                 <table class="table table-striped" id="table1"></table>
                 <br>
+
             </div>
 
-            <div class="col-sm-12" style="margin-top: 30px; margin-bottom: 10px; background: #F2F2F2; height: 180px;">
-                <div class="col-sm-9">
+            <div class="col-sm-12" style="margin-top: 30px; margin-bottom: 10px; background: #F2F2F2; height: auto;">
+                <div class="col-sm-8">
                     <h4 style="text-align: left;">地图选项</h4>
                     <div class="col-sm-12">
                         <form action="#">
@@ -120,7 +140,7 @@
 
                     <div class="col-sm-12">
                         <label>打点名称  ：
-                            <input type="text" id="marker-name" value="飞天螳螂">
+                            <input type="text" id="marker-name" value="Call Me Terra">
                         </label>
                     </div>
 
@@ -133,7 +153,7 @@
                     </div>
                 </div>
 
-                <div class="col-sm-3" style='float: right;'>
+                <div class="col-sm-4">
                     <br><br><br><br><br>
                     <button type="button" class="btn btn-primary btn-lg" onclick="runHeat()">双击生成地图</button>
                     <button type="button" class="btn btn-info btn-lg" onclick="runHeat(true)">输入经纬度</button>

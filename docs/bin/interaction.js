@@ -286,7 +286,7 @@ function showAdderss() {
 var TEXT_DATA;
 
 
-function getPasteText() {
+function getPasteText(table_id = "#trans_data") {
 	$("text-input").ready(function() {
 		var text = $.trim($("textarea").val());
 
@@ -312,7 +312,7 @@ function getPasteText() {
 			} else {
 				console.log("INFO: Stay");
 			}
-			jsonToTable(json, "#trans_data", 10);
+			jsonToTable(json, table_id, 10);
 			TEXT_DATA = json;
 		} else {
 			alert("输入的字符是空的哦~~")

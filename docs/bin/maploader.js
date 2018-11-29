@@ -248,8 +248,7 @@ function run(pointer = false, data = HEAT_JSON) {
 	var js = document.scripts;
 	console.log(js[js.length - 2].src);
 	let path = js[js.length - 1].src.substring(0, js[js.length - 1].src.lastIndexOf("/"))
-
-	path = path.substring(0, path.lastIndexOf("/")) + "/css/icon/";
+	path = path.substring(0, path.lastIndexOf("bin")) + "/css/icon/";
 	console.log(path);
 
 	map_data = {
@@ -283,46 +282,6 @@ function run(pointer = false, data = HEAT_JSON) {
 }
 
 
-function runHeat(pointer = false, data = HEAT_JSON) {
-	var power = parseInt(document.getElementById("heat-power").value);
-	var m_name = document.getElementById("marker-name").value;
-	console.log(power);
-
-	let circle_length_1 = clickCircleList("circle_1");
-	let circle_length_2 = clickCircleList("circle_2");
-	let circle_length_3 = clickCircleList("circle_3");
-	let radius = [circle_length_1, circle_length_2, circle_length_3];
-
-	console.log(radius);
-
-	map_data = {
-		max: power,
-		data: data
-	};
-
-	console.log(map_data);
-
-	if (pointer) {
-		console.log("pointer map");
-		let latlng = userInputLatLng();
-		var point = new qq.maps.LatLng(latlng[0], latlng[1]);
-		loadMap(point, zoom = 14);
-	} else {
-		addressToLatLng(LOCATION_SELECT);
-		loadMap(ADDRESS_POINT, zoom = 10);
-	}
-	layerOfHeat(MAP, map_data);
-
-	if (pointer) {
-		addMarker(MAP, point, m_name);
-		for (var j = 0; j < radius.length; ++j) {
-			addCircle(MAP, point, radius[j], fillWeight = 0.04,
-				color = "#0040FF", option = "circle");
-		}
-	}
-}
-
-
 function run_point(data = TEXT_DATA) {
 	var point = new qq.maps.LatLng(data[0].lat, data[0].lng);
 	let circle_length_1 = clickCircleList("circle_1");
@@ -337,11 +296,66 @@ function run_point(data = TEXT_DATA) {
 }
 
 
-function run_bubble(pointer = false, data = HEAT_JSON, length = 100) {
+function runHeat(pointer = false, data = HEAT_JSON, store = TEXT_DATA) {
+	var js = document.scripts;
+	let path = js[js.length - 1].src.substring(0, js[js.length - 1].src.lastIndexOf("/"))
+	path = path.substring(0, path.lastIndexOf("bin")) + "/css/icon/";
+
+	var power = parseInt(document.getElementById("heat-power").value);
+	var m_name = document.getElementById("marker-name").value;
+
+	let circle_length_1 = clickCircleList("circle_1");
+	let circle_length_2 = clickCircleList("circle_2");
+	let circle_length_3 = clickCircleList("circle_3");
+	let radius = [circle_length_1, circle_length_2, circle_length_3];
+
+	map_data = {
+		max: power,
+		data: data
+	};
+
 	if (pointer) {
 		console.log("pointer map");
 		let latlng = userInputLatLng();
-		let point = new qq.maps.LatLng(latlng[0], latlng[1]);
+		var point = new qq.maps.LatLng(latlng[0], latlng[1]);
+		loadMap(point, zoom = 14);
+	} else {
+		addressToLatLng(LOCATION_SELECT);
+		loadMap(ADDRESS_POINT, zoom = 10);
+	}
+
+	layerOfHeat(MAP, map_data);
+
+	if (pointer) {
+		addMarker(MAP, point, m_name, color = path + "pointer.png");
+		for (var j = 0; j < radius.length; ++j) {
+			addCircle(MAP, point, radius[j], fillWeight = 0.04,
+				color = "#0040FF", option = "circle");
+		}
+	}
+
+	if (store !== undefined){
+		layerOfMarker(MAP, store, radius = radius, circle = true);
+	}
+}
+
+
+function runBubble(pointer = false, data = HEAT_JSON, store = TEXT_DATA, length = 100) {
+	var js = document.scripts;
+	let path = js[js.length - 1].src.substring(0, js[js.length - 1].src.lastIndexOf("/"))
+	path = path.substring(0, path.lastIndexOf("bin")) + "/css/icon/";
+
+	let circle_length_1 = clickCircleList("circle_1");
+	let circle_length_2 = clickCircleList("circle_2");
+	let circle_length_3 = clickCircleList("circle_3");
+	let radius = [circle_length_1, circle_length_2, circle_length_3];
+
+	var m_name = document.getElementById("marker-name").value;
+
+	if (pointer) {
+		console.log("pointer map");
+		let latlng = userInputLatLng();
+		var point = new qq.maps.LatLng(latlng[0], latlng[1]);
 		loadMap(point, zoom = 14);
 
 	} else {
@@ -350,6 +364,18 @@ function run_bubble(pointer = false, data = HEAT_JSON, length = 100) {
 	}
 
 	layerOfBubble(data);
+
+	if (pointer) {
+		addMarker(MAP, point, m_name, color = path + "pointer.png");
+		for (var j = 0; j < radius.length; ++j) {
+			addCircle(MAP, point, radius[j], fillWeight = 0.04,
+				color = "#0040FF", option = "circle");
+		}
+	}
+
+	if (store !== undefined){
+		layerOfMarker(MAP, store, radius = radius, circle = true);
+	}
 }
 
 
