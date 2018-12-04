@@ -121,14 +121,17 @@
                     <h4 style="text-align: left;">地图选项</h4>
                     <div class="col-sm-12">
                         <form action="#">
-                            <label for="pcc_show">您选择的是：
-                            <input type="text" value="" id="pcc_show">
-                            </label>
-
-                            <select id="province_dropdown1" onchange="showCity(this)">
+                            <select id="province_dropdown" onchange="showCity(this)">
                                 <option>=请选择省份=</option>
                             </select>
-                            <button type="button" class="btn met1" onClick="showAdderss()">确定</button>
+                            <select id="city_dropdown" onchange="showCountry(this)">
+                                <option>=请选择省份=</option>
+                            </select>
+                            <button type="button" class="btn met1" onClick="showAdderss()">确定</button><br>
+
+                            <label for="pcc_show">您选择的是：
+                                <input type="text" value="" id="pcc_show">
+                            </label>
                         </form>
                     </div>
 
@@ -182,5 +185,6 @@
 <script src="../bin/maploader.js"></script>
 <script src="../bin/interaction.js"> </script>
 <script src="../bin/initial/circledropdown.js"> </script>
+<script src="../bin/initial/provcitydropdown.js"></script>
 <script src="../bin/initial/map.js"> </script>
 </html>

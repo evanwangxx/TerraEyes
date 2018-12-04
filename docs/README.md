@@ -1,7 +1,7 @@
 ### Terra Eyes
 Terra Eyes:  https://evanwangxx.github.io/terra_eyes/
 
-Version Now: 1.4.7
+Version Now: 1.5.0
 
 
 ### Terra
@@ -35,6 +35,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 
 ### History
+
+1.5.0  | add move interval by time; bug fix; split dropdown and interaction
+
 1.4.7  | data parser in Heatmap & Bubblemap
 1.4.6  | bubble maintenance
 1.4.5  | Heatmap maintenance

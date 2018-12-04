@@ -115,14 +115,18 @@
                         <div class="col-sm-8">
                             <div class="col-sm-12">
                                 <form action="#">
+                                    <select id="province_dropdown" onchange="showCity(this)">
+                                        <option>=请选择省份=</option>
+                                    </select>
+                                    <select id="city_dropdown" onchange="showCountry(this)">
+                                        <option>=请选择省份=</option>
+                                    </select>
+                                    <button type="button" class="btn met1" onClick="showAdderss()">确定</button><br>
+
                                     <label for="pcc_show">您选择的是：
                                         <input type="text" value="" id="pcc_show">
                                     </label>
-                                    <select id="province_dropdown1" onchange="showCity(this)">
-                                        <option>=请选择省份=</option>
-                                    </select>
-                                    <button type="button" class="btn met1" onClick="showAdderss()">确定</button>
-                               </form>
+                                </form>
                            </div>
 
                            <div class="col-sm-12">
@@ -139,6 +143,7 @@
                                 <span class="glyphicon glyphicon-info-sign" title="打点覆盖半径"></span>
                             </div>
                         </div>
+                        
                         <div class="col-sm-4">
                             <button type="button" class="btn btn-primary btn-lg" onclick="runBubble()">生成地图</button>
                             <button type="button" class="btn btn-info btn-lg" onclick="runBubble(true)">输入经纬度</button>
@@ -165,5 +170,6 @@
 <script src="../bin/maploader.js"></script>
 <script src="../bin/interaction.js"> </script>
 <script src="../bin/initial/circledropdown.js"> </script>
+<script src="../bin/initial/provcitydropdown.js"></script>
 <script src="../bin/initial/map.js"> </script>
 </html>

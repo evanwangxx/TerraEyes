@@ -30,6 +30,18 @@ function convert_bd09_gcj02(lat, lng) {
 }
 
 
+function covertPointListToPath(pointPathString, sep = "|") {
+	var all_point = pointPathString.split(sep);
+	var path = [];
+
+	for (var i = 0; i < all_point.length; i++) {
+		let point = all_point[i].split(";");
+		path.push(new qq.maps.LatLng(point[0], point[1]));
+	}
+	return path;
+}
+
+
 // Geohash Converter
 BITS = [16, 8, 4, 2, 1];
 

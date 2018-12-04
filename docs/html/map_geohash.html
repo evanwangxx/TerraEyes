@@ -21,7 +21,7 @@
         .heatmap {
             padding: 3px;
             width: 100%;
-            height: 900px;
+            height: 800px;
             margin-top: 30px;
         }
 
@@ -89,7 +89,7 @@
 
                         <div class="col-sm-6" style="text-align: left;">
                             <h4 style="text-align: left;"><small>门店数据格式： 经度，纬度</small></h4>
-                            <input type="file" id="store_data" style="display:inline-block;" onclick="csvStoreLoader(header=STORE_HEADER)">
+                            <input type="file" id="store_data" style="display:inline-block;" onclick="csvStoreLoaderWithPath()">
                             <button type="button" class="btn btn-default btn-sm" style="display:inline-block;" onclick="jsonToTable(STORE_JSON, id='#table1')">显示</button>
                         </div>
                         <table class="table table-striped" id="table1"></table>
@@ -115,13 +115,13 @@
                     <div class="col-sm-12" style="margin-top: 30px;">
                         <div class="col-sm-6"></div>
                         <div class="col-sm-6">
-                            <button type="button" class="btn btn-primary btn-lg" onclick="run_geohash()">生成地图</button>
-
-                            <button type="button" class="btn btn-info btn-lg" onclick="run_geohash(true)">输入经纬度</button>
+                            <button type="button" class="btn btn-primary btn-lg" onclick="runGeohash()">生成地图</button>
+                            <button type="button" class="btn btn-info btn-lg" onclick="runGeohash(true)">输入经纬度</button>
                         </div>
                     </div>
 
                     <div class="col-sm-12">
+                        <div id="polyinfo"></div>
                         <div class="heatmap" id="map-canvas"></div>
                     </div>
                 </div>

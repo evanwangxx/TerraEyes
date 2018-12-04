@@ -1,5 +1,22 @@
 // Initial Circle dropdown
 
+function selectCircleRadius() {
+	let circle_length_1 = clickCircleList("circle_1");
+	let circle_length_2 = clickCircleList("circle_2");
+	let circle_length_3 = clickCircleList("circle_3");
+	let radius = [circle_length_1, circle_length_2, circle_length_3];
+
+	return radius
+}
+
+function clickCircleList(id) {
+	var myselect = document.getElementById(id);
+	var index = myselect.selectedIndex;
+	var distance = myselect.options[index].value;
+
+	return Number(distance);
+}
+
 var CIRCLE_DOWN_1 = document.getElementById("circle_1");
 var CIRCLE_DOWN_2 = document.getElementById("circle_2");
 var CIRCLE_DOWN_3 = document.getElementById("circle_3");

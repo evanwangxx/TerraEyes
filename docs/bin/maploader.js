@@ -9,52 +9,6 @@ var ZOOM;
 var ADDRESS_POINT;
 var ADDRESS;
 
-function addMarker(map, point, text, color = "http://webapi.amap.com/theme/v1.3/markers/n/mark_b.png") {
-	var icon = new qq.maps.MarkerImage(color);
-	var marker = new qq.maps.Marker({
-		position: point,
-		animation: qq.maps.MarkerAnimation.DROP,
-		map: map
-	});
-
-	marker.setIcon(icon);
-	marker.setShadow(null);
-
-	qq.maps.event.addListener(marker, 'click', function() {
-		var info = new qq.maps.InfoWindow({
-			map: map
-		});
-		info.open();
-		info.setContent('<div style="text-align:center;white-space:nowrap;' +
-			'margin:10px;">' + text + '</div>');
-		info.setPosition(marker.getPosition());
-	});
-}
-
-
-function layerOfMarker(map, data, radius = null, circle = false, color = '#FA5858') {
-
-	if (radius === null) {
-		radius = [3000];
-		console.log("in null");
-	}
-
-	console.log("a" + color);
-
-	console.log(radius);
-	for (var i = 0; i < data.length; i++) {
-		var point = new qq.maps.LatLng(data[i].lat, data[i].lng);
-		addMarker(map, point, data[i].详细);
-		if (circle) {
-			for (var j = 0; j < radius.length; ++j) {
-				console.log("b" + color);
-				addCircle(map, point, radius[j], fillWeight = 0.04, color = color);
-			}
-		}
-	}
-	console.log("Layer label Done");
-}
-
 
 function addCircle(map, point, radius, fillWeight = 0.05, color = '#FA5858', option = "other") {
 	if (option == "bubble") {
@@ -73,11 +27,11 @@ function addCircle(map, point, radius, fillWeight = 0.05, color = '#FA5858', opt
 			map: map,
 			center: point,
 			radius: radius,
-			strokeWeight: 3,
+			strokeWeight: 1,
 			strokeDashStyle: 'dash',
 			cursor: 'pointer',
 			visible: true,
-			fillColor: qq.maps.Color.fromHex(color, 0.0000001),
+			fillColor: qq.maps.Color.fromHex(color, 0.05),
 			zIndex: 1000
 		}
 	} else {
@@ -86,13 +40,102 @@ function addCircle(map, point, radius, fillWeight = 0.05, color = '#FA5858', opt
 			center: point,
 			radius: radius,
 			strokeColor: '#5858FA',
-			fillColor: qq.maps.Color.fromHex(color, fillWeight),
+			fillColor: null,
 			strokeDashStyle: 'dash',
-			strokeWeight: 1.0
+			strokeWeight: 3.0,
 		}
 	}
 	var circle = new qq.maps.Circle(option);
 	return circle;
+}
+
+
+function addLabel(map, point, text, offsetOrNot, color = "#242424", backgroundColor = "") {
+	var cssC = {
+		color: color,
+		fontWeight: "bold",
+	}
+	if (offsetOrNot) {
+		var label = new qq.maps.Label({
+			map: map,
+			content: text,
+			position: point,
+			style: cssC,
+			zIndex: 1000
+		});
+	} else {
+		var label = new qq.maps.Label({
+			map: map,
+			content: text,
+			position: point,
+			style: cssC,
+			offset: new qq.maps.Size(0, 10),
+			zIndex: 1000
+		});
+	}
+}
+
+
+function addMarker(map, point, text, color = "http://webapi.amap.com/theme/v1.3/markers/n/mark_b.png") {
+	var icon = new qq.maps.MarkerImage(color);
+	var marker = new qq.maps.Marker({
+		position: point,
+		animation: qq.maps.MarkerAnimation.DROP,
+		map: map,
+		zIndex: 1000
+	});
+
+	marker.setIcon(icon);
+	marker.setShadow(null);
+
+	qq.maps.event.addListener(marker, 'click', function() {
+		var info = new qq.maps.InfoWindow({
+			map: map
+		});
+		info.open();
+		info.setContent('<div style="text-align:center;white-space:nowrap;' +
+			'margin:10px;">' + text + '</div>');
+		info.setPosition(marker.getPosition());
+	});
+}
+
+
+function addPolygon(map, polygon_array, color, score, raw_score, center) {
+	var polygon = new qq.maps.Polygon({
+		map: map,
+		path: polygon_array,
+		strokeColor: color,
+		strokeWeight: 0,
+		fillColor: qq.maps.Color.fromHex(color, score)
+	});
+
+	qq.maps.event.addListener(polygon, 'click', function() {
+		var info = new qq.maps.InfoWindow({
+			map: map
+		});
+		info.open();
+		info.setContent('<div style="text-align:center;white-space:nowrap;' + 'margin:10px;">' +
+			"量级：" + raw_score +
+			"<br>浓度：" + score.toFixed(2) + '</div>');
+		info.setPosition(center);
+	});
+
+	qq.maps.event.addListener(polygon, 'mousemove', function(event) {
+		document.getElementById("polyinfo").innerHTML = "量级：" + raw_score +
+			"<br>浓度：" + score.toFixed(2);
+	});
+}
+
+
+function addPolyline(map, path, strokeColor = '#610B21', strokeWeight = 3) {
+	var polyline = new qq.maps.Polyline({
+		map: map,
+		path: path,
+		strokeColor: strokeColor,
+		strokeWeight: strokeWeight,
+		editable: false,
+		zIndex: 100
+	});
 }
 
 
@@ -109,6 +152,7 @@ function layerOfBubble(data, max_bubble = 500) {
 		let point = new qq.maps.LatLng(data_sort[i]["lat"], data_sort[i]["lng"]);
 		var radius = ((parseInt(data_sort[i]["分数"]) - data_min) /
 			(data_max - data_min)) * (radius_max - radius_min) + radius_min;
+
 		if (radius != NaN) {
 			var circle = addCircle(MAP, point, radius, fillWeight = 0.5, color = '#FA5858', option = "bubble");
 			qq.maps.event.addListener(circle, 'click', function() {
@@ -122,30 +166,6 @@ function layerOfBubble(data, max_bubble = 500) {
 				info.setPosition(point);
 			});
 		}
-	}
-}
-
-
-function addLabel(map, point, text, offsetOrNot, color = "#242424", backgroundColor = "") {
-	var cssC = {
-		color: color,
-		fontWeight: "bold",
-	}
-	if (offsetOrNot) {
-		var label = new qq.maps.Label({
-			map: map,
-			content: text,
-			position: point,
-			style: cssC
-		});
-	} else {
-		var label = new qq.maps.Label({
-			map: map,
-			content: text,
-			position: point,
-			style: cssC,
-			offset: new qq.maps.Size(0, 10)
-		});
 	}
 }
 
@@ -169,32 +189,6 @@ function layerOfHeat(map, data, valueField = "分数", radius = 1, maxOpacity = 
 }
 
 
-function addPolygon(map, polygon_array, color, score, raw_score, center) {
-	var polygon = new qq.maps.Polygon({
-		map: map,
-		path: polygon_array,
-		strokeColor: color,
-		strokeWeight: 0,
-		fillColor: qq.maps.Color.fromHex(color, score)
-	});
-
-	qq.maps.event.addListener(polygon, 'mouseover', function() {
-		var info = new qq.maps.InfoWindow({
-			map: map
-		});
-		info.open();
-		info.setContent('<div style="text-align:center;white-space:nowrap;' + 'margin:10px;">' +
-			"量级：" + raw_score +
-			"<br>浓度：" + score.toFixed(2) + '</div>');
-		info.setPosition(center);
-
-		qq.maps.event.addListener(polygon, 'mouseout', function() {
-			info.close();
-		});
-	});
-}
-
-
 function layerOfGeohash(map, geohash, level, concentration, raw_score) {
 	this.box = decodeGeoHash(geohash);
 	color = getColr(level);
@@ -208,6 +202,43 @@ function layerOfGeohash(map, geohash, level, concentration, raw_score) {
 	var center = new qq.maps.LatLng((this.box.latitude[1] + this.box.latitude[0]) / 2.0,
 		(this.box.longitude[1] + this.box.longitude[0]) / 2);
 	addPolygon(map, polygonArr, color, concentration, raw_score, center);
+}
+
+
+function layerOfMarker(map, data,
+	radius = null, circle = false, color = '#FA5858', reachRadius = false, circleOption = 'circle') {
+
+	if (radius === null) {
+		radius = [3000];
+	}
+
+	for (var i = 0; i < data.length; i++) {
+		var point = new qq.maps.LatLng(data[i].lat, data[i].lng);
+		addMarker(map, point, data[i].详细);
+		if (circle) {
+			for (var j = 0; j < radius.length; ++j) {
+				addCircle(map, point, radius[j], fillWeight = 0.04, color = color, option = circleOption);
+			}
+		}
+
+		if (reachRadius) {
+			let path1 = covertPointListToPath(data[i].path1);
+			let path2 = covertPointListToPath(data[i].path2);
+			let path3 = covertPointListToPath(data[i].path3);
+			addPolyline(map, path1, strokeColor = '#610B21', strokeWeight = 3);
+			addPolyline(map, path2, strokeColor = '#610B38', strokeWeight = 2);
+			addPolyline(map, path3, strokeColor = '#8A084B', strokeWeight = 1);
+		}
+	}
+}
+
+
+function getIconPath() {
+	var js = document.scripts;
+	let path = js[js.length - 1].src.substring(0, js[js.length - 1].src.lastIndexOf("/"))
+	path = path.substring(0, path.lastIndexOf("bin")) + "/css/icon/";
+
+	return path
 }
 
 
@@ -241,15 +272,12 @@ function loadMap(point, zoom = 3, mapTypeId = qq.maps.MapTypeId.ROADMAP) {
 }
 
 
-// ---------------------------- main -----------------------------------------------
+// ---------------------------- main --------------------------------
 
 
 function run(pointer = false, data = HEAT_JSON) {
-	var js = document.scripts;
-	console.log(js[js.length - 2].src);
-	let path = js[js.length - 1].src.substring(0, js[js.length - 1].src.lastIndexOf("/"))
-	path = path.substring(0, path.lastIndexOf("bin")) + "/css/icon/";
-	console.log(path);
+
+	let path = getIconPath();
 
 	map_data = {
 		max: 100,
@@ -257,7 +285,7 @@ function run(pointer = false, data = HEAT_JSON) {
 	};
 
 	if (pointer) {
-		console.log("pointer map");
+		console.log("INFO | pointer map");
 		let latlng = userInputLatLng();
 		let point = new qq.maps.LatLng(latlng[0], latlng[1]);
 		loadMap(point, zoom = 14);
@@ -282,14 +310,11 @@ function run(pointer = false, data = HEAT_JSON) {
 }
 
 
-function run_point(data = TEXT_DATA) {
+function runPoint(data = TEXT_DATA) {
 	var point = new qq.maps.LatLng(data[0].lat, data[0].lng);
-	let circle_length_1 = clickCircleList("circle_1");
-	let circle_length_2 = clickCircleList("circle_2");
-	let circle_length_3 = clickCircleList("circle_3");
 
 	let color = clickColorList("color-dd");
-	let radius = [circle_length_1, circle_length_2, circle_length_3];
+	let radius = selectCircleRadius()
 
 	loadMap(point, zoom = 14);
 	layerOfMarker(MAP, data, radius = radius, circle = true, color = color);
@@ -297,17 +322,10 @@ function run_point(data = TEXT_DATA) {
 
 
 function runHeat(pointer = false, data = HEAT_JSON, store = TEXT_DATA) {
-	var js = document.scripts;
-	let path = js[js.length - 1].src.substring(0, js[js.length - 1].src.lastIndexOf("/"))
-	path = path.substring(0, path.lastIndexOf("bin")) + "/css/icon/";
-
+	let path = getIconPath();
 	var power = parseInt(document.getElementById("heat-power").value);
 	var m_name = document.getElementById("marker-name").value;
-
-	let circle_length_1 = clickCircleList("circle_1");
-	let circle_length_2 = clickCircleList("circle_2");
-	let circle_length_3 = clickCircleList("circle_3");
-	let radius = [circle_length_1, circle_length_2, circle_length_3];
+	let radius = selectCircleRadius();
 
 	map_data = {
 		max: power,
@@ -315,7 +333,7 @@ function runHeat(pointer = false, data = HEAT_JSON, store = TEXT_DATA) {
 	};
 
 	if (pointer) {
-		console.log("pointer map");
+		console.log("INFO | pointer map");
 		let latlng = userInputLatLng();
 		var point = new qq.maps.LatLng(latlng[0], latlng[1]);
 		loadMap(point, zoom = 14);
@@ -334,23 +352,16 @@ function runHeat(pointer = false, data = HEAT_JSON, store = TEXT_DATA) {
 		}
 	}
 
-	if (store !== undefined){
+	if (store !== undefined) {
 		layerOfMarker(MAP, store, radius = radius, circle = true);
 	}
 }
 
 
 function runBubble(pointer = false, data = HEAT_JSON, store = TEXT_DATA, length = 100) {
-	var js = document.scripts;
-	let path = js[js.length - 1].src.substring(0, js[js.length - 1].src.lastIndexOf("/"))
-	path = path.substring(0, path.lastIndexOf("bin")) + "/css/icon/";
-
-	let circle_length_1 = clickCircleList("circle_1");
-	let circle_length_2 = clickCircleList("circle_2");
-	let circle_length_3 = clickCircleList("circle_3");
-	let radius = [circle_length_1, circle_length_2, circle_length_3];
-
-	var m_name = document.getElementById("marker-name").value;
+	let path = getIconPath();
+	let radius = selectCircleRadius()
+	let m_name = document.getElementById("marker-name").value;
 
 	if (pointer) {
 		console.log("pointer map");
@@ -373,13 +384,13 @@ function runBubble(pointer = false, data = HEAT_JSON, store = TEXT_DATA, length 
 		}
 	}
 
-	if (store !== undefined){
+	if (store !== undefined) {
 		layerOfMarker(MAP, store, radius = radius, circle = true);
 	}
 }
 
 
-function run_geohash(data_geohash = GEOHASH_JSON, pointer = false, filter = 30, gaussian = true) {
+function runGeohash(pointer = false, data_geohash = GEOHASH_JSON, filter = 30) {
 	let data = [];
 	let score_array = [];
 	for (var i = 0; i < data_geohash.length; ++i) {
@@ -396,7 +407,7 @@ function run_geohash(data_geohash = GEOHASH_JSON, pointer = false, filter = 30, 
 	data_sort.pop(data_sort);
 
 	if (pointer) {
-		console.log("pointer map");
+		console.log("INFO | pointer map");
 		let latlng = userInputLatLng();
 		let point = new qq.maps.LatLng(latlng[0], latlng[1]);
 		loadMap(point, zoom = 14);
@@ -407,35 +418,23 @@ function run_geohash(data_geohash = GEOHASH_JSON, pointer = false, filter = 30, 
 	}
 
 	if (STORE_JSON !== undefined) {
-		layerOfMarker(MAP, STORE_JSON, circle = true);
+		layerOfMarker(MAP, STORE_JSON, 
+			radius = [3000], circle = true, color = null, 
+			reachRadius = true, circleOption = 'other');
 	}
 
-	if (gaussian) {
-		var data_max = (parseInt(data_sort[0]["分数"]) - mean) / std;
-		var data_min = (parseInt(data_sort[data_sort.length - 1]["分数"] - mean)) / std;
-		var radius_max = 1.00;
-		var radius_min = 0.05;
+	var data_max = (parseInt(data_sort[0]["分数"]) - mean) / std;
+	var data_min = (parseInt(data_sort[data_sort.length - 1]["分数"] - mean)) / std;
+	var radius_max = 1.00;
+	var radius_min = 0.05;
 
-		for (var i = 0; i < data_sort.length; ++i) {
-			var geohash = data_sort[i]["geohash"];
-			var raw_score = data_sort[i]["分数"];
-			var normal_score = ((parseInt(raw_score) - mean) / std);
-			var score = ((normal_score - data_min) /
-				(data_max - data_min)) * (radius_max - radius_min) + radius_min;
-			layerOfGeohash(MAP, geohash, 0.92, score, raw_score);
-		}
-	} else {
-		var data_max = data_sort[0]["分数"];
-		var data_min = data_sort[data_sort.length - 1]["分数"];
-		var radius_max = 1.00;
-		var radius_min = 0.05;
-
-		for (var i = 0; i < data_sort.length; ++i) {
-			var geohash = data_sort[i]["geohash"];
-			var raw_score = data_sort[i]["分数"];
-			var score = ((parseInt(raw_score) - data_min) /
-				(data_max - data_min)) * (radius_max - radius_min) + radius_min;
-			layerOfGeohash(MAP, geohash, 0.92, score, raw_score);
-		}
+	for (var i = 0; i < data_sort.length; ++i) {
+		var geohash = data_sort[i]["geohash"];
+		var raw_score = data_sort[i]["分数"];
+		var normal_score = ((parseInt(raw_score) - mean) / std);
+		var score = ((normal_score - data_min) /
+			(data_max - data_min)) * (radius_max - radius_min) + radius_min;
+		layerOfGeohash(MAP, geohash, 0.92, score, raw_score);
 	}
+
 }
