@@ -139,7 +139,7 @@ function addPolyline(map, path, strokeColor = '#610B21', strokeWeight = 3) {
 }
 
 
-function layerOfBubble(data, max_bubble = 500) {
+function layerOfBubble(data, max_bubble = 500, color = '#FA5858') {
 
 	var data_sort = quickSort(data);
 	data_sort.pop();
@@ -154,7 +154,7 @@ function layerOfBubble(data, max_bubble = 500) {
 			(data_max - data_min)) * (radius_max - radius_min) + radius_min;
 
 		if (radius != NaN) {
-			var circle = addCircle(MAP, point, radius, fillWeight = 0.5, color = '#FA5858', option = "bubble");
+			var circle = addCircle(MAP, point, radius, fillWeight = 0.5, color = color, option = "bubble");
 			qq.maps.event.addListener(circle, 'click', function() {
 				var info = new qq.maps.InfoWindow({
 					map: MAP
@@ -314,7 +314,7 @@ function runPoint(data = TEXT_DATA) {
 	var point = new qq.maps.LatLng(data[0].lat, data[0].lng);
 
 	let color = clickColorList("color-dd");
-	let radius = selectCircleRadius()
+	let radius = selectCircleRadius();
 
 	loadMap(point, zoom = 14);
 	layerOfMarker(MAP, data, radius = radius, circle = true, color = color);
@@ -360,8 +360,11 @@ function runHeat(pointer = false, data = HEAT_JSON, store = TEXT_DATA) {
 
 function runBubble(pointer = false, data = HEAT_JSON, store = TEXT_DATA, length = 100) {
 	let path = getIconPath();
-	let radius = selectCircleRadius()
+	var max_bubble = parseInt(document.getElementById("max-bubble").value);
 	let m_name = document.getElementById("marker-name").value;
+	let radius = selectCircleRadius();
+	let color = clickColorList("color-dd");
+
 
 	if (pointer) {
 		console.log("pointer map");
@@ -374,7 +377,7 @@ function runBubble(pointer = false, data = HEAT_JSON, store = TEXT_DATA, length 
 		loadMap(ADDRESS_POINT, zoom = 10);
 	}
 
-	layerOfBubble(data);
+	layerOfBubble(data, max_bubble, color);
 
 	if (pointer) {
 		addMarker(MAP, point, m_name, color = path + "pointer.png");

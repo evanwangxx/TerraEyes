@@ -117,7 +117,7 @@
 
                     <div class="col-sm-12" style="margin-top: 30px; margin-bottom: 10px; background: #F2F2F2; height: auto;">
                         <h4 style="text-align: left;">地图选项</h4>
-                        <div class="col-sm-8">
+                        <div class="col-sm-4">
                             <div class="col-sm-12">
                                 <form action="#">
                                     <select id="province_dropdown" onchange="showCity(this)">
@@ -133,8 +133,21 @@
                                     </label>
                                 </form>
                            </div>
+                        </div>
 
-                           <div class="col-sm-12">
+                        <div class="col-sm-4">
+                            <div class="col-sm-12">
+                                <label>最大气泡数：
+                                    <input type="text" id="max-bubble" value="100">
+                                </label>
+                            </div>
+
+                            <div class="col-sm-12">
+                                <label for="inputlg">气泡颜色 ： </label>
+                                <select id="color-dd"></select>
+                            </div>
+
+                            <div class="col-sm-12">
                                 <label>打点名称  ：
                                     <input type="text" id="marker-name" value="Call Me Terra">
                                 </label>
@@ -176,5 +189,6 @@
 <script src="../bin/interaction.js"> </script>
 <script src="../bin/initial/circledropdown.js"> </script>
 <script src="../bin/initial/provcitydropdown.js"></script>
+<script src="../bin/initial/colordropdown.js"></script>
 <script src="../bin/initial/map.js"> </script>
 </html>
