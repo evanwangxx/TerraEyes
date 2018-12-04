@@ -144,12 +144,13 @@ function layerOfBubble(data, max_bubble = 500, color = '#FA5858') {
 	var data_sort = quickSort(data);
 	data_sort.pop();
 	var data_max = data_sort[0]["分数"]
-	var data_min = data_sort[data_sort.length - 1]["分数"]
+	var data_min = data_sort[data_sort.length - 3]["分数"]
 	var radius_max = 800;
 	var radius_min = 50;
 
-	for (var i = 0; i < data_sort.length && i < max_bubble; ++i) {
+	for (var i = 0; i < data_sort.length-1 && i < max_bubble; ++i) {
 		let point = new qq.maps.LatLng(data_sort[i]["lat"], data_sort[i]["lng"]);
+		var level = data_sort[i]["分数"];
 		var radius = ((parseInt(data_sort[i]["分数"]) - data_min) /
 			(data_max - data_min)) * (radius_max - radius_min) + radius_min;
 
@@ -161,7 +162,7 @@ function layerOfBubble(data, max_bubble = 500, color = '#FA5858') {
 				});
 				info.open();
 				info.setContent('<div style="text-align:center;white-space:nowrap;' +
-					'margin:10px;">' + "量级：" + data_sort[i]["分数"] +
+					'margin:10px;">' + "量级：" + level +
 					"<br>半径：" + radius.toFixed(2) + '</div>');
 				info.setPosition(point);
 			});
