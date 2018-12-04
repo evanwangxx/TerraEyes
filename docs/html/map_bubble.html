@@ -81,33 +81,38 @@
                 <div class="col-sm-10 text-left" >
                     <div class="col-sm-12" style="background: #F2F2F2; margin-top: 20px;">
                         <div class="col-sm-6" style="margin-top: 20px;">
-                            <label>输入气泡图数据</label>
-                            <h5 style="text-align: left;">
-                                <small>数据格式： 经度，维度，分值</small>
-                            </h5>
-                            <input type="file" id="heat_data" style="display:inline-block;" onclick="csvHeatLoader()">
-                            <button type="button" class="btn btn-default btn-sm" style="display:inline-block;" onclick="jsonToTable(HEAT_JSON, id='#table1')">显示</button>
+                            <div class="col-sm-12">
+                                <label>输入气泡图数据</label>
+                                <h5 style="text-align: left;">
+                                    <small>数据格式： 经度，维度，分值</small>
+                                </h5>
+                                <input type="file" id="heat_data" style="display:inline-block;" onclick="csvHeatLoader()">
+                                <button type="button" class="btn btn-default btn-sm" style="display:inline-block;" onclick="jsonToTable(HEAT_JSON, id='#table1')">显示</button>
+                                <br>
+                                <br>
+                                <br>
+                            </div>
+                            <br>
+                            <div class="col-sm-12">
+                                <label>输入地点数据</label><span class="glyphicon glyphicon-info-sign" title="粘贴数据至输入框"></span>
+                                <h5><small>数据格式： 经度，纬度，详细信息（可选）</small></h5>
+                                <textarea class="form-control" rows="10" id="text-input"></textarea>
+                                <div class="col-sm-8">
+                                    <select id="lat-lng-convert">
+                                        <option>不转化</option>
+                                        <option>转化为腾讯高德系（GCJ02）</option>
+                                        <option>转化为百度系（BD09）</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-4">
+                                    <button type="button" class="btn btn-default btn-sm" onclick="getPasteText('#table1')"><span class="glyphicon glyphicon-share-alt"></span>转化数据</button>
+                                    <br><br>
+                                </div>
+                            </div>
                         </div>
-
                         <div class="col-sm-6" style="background: #F2F2F2; margin-top: 20px;">
-                            <label>输入地点数据</label><span class="glyphicon glyphicon-info-sign" title="粘贴数据至输入框"></span>
-                            <h5><small>数据格式： 经度，纬度，详细信息（可选）</small></h5>
-                            <textarea class="form-control" rows="10" id="text-input"></textarea>
-                            <div class="col-sm-8">
-                                <select id="lat-lng-convert">
-                                    <option>不转化</option>
-                                    <option>转化为腾讯高德系（GCJ02）</option>
-                                    <option>转化为百度系（BD09）</option>
-                                </select>
-                            </div>
-                            <div class="col-sm-4">
-                                <button type="button" class="btn btn-primary btn-sm" onclick="getPasteText('#table1')"><span class="glyphicon glyphicon-share-alt"></span>转化数据</button>
-                            </div>
+                            <table class="table table-striped" id="table1"></table>
                         </div>
-
-                        <br>
-                        <table class="table table-striped" id="table1"></table>
-                        <br>
                     </div>
 
                     <div class="col-sm-12" style="margin-top: 30px; margin-bottom: 10px; background: #F2F2F2; height: auto;">

@@ -5,7 +5,7 @@
 
 
 var CIRCLE_DROP_DOWN = [{
-    name: "无",
+    name: "=无=",
     length: 0
 }, {
     name: "100m",
@@ -37,7 +37,7 @@ var CIRCLE_DROP_DOWN = [{
 }]
 
 var CORLOR_DROP_DOWN = [{
-    name: "透明",
+    name: "=透明=",
     length: "#A4A4A4"
 }, {
     name: "红色",
