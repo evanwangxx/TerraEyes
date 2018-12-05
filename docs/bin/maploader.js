@@ -22,6 +22,18 @@ function addCircle(map, point, radius, fillWeight = 0.05, color = '#FA5858', opt
 			visible: true,
 			fillColor: qq.maps.Color.fromHex(color, 0.5)
 		}
+		var circle = new qq.maps.Circle(option);
+
+		qq.maps.event.addListener(circle, 'click', function() {
+			var info = new qq.maps.InfoWindow({
+				map: MAP
+			});
+			info.open();
+			info.setContent('<div style="text-align:center;white-space:nowrap;' +
+				'margin:10px;">' + "量级：" + level +
+				"<br>半径：" + radius.toFixed(2) + '</div>');
+			info.setPosition(point);
+		});
 	} else if (option == "circle") {
 		var option = {
 			map: map,
@@ -34,6 +46,7 @@ function addCircle(map, point, radius, fillWeight = 0.05, color = '#FA5858', opt
 			fillColor: qq.maps.Color.fromHex(color, 0.05),
 			zIndex: 1000
 		}
+		var circle = new qq.maps.Circle(option);
 	} else {
 		var option = {
 			map: map,
@@ -44,19 +57,8 @@ function addCircle(map, point, radius, fillWeight = 0.05, color = '#FA5858', opt
 			strokeDashStyle: 'dash',
 			strokeWeight: 3.0,
 		}
+		var circle = new qq.maps.Circle(option);
 	}
-	var circle = new qq.maps.Circle(option);
-
-	qq.maps.event.addListener(circle, 'click', function() {
-		var info = new qq.maps.InfoWindow({
-			map: MAP
-		});
-		info.open();
-		info.setContent('<div style="text-align:center;white-space:nowrap;' +
-			'margin:10px;">' + "量级：" + level +
-			"<br>半径：" + radius.toFixed(2) + '</div>');
-		info.setPosition(point);
-	});
 	return circle;
 }
 
