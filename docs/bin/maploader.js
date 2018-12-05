@@ -11,30 +11,7 @@ var ADDRESS;
 
 
 function addCircle(map, point, radius, fillWeight = 0.05, color = '#FA5858', option = "other", level) {
-	if (option == "bubble") {
-		var option = {
-			map: map,
-			center: point,
-			radius: radius,
-			strokeWeight: 0,
-			strokeColor: color,
-			cursor: 'pointer',
-			visible: true,
-			fillColor: qq.maps.Color.fromHex(color, 0.5)
-		}
-		var circle = new qq.maps.Circle(option);
-
-		qq.maps.event.addListener(circle, 'click', function() {
-			var info = new qq.maps.InfoWindow({
-				map: MAP
-			});
-			info.open();
-			info.setContent('<div style="text-align:center;white-space:nowrap;' +
-				'margin:10px;">' + "量级：" + level +
-				"<br>半径：" + radius.toFixed(2) + '</div>');
-			info.setPosition(point);
-		});
-	} else if (option == "circle") {
+	if (option == "circle") {
 		var option = {
 			map: map,
 			center: point,
@@ -46,7 +23,6 @@ function addCircle(map, point, radius, fillWeight = 0.05, color = '#FA5858', opt
 			fillColor: qq.maps.Color.fromHex(color, 0.05),
 			zIndex: 1000
 		}
-		var circle = new qq.maps.Circle(option);
 	} else {
 		var option = {
 			map: map,
@@ -57,9 +33,34 @@ function addCircle(map, point, radius, fillWeight = 0.05, color = '#FA5858', opt
 			strokeDashStyle: 'dash',
 			strokeWeight: 3.0,
 		}
-		var circle = new qq.maps.Circle(option);
 	}
+	var circle = new qq.maps.Circle(option);
 	return circle;
+}
+
+function addBubble(map, point, radius, level, color = '#FA5858'){
+	var option = {
+		map: map,
+		center: point,
+		radius: radius,
+		strokeWeight: 0,
+		strokeColor: color,
+		cursor: 'pointer',
+		visible: true,
+		fillColor: qq.maps.Color.fromHex(color, 0.5)
+	}
+	var circle = new qq.maps.Circle(option);
+
+	qq.maps.event.addListener(circle, 'click', function() {
+		var info = new qq.maps.InfoWindow({
+			map: MAP
+		});
+		info.open();
+		info.setContent('<div style="text-align:center;white-space:nowrap;' +
+			'margin:10px;">' + "量级：" + level +
+			"<br>半径：" + radius.toFixed(2) + '</div>');
+		info.setPosition(point);
+	});
 }
 
 
@@ -177,8 +178,9 @@ function layerOfBubble(data_sort, color, max_bubble = 500, radius_min = 50, radi
 			(data_max - data_min)) * (radius_max - radius_min) + radius_min;
 
 		if (radius != NaN) {
-			var circle = addCircle(MAP, point, radius, fillWeight = 0.5, color = color, option = "bubble", level);
-			var label = addLabel(MAP, point, data_sort[i]["详细"], true, "#242424", backgroundColor = "");
+			let rank = i+1;
+			var circle = addBubble(MAP, point, radius, level, color);
+			var label = addLabel(MAP, point, rank + ". " + data_sort[i]["详细"], true, "#242424", backgroundColor = "");
 		}
 	}
 }
