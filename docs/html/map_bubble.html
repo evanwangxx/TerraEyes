@@ -126,13 +126,27 @@
                                     <select id="city_dropdown" onchange="showCountry(this)">
                                         <option>=请选择省份=</option>
                                     </select>
-                                    <button type="button" class="btn met1" onClick="showAdderss()">确定</button><br>
+                                    <button type="button" class="btn btn-default btn-sm" onClick="showAdderss()">确定</button><br>
 
                                     <label for="pcc_show">您选择的是：
                                         <input type="text" value="" id="pcc_show">
                                     </label>
                                 </form>
                            </div>
+
+                           <div class="col-sm-12">
+                                <label>打点名称  ：
+                                    <input type="text" id="marker-name" value="Call Me Terra">
+                                </label>
+                            </div>
+
+                            <div class="col-sm-12">
+                                <label for="inputlg">打点半径 ：</label>
+                                <select id="circle_1"></select>
+                                <select id="circle_2"></select>
+                                <select id="circle_3"></select>
+                                <span class="glyphicon glyphicon-info-sign" title="打点覆盖半径"></span>
+                            </div>
                         </div>
 
                         <div class="col-sm-4">
@@ -145,20 +159,19 @@
                             <div class="col-sm-12">
                                 <label for="inputlg">气泡颜色 ： </label>
                                 <select id="color-dd"></select>
+                                <button id="visible-label" class="btn btn-default btn-sm">显示标签</button>
                             </div>
 
                             <div class="col-sm-12">
-                                <label>打点名称  ：
-                                    <input type="text" id="marker-name" value="Call Me Terra">
+                                <label>气泡最大半径：
+                                    <input type="text" id="r-max" value="500">
                                 </label>
                             </div>
 
                             <div class="col-sm-12">
-                                <label for="inputlg">打点半径 ：</label>
-                                <select id="circle_1"></select>
-                                <select id="circle_2"></select>
-                                <select id="circle_3"></select>
-                                <span class="glyphicon glyphicon-info-sign" title="打点覆盖半径"></span>
+                                <label>气泡最小半径：
+                                    <input type="text" id="r-min" value="100">
+                                </label>
                             </div>
                         </div>
                         

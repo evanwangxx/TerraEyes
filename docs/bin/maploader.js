@@ -10,7 +10,7 @@ var ADDRESS_POINT;
 var ADDRESS;
 
 
-function addCircle(map, point, radius, fillWeight = 0.05, color = '#FA5858', option = "other") {
+function addCircle(map, point, radius, fillWeight = 0.05, color = '#FA5858', option = "other", level) {
 	if (option == "bubble") {
 		var option = {
 			map: map,
@@ -46,6 +46,17 @@ function addCircle(map, point, radius, fillWeight = 0.05, color = '#FA5858', opt
 		}
 	}
 	var circle = new qq.maps.Circle(option);
+
+	qq.maps.event.addListener(circle, 'click', function() {
+		var info = new qq.maps.InfoWindow({
+			map: MAP
+		});
+		info.open();
+		info.setContent('<div style="text-align:center;white-space:nowrap;' +
+			'margin:10px;">' + "量级：" + level +
+			"<br>半径：" + radius.toFixed(2) + '</div>');
+		info.setPosition(point);
+	});
 	return circle;
 }
 
@@ -73,6 +84,18 @@ function addLabel(map, point, text, offsetOrNot, color = "#242424", backgroundCo
 			zIndex: 1000
 		});
 	}
+
+	var visibleF = document.getElementById("visible-label");
+    qq.maps.event.addDomListener(visibleF, "click", function() {
+        label.setMap(map);
+        if (label.getVisible()) {
+            label.setVisible(false);
+        } else {
+            label.setVisible(true);
+        }
+    });
+
+	return label;
 }
 
 
@@ -139,14 +162,11 @@ function addPolyline(map, path, strokeColor = '#610B21', strokeWeight = 3) {
 }
 
 
-function layerOfBubble(data, max_bubble = 500, color = '#FA5858') {
+function layerOfBubble(data_sort, color, max_bubble = 500, radius_min = 50, radius_max = 800) {
 
-	var data_sort = quickSort(data);
-	data_sort.pop();
-	var data_max = data_sort[0]["分数"]
-	var data_min = data_sort[data_sort.length - 3]["分数"]
-	var radius_max = 800;
-	var radius_min = 50;
+	var visibleF = document.getElementById("visible-label");
+	var data_max = data_sort[0]["分数"];
+	var data_min = data_sort[data_sort.length - 3]["分数"];
 
 	for (var i = 0; i < data_sort.length-1 && i < max_bubble; ++i) {
 		let point = new qq.maps.LatLng(data_sort[i]["lat"], data_sort[i]["lng"]);
@@ -155,17 +175,8 @@ function layerOfBubble(data, max_bubble = 500, color = '#FA5858') {
 			(data_max - data_min)) * (radius_max - radius_min) + radius_min;
 
 		if (radius != NaN) {
-			var circle = addCircle(MAP, point, radius, fillWeight = 0.5, color = color, option = "bubble");
-			qq.maps.event.addListener(circle, 'click', function() {
-				var info = new qq.maps.InfoWindow({
-					map: MAP
-				});
-				info.open();
-				info.setContent('<div style="text-align:center;white-space:nowrap;' +
-					'margin:10px;">' + "量级：" + level +
-					"<br>半径：" + radius.toFixed(2) + '</div>');
-				info.setPosition(point);
-			});
+			var circle = addCircle(MAP, point, radius, fillWeight = 0.5, color = color, option = "bubble", level);
+			var label = addLabel(MAP, point, data_sort[i]["详细"], true, "#242424", backgroundColor = "");
 		}
 	}
 }
@@ -366,6 +377,11 @@ function runBubble(pointer = false, data = HEAT_JSON, store = TEXT_DATA, length 
 	let radius = selectCircleRadius();
 	let color = clickColorList("color-dd");
 
+	var r_max = parseInt(document.getElementById("r-max").value);
+	var r_min = parseInt(document.getElementById("r-min").value);
+
+	Object.freeze(HEAT_JSON);
+	var data_sort = quickSort([...data]);
 
 	if (pointer) {
 		console.log("pointer map");
@@ -378,7 +394,7 @@ function runBubble(pointer = false, data = HEAT_JSON, store = TEXT_DATA, length 
 		loadMap(ADDRESS_POINT, zoom = 10);
 	}
 
-	layerOfBubble(data, max_bubble, color);
+	layerOfBubble(data_sort, color, max_bubble, r_min, r_max);
 
 	if (pointer) {
 		addMarker(MAP, point, m_name, color = path + "pointer.png");

@@ -33,7 +33,6 @@ function showCity(object) {
 	if (value != CURRENT_PCC.prov) {
 		CURRENT_PCC.prov = value;
 		ADDRESS_PROV_CITY_COUN.value = "";
-		BTN.disabled = false;
 	}
 	if (value != null) {
 		CITY_DROPDOWN.length = 1;

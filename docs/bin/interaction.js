@@ -125,7 +125,7 @@ function csvGeohash() {
 }
 
 
-function processDataToJSON(csv, header = ['lat', "lng", "分数"], split = ',') {
+function processDataToJSON(csv, header = ['lat', "lng", "分数", "详细"], split = ',') {
 	var allTextLines = csv.split(/\r\n|\n/);
 	var lines = [];
 
