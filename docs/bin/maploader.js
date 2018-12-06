@@ -38,7 +38,7 @@ function addCircle(map, point, radius, fillWeight = 0.05, color = '#FA5858', opt
 	return circle;
 }
 
-function addBubble(map, point, radius, level, color = '#FA5858'){
+function addBubble(map, point, radius, level, color = '#FA5858') {
 	var option = {
 		map: map,
 		center: point,
@@ -89,14 +89,14 @@ function addLabel(map, point, text, offsetOrNot, color = "#242424", backgroundCo
 	}
 
 	var visibleF = document.getElementById("visible-label");
-    qq.maps.event.addDomListener(visibleF, "click", function() {
-        label.setMap(map);
-        if (label.getVisible()) {
-            label.setVisible(false);
-        } else {
-            label.setVisible(true);
-        }
-    });
+	qq.maps.event.addDomListener(visibleF, "click", function() {
+		label.setMap(map);
+		if (label.getVisible()) {
+			label.setVisible(false);
+		} else {
+			label.setVisible(true);
+		}
+	});
 
 	return label;
 }
@@ -171,14 +171,14 @@ function layerOfBubble(data_sort, color, max_bubble = 500, radius_min = 50, radi
 	var data_max = data_sort[0]["分数"];
 	var data_min = data_sort[data_sort.length - 3]["分数"];
 
-	for (var i = 0; i < data_sort.length-1 && i < max_bubble; ++i) {
+	for (var i = 0; i < data_sort.length - 1 && i < max_bubble; ++i) {
 		let point = new qq.maps.LatLng(data_sort[i]["lat"], data_sort[i]["lng"]);
 		var level = data_sort[i]["分数"];
 		var radius = ((parseInt(data_sort[i]["分数"]) - data_min) /
 			(data_max - data_min)) * (radius_max - radius_min) + radius_min;
 
 		if (radius != NaN) {
-			let rank = i+1;
+			let rank = i + 1;
 			var circle = addBubble(MAP, point, radius, level, color);
 			var label = addLabel(MAP, point, rank + ". " + data_sort[i]["详细"], true, "#242424", backgroundColor = "");
 		}
@@ -442,8 +442,8 @@ function runGeohash(pointer = false, data_geohash = GEOHASH_JSON, filter = 30) {
 	}
 
 	if (STORE_JSON !== undefined) {
-		layerOfMarker(MAP, STORE_JSON, 
-			radius = [3000], circle = true, color = null, 
+		layerOfMarker(MAP, STORE_JSON,
+			radius = [3000], circle = true, color = null,
 			reachRadius = true, circleOption = 'other');
 	}
 
