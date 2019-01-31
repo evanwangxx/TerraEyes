@@ -1,8 +1,15 @@
 ### Terra Eyes
+
+ _____                        __                
+/__   \___ _ __ _ __ __ _    /__\   _  ___  ___ 
+  / /\/ _ \ '__| '__/ _` |  /_\| | | |/ _ \/ __|
+ / / |  __/ |  | | | (_| | //__| |_| |  __/\__ \
+ \/   \___|_|  |_|  \__,_| \__/ \__, |\___||___/
+                                |___/           
+
 Terra Eyes:  https://evanwangxx.github.io/TerraEyes/
 
 Version Now: 1.5.1
-
 * point-map
 * heat-map
 * bubble-map
