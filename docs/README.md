@@ -1,15 +1,8 @@
 ### Terra Eyes
-Terra Eyes:  https://evanwangxx.github.io/terra_eyes/
+Terra Eyes:  https://evanwangxx.github.io/TerraEyes/
 
 Version Now: 1.5.1
 
-
-### Terra
---- ML
-* Features Transformer
-* Model Evaluation
-
---- Terra Eyes
 * point-map
 * heat-map
 * bubble-map
