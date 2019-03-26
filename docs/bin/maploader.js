@@ -443,7 +443,7 @@ function runGeohash(pointer = false, data_geohash = GEOHASH_JSON, filter = 30) {
 
 	if (STORE_JSON !== undefined) {
 		layerOfMarker(MAP, STORE_JSON,
-			radius = [3000], circle = true, color = null,
+			radius = [3000], circle = false, color = null,
 			reachRadius = true, circleOption = 'other');
 	}
 
