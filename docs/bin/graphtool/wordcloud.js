@@ -21,7 +21,7 @@ function quickSort(data, by = 'value') {
     var left = [];
     var right = [];
 
-    for (var i = 0; i < data.length; ++i) {
+    for (var i = 0; i < data.length; i++) {
         if (parseInt(data[i][by]) >= parseInt(pivot[by])) {
             left.push(data[i]);
         } else {
@@ -64,7 +64,6 @@ function jsonToTable(json, id, num = 10) {
 function processDataToJSON(csv, header, split = ',') {
     var allTextLines = csv.split(/\r\n|\n/);
     var lines = [];
-
     for (var i = 0; i < allTextLines.length; i++) {
         var data = allTextLines[i].split(split);
         var tmp_dict = {};
