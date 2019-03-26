@@ -9,20 +9,15 @@
 
 Terra Eyes:  https://evanwangxx.github.io/TerraEyes/
 
-Version Now: 1.5.1
+Version Now: 2.0.0
+
+* word-cloud
+
 * point-map
 * heat-map
 * bubble-map
 * geohash-map
 * location-decision helper
-
-
-### Version Control
-1.4.0: geohash map
-1.3.0: bubble map
-1.2.0: decision helper (based on Tuhu)
-1.1.0: heatmap
-
 
 ### License
 Copyright (C) 2018 Hongbo Wang 
@@ -35,6 +30,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 
 ### History
+
+2.0.0  | new structure, add word-cloud
 
 1.5.1  | div arrange; max_bubble; bubble color 
 1.5.0  | add move interval by time; bug fix; split dropdown and interaction

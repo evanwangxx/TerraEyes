@@ -54,11 +54,42 @@
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="home.html">主页</a></li>
-                        <li><a href="map_pointer.html">地图打点</a></li>
-                        <li><a href="map_heat.html">热力图</a></li>
-                        <li><a href="map_bubble.html">泡泡图</a></li>
-                        <li><a href="map_geohash.html">格子图</a></li>
-                        <li><a href="strategy_locationDecision.html">辅助选址</a></li>
+
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                地图工具 <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="map_pointer.html">地图打点</a></li>
+                                <li><a href="map_bubble.html">泡泡图</a></li>
+                                <li class="disabled"><a href=>画多边形</a></li>
+                                <li class="disabled"><a href=>取多边形</a></li>
+                                <li><a href="map_heat.html">ArcGIS 热力图</a></li>
+                                <li><a href="map_geohash.html">GeoHash 热力图</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                图表工具 <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="graph_wordcloud.html">词云图</a></li>
+                                <li class="disabled"><a href=>Circos 图</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                智慧零售 <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="strategy_locationDecision.html">辅助选址</a></li>
+                                <li class="disabled"><a href=>圈层分析</a></li>
+                                <li class="disabled"><a href=>社区地推</a></li>
+                                <li class="disabled"><a href=>会员分析</a></li>
+                            </ul>
+                        </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="about.html"><span class="glyphicon glyphicon-log-in"></span>关于</a></li>

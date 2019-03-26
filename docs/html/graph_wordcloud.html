@@ -1,29 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>格子图</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <meta name="application-name" content="Terra_Eyes v1.1.0">
+        <meta name="application-name" content="Terra_Eyes v1.0.0">
         <meta name="author" content="neptunewang">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+        <title>Terra Eyes</title>
+        <link rel="stylesheet" href="../css/bootstrap-3.3.7-dist/css/bootstrap.min.css">
         <link rel="icon" href="../css/homepage/start.png" type="icon">
         <link rel="shortcut icon" href="../css/homepage/start.png" type="icon">
         <link rel="stylesheet" href="../css/bootstrap-3.3.7-dist/css/bootstrap.min.css">
         <script src="../bin/jquery.min.js"></script>
         <script src="../css/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
         <script src="../bin/jquery-1.10.2.js"></script>
-        <script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp&key=DDNBZ-VUNKF-VVJJA-NSN2B-66R5H-VFF23"></script>
-        <style>
-        .row.content {height: auto}
 
-        .heatmap {
-            padding: 3px;
-            width: 100%;
-            height: 800px;
-            margin-top: 30px;
-        }
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.2.1/echarts.min.js"></script>
+        <script src="../css/wordcloud/echarts-wordcloud.min.js"></script>
+        <script src="../bin/graphtool/wordcloud.js"></script>
+        <style>
+        .row.content {height: 800px}
 
         .sidenav {
             background-color: #f1f1f1;
@@ -44,19 +41,20 @@
             .row.content {height: auto;} 
         }
         </style>
+
     </head>
 
     <body>
-
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>                                                
+                        <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" title="Terra Eyes">Terra Eyes</a>
+                    
                 </div>
                 <div class="collapse navbar-collapse" id="myNavbar">
                     <ul class="nav navbar-nav">
@@ -72,7 +70,7 @@
                                 <li class="disabled"><a href=>画多边形</a></li>
                                 <li class="disabled"><a href=>取多边形</a></li>
                                 <li><a href="map_heat.html">ArcGIS 热力图</a></li>
-                                <li class="active"><a href="map_geohash.html">GeoHash 热力图</a></li>
+                                <li><a href="map_geohash.html">GeoHash 热力图</a></li>
                             </ul>
                         </li>
 
@@ -81,7 +79,7 @@
                                 图表工具 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="graph_wordcloud.html">词云图</a></li>
+                                <li class="active"><a href="graph_wordcloud.html">词云图</a></li>
                                 <li class="disabled"><a href=>Circos 图</a></li>
                             </ul>
                         </li>
@@ -99,7 +97,7 @@
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="about.html"><span class="glyphicon glyphicon-log-in"></span> 关于 </a></li>
+                        <li><a href="about.html"><span class="glyphicon glyphicon-log-in"></span>关于</a></li>
                     </ul>
                 </div>
             </div>
@@ -107,57 +105,30 @@
 
         <div class="container-fluid text-center">     
             <div class="row content">
-                <div class="col-sm-1 sidenav"></div>
+                <div class="col-sm-2 sidenav"></div>
 
-                <div class="col-sm-10" style="margin-bottom: 30px;">
-                    <div class="col-sm-12" style="background: #F2F2F2; margin-top: 20px;">
-                        <h4 style="text-align: left;">数据导入</h4>
-                        <div class="col-sm-6" style="text-align: left;">
-                            <h4 style="text-align: left;"><small>Geohash 数据格式： geohash，分值</small></h4>
-                            <input type="file" id="geohash_data" style="display:inline-block;" onclick="csvGeohash()">
-                            <button type="button" class="btn btn-default btn-sm" style="display:inline-block;" onclick="jsonToTable(GEOHASH_JSON, id='#table1')">显示</button>
-                        </div>
+                <div class="col-sm-8 text-left">
 
-                        <div class="col-sm-6" style="text-align: left;">
-                            <h4 style="text-align: left;"><small>门店数据格式： 经度，纬度</small></h4>
-                            <input type="file" id="store_data" style="display:inline-block;" onclick="csvStoreLoaderWithPath()">
-                            <button type="button" class="btn btn-default btn-sm" style="display:inline-block;" onclick="jsonToTable(STORE_JSON, id='#table1')">显示</button>
-                        </div>
-                        <table class="table table-striped" id="table1"></table>
-                        <br>
-                    </div>
-
-                    <div class="col-sm-12" style="margin-top: 30px; margin-bottom: 10px; background: #F2F2F2; height: 130px; display: none;">
-                        <h4 style="text-align: left;">地图选项</h4>
-                        <div class="col-sm-6">
-                            <form action="#">
-                                <label for="pcc_show">您选择的是：
-                                <input type="text" value="" id="pcc_show">
-                                </label>
-
-                                <select id="province_dropdown1" onchange="showCity(this)">
-                                    <option>=请选择省份=</option>
-                                </select>
-                                <button type="button" class="btn met2" onClick="showAdderss()">确定</button>
-                           </form>
+                    <div class="panel panel-default">
+                        <div class="panel-body" style="width: auto;height: 500px;">
+                            <div id="word-cloud" style="width: 100%; height: 100%"></div>
                         </div>
                     </div>
 
-                    <div class="col-sm-12" style="margin-top: 30px;">
-                        <div class="col-sm-6"></div>
-                        <div class="col-sm-6">
-                            <button type="button" class="btn btn-primary btn-lg" onclick="runGeohash()">生成地图</button>
-                            <button type="button" class="btn btn-info btn-lg" onclick="runGeohash(true)">输入经纬度</button>
-                        </div>
-                    </div>
+                    <div class="col-sm-6 text-left">
+                        <div class="col-sm-12 text-left" style="margin-bottom:15px">
+                            <button type="button" class="btn btn-primary btn-sm" onclick="getPasteText()"><span class="glyphicon glyphicon-share-alt"></span>读取数据</button>
 
-                    <div class="col-sm-12">
-                        <div id="polyinfo"></div>
-                        <div class="heatmap" id="map-canvas"></div>
+                            <button type="button" class="btn btn-primary btn-sm" onclick="main()"><span class="glyphicon glyphicon-share-alt"></span>生成词云</button>
+                        </div>
+                        <textarea class="form-control" rows="10" id="word-input"></textarea>
+                    </div>
+                    <div class="col-sm-6 text-left">
+                        <table class="table table-striped" id="word-cloud-table"></table>
                     </div>
                 </div>
 
-                <div class="col-sm-1 sidenav"></div>
+                <div class="col-sm-2 sidenav"></div>
             </div>
         </div>
     </body>
@@ -166,12 +137,4 @@
         <p>Copyright © 1998 - 2018 Tencent. All Rights Reserved.</p>
         <p> 腾讯公司 版权所有 </p>
     </footer>
-
-<script src="https://d3js.org/d3.v5.min.js"></script>
-<script src="../bin/dropdown.js"></script>
-<script src="../bin/maploader.js"></script>
-<script src="../bin/interaction.js"></script>
-<script src="../bin/converter.js"></script>
-<script src="../bin/papaparse.min.js"></script>
-<script src="../bin/initial/map.js"></script>
 </html>
