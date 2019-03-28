@@ -62,12 +62,12 @@
 
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                地图工具 <span class="caret"></span>
+                                地图 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a href="map_pointer.html">地图打点</a></li>
                                 <li><a href="map_bubble.html">泡泡图</a></li>
-                                <li class="disabled"><a href=>画多边形</a></li>
+                                <li><a href="map_polygon.html">画多边形</a></li>
                                 <li class="disabled"><a href=>取多边形</a></li>
                                 <li><a href="map_heat.html">ArcGIS 热力图</a></li>
                                 <li><a href="map_geohash.html">GeoHash 热力图</a></li>
@@ -76,7 +76,7 @@
 
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                图表工具 <span class="caret"></span>
+                                图表 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <li class="active"><a href="graph_wordcloud.html">词云图</a></li>
@@ -86,7 +86,7 @@
 
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                智慧零售 <span class="caret"></span>
+                                策略 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a href="strategy_locationDecision.html">辅助选址</a></li>
@@ -116,10 +116,14 @@
                     </div>
 
                     <div class="col-sm-6 text-left">
-                        <div class="col-sm-12 text-left" style="margin-bottom:15px">
+                        <div class="col-sm-6 text-left" style="margin-bottom:15px">
                             <button type="button" class="btn btn-primary btn-sm" onclick="getPasteText()"><span class="glyphicon glyphicon-share-alt"></span>读取数据</button>
 
                             <button type="button" class="btn btn-primary btn-sm" onclick="main()"><span class="glyphicon glyphicon-share-alt"></span>生成词云</button>
+                        </div>
+
+                        <div class="col-sm-6 text-left" style="margin-bottom:15px">
+                            <input type="file" id="word-cloud-data" style="display:inline-block;" onclick="loadDataFromCvs()">
                         </div>
                         <textarea class="form-control" rows="10" id="word-input"></textarea>
                     </div>

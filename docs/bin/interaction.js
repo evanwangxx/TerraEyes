@@ -9,6 +9,7 @@ var COMPA_JSON;
 var COMPA_JSON2;
 var LOCATION_SELECT;
 var GEOHASH_JSON;
+var POLYGON_JSON;
 
 var STORE_HEADER = ["详细", "lat", "lng"];
 var CSV_DATA;
@@ -49,7 +50,7 @@ function csvHeatLoader() {
 }
 
 // TODO: Combine csvLoader to one general
-function csvStoreLoader(header = ["store", "lng", "lat", "省份", "城市", "具体地址"]) {
+function csvStoreLoader(header = ["store", "lat", "lng", "省份", "城市", "具体地址"]) {
 	$("#store_data").change(function() {
 		var fileSelector = $("#store_data")[0].files;
 		var file = fileSelector[0];
@@ -124,6 +125,21 @@ function csvGeohash() {
 	});
 }
 
+function csvPolygon() {
+	$('#polygon_data').change(function() {
+		var fileSelector = $('#polygon_data')[0].files;
+		var file = fileSelector[0];
+
+		$("fileNamesDes").text(fileSelector[0].name);
+		var reader = new FileReader();
+		reader.onload = function() {
+			POLYGON_JSON = quickSort(processDataToJSON(this.result, ['polygon', '分数']));
+
+		};
+
+		reader.readAsText(file);
+	});
+}
 
 function processDataToJSON(csv, header = ['lat', "lng", "分数", "详细"], split = ',') {
 	var allTextLines = csv.split(/\r\n|\n/);
@@ -142,7 +158,7 @@ function processDataToJSON(csv, header = ['lat', "lng", "分数", "详细"], spl
 }
 
 
-function jsonToTable(json, id, num = 10) {
+function jsonToTable(json, id, num = 10, sub = false) {
 	var html = "";
 	var json_headLine = json.slice(0, num);
 
@@ -161,6 +177,9 @@ function jsonToTable(json, id, num = 10) {
 		html += "<tr>";
 		$.each(item, function(vlaIndex, valItem) {
 			html += "<td><font face=\"Arial\" size=2>";
+			if (sub) {
+				valItem = valItem.substring(0, 30) + " ... "
+			}
 			html += valItem;
 			html += "</td>";
 		});

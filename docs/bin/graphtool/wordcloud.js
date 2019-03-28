@@ -1,5 +1,20 @@
 var TEXT_DATA;
 
+function loadDataFromCvs() {
+    $("#word-cloud-data").change(function() {
+        var fileSelector = $("#word-cloud-data")[0].files;
+        var file = fileSelector[0];
+
+        $("fileNamesDes").text(fileSelector[0].name);
+        var reader = new FileReader();
+        reader.onload = function() {
+            TEXT_DATA = processDataToJSON(this.result, header = ["name", "value"], split = ',');
+            jsonToTable(quickSort(TEXT_DATA), "#word-cloud-table", 15)
+        };
+        reader.readAsText(file);
+    });
+}
+
 function getPasteText() {
     $("word-input").ready(function() {
         var text = $.trim($("textarea").val());
@@ -62,6 +77,7 @@ function jsonToTable(json, id, num = 10) {
 }
 
 function processDataToJSON(csv, header, split = ',') {
+    csv = csv.replace(/^\n+|\n+$/g,"")
     var allTextLines = csv.split(/\r\n|\n/);
     var lines = [];
     for (var i = 0; i < allTextLines.length; i++) {
@@ -122,5 +138,6 @@ function generateWordCloud(JosnList, text = null) {
 }
 
 function main() {
+    console.log(TEXT_DATA);
     generateWordCloud(TEXT_DATA);
 }

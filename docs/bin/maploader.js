@@ -126,30 +126,34 @@ function addMarker(map, point, text, color = "http://webapi.amap.com/theme/v1.3/
 }
 
 
-function addPolygon(map, polygon_array, color, score, raw_score, center) {
+
+function addPolygon(map, polygon_array, color, score, raw_score=false, center=false, strokeWeight=0) {
 	var polygon = new qq.maps.Polygon({
 		map: map,
 		path: polygon_array,
 		strokeColor: color,
-		strokeWeight: 0,
+		strokeWeight: strokeWeight,
 		fillColor: qq.maps.Color.fromHex(color, score)
 	});
 
-	qq.maps.event.addListener(polygon, 'click', function() {
-		var info = new qq.maps.InfoWindow({
-			map: map
-		});
-		info.open();
-		info.setContent('<div style="text-align:center;white-space:nowrap;' + 'margin:10px;">' +
-			"量级：" + raw_score +
-			"<br>浓度：" + score.toFixed(2) + '</div>');
-		info.setPosition(center);
-	});
 
-	qq.maps.event.addListener(polygon, 'mousemove', function(event) {
-		document.getElementById("polyinfo").innerHTML = "量级：" + raw_score +
-			"<br>浓度：" + score.toFixed(2);
-	});
+	if (raw_score && center){
+		qq.maps.event.addListener(polygon, 'click', function() {
+			var info = new qq.maps.InfoWindow({
+				map: map
+			});
+			info.open();
+			info.setContent('<div style="text-align:center;white-space:nowrap;' + 'margin:10px;">' +
+				"量级：" + raw_score +
+				"<br>浓度：" + score.toFixed(2) + '</div>');
+			info.setPosition(center);
+		});
+
+		qq.maps.event.addListener(polygon, 'mousemove', function(event) {
+			document.getElementById("polyinfo").innerHTML = "量级：" + raw_score +
+				"<br>浓度：" + score.toFixed(2);
+		});
+	}
 }
 
 
@@ -218,6 +222,12 @@ function layerOfGeohash(map, geohash, level, concentration, raw_score) {
 	var center = new qq.maps.LatLng((this.box.latitude[1] + this.box.latitude[0]) / 2.0,
 		(this.box.longitude[1] + this.box.longitude[0]) / 2);
 	addPolygon(map, polygonArr, color, concentration, raw_score, center);
+}
+
+
+function layerOfPolygon(map, polygon_array, fill_opacity, stroke_weight) {
+	color = getColr(0.92);
+	addPolygon(map, polygon_array, color, fill_opacity, false, false, stroke_weight)
 }
 
 
@@ -461,4 +471,68 @@ function runGeohash(pointer = false, data_geohash = GEOHASH_JSON, filter = 30) {
 		layerOfGeohash(MAP, geohash, 0.92, score, raw_score);
 	}
 
+}
+
+
+function runPolygon(pointer = false, data_polygon = POLYGON_JSON, filter = 30, fill_color = false) {
+	let data = [];
+	let score_array = [];
+	for (var i = 0; i < data_polygon.length; ++i) {
+		var tmp_score = parseInt(data_polygon[i]["分数"]);
+		if (tmp_score >= filter) {
+			data.push(data_polygon[i]);
+			score_array.push(tmp_score);
+		}
+	}
+	let mean = average(score_array);
+	let std = standardDeviation(score_array)
+
+	var data_sort = quickSort(data);
+	// data_sort.pop(data_sort);
+	
+	if (pointer) {
+		console.log("INFO | pointer map");
+		let latlng = userInputLatLng();
+		let point = new qq.maps.LatLng(latlng[0], latlng[1]);
+		loadMap(point, zoom = 14);
+	} else {
+		console.log('no pointer')
+		var polygon_str = data_sort[0]["polygon"]
+		var point = polygon_str.split('|')[0].split(';')
+		console.log(point)
+		var center = new qq.maps.LatLng(point[0], point[1]);
+		loadMap(center, zoom = 13);
+	}
+
+	if (STORE_JSON !== undefined) {
+		layerOfMarker(MAP, STORE_JSON,
+			radius = [3000], circle = false, color = null,
+			reachRadius = false, circleOption = 'other');
+	}
+
+	var data_max = (parseInt(data_sort[0]["分数"]) - mean) / std;
+	var data_min = (parseInt(data_sort[data_sort.length - 1]["分数"] - mean)) / std;
+	var radius_max = 1.00;
+	var radius_min = 0.05;
+	for (var i = 0; i < data_sort.length; i++) {
+		var polygon_str = data_sort[i]["polygon"];
+		var raw_score = data_sort[i]["分数"];
+		var normal_score = ((parseInt(raw_score) - mean) / std);
+		var fill_opacity = 0.0000000001
+		if (fill_color){
+			fill_opacity = ((normal_score - data_min) /
+			(data_max - data_min)) * (radius_max - radius_min) + radius_min;
+		}		
+		
+		var point_array = polygon_str.split('|');
+	    var polygon_array = new Array();
+	    for(var j=0; j<point_array.length; j++){
+	        point = point_array[j].split(';');
+	        lat = parseFloat(point[0]);
+	        lng = parseFloat(point[1]);
+	        var point = new qq.maps.LatLng(lat,lng);
+	        polygon_array.push(point);
+	    }
+	    layerOfPolygon(MAP, polygon_array, fill_opacity, 3)
+	}
 }

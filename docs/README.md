@@ -12,7 +12,7 @@
 
 Terra Eyes:  https://evanwangxx.github.io/TerraEyes/
 
-Version Now: 2.0.0
+Version Now: 2.1.0
 
 * word-cloud
 
@@ -20,6 +20,7 @@ Version Now: 2.0.0
 * heat-map
 * bubble-map
 * geohash-map
+* polygon-map
 * location-decision helper
 
 ### License
@@ -34,6 +35,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ### History
 
+2.1.0  | Polygon Map
 2.0.0  | new structure, add word-cloud
 
 1.5.1  | div arrange; max_bubble; bubble color 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>地图打点</title>
+        <title>格子图</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
         <meta name="application-name" content="Terra_Eyes v1.1.0">
@@ -10,19 +10,20 @@
 
         <link rel="icon" href="../css/homepage/start.png" type="icon">
         <link rel="shortcut icon" href="../css/homepage/start.png" type="icon">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="../bin/jquery-1.10.2.js"></script>
+        <link rel="stylesheet" href="../css/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+        <script src="../bin/jquery.min.js"></script>
         <script src="../css/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-        <script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp&key=ZMBBZ-QS4RP-O6LDK-VG7DW-S5KSQ-TSFL6"></script>
+        <script src="../bin/jquery-1.10.2.js"></script>
+        <script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp&key=DDNBZ-VUNKF-VVJJA-NSN2B-66R5H-VFF23"></script>
         <style>
+        .row.content {height: auto}
+
         .heatmap {
-            margin: 10px;
             padding: 3px;
             width: 100%;
-            height: 900px;
+            height: 800px;
+            margin-top: 30px;
         }
-        .row.content {height: auto}
 
         .sidenav {
             background-color: #f1f1f1;
@@ -43,8 +44,6 @@
             .row.content {height: auto;} 
         }
         </style>
-
-        <script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp&key=ZMBBZ-QS4RP-O6LDK-VG7DW-S5KSQ-TSFL6"></script>
     </head>
 
     <body>
@@ -55,7 +54,7 @@
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>                                                
                     </button>
                     <a class="navbar-brand" title="Terra Eyes">Terra Eyes</a>
                 </div>
@@ -68,12 +67,12 @@
                                 地图 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li class="active"><a href="map_pointer.html">地图打点</a></li>
+                                <li><a href="map_pointer.html">地图打点</a></li>
                                 <li><a href="map_bubble.html">泡泡图</a></li>
                                 <li><a href="map_polygon.html">画多边形</a></li>
                                 <li class="disabled"><a href=>取多边形</a></li>
                                 <li><a href="map_heat.html">ArcGIS 热力图</a></li>
-                                <li><a href="map_geohash.html">GeoHash 热力图</a></li>
+                                <li class="active"><a href="map_geohash.html">GeoHash 热力图</a></li>
                             </ul>
                         </li>
 
@@ -100,7 +99,7 @@
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="about.html"><span class="glyphicon glyphicon-log-in"></span>关于</a></li>
+                        <li><a href="about.html"><span class="glyphicon glyphicon-log-in"></span> 关于 </a></li>
                     </ul>
                 </div>
             </div>
@@ -110,39 +109,52 @@
             <div class="row content">
                 <div class="col-sm-1 sidenav"></div>
 
-                <div class="col-sm-10 text-center">
-                    <div class="col-sm-4 text-left">
-                        <label>输入文本数据</label><span class="glyphicon glyphicon-info-sign" title="粘贴数据至输入框"></span>
-                        <h5><small>数据格式： 纬度(latitude)，经度(longitude)，详细信息（可选）</small></h5>
-                    </div>
-                    <div class="col-sm-8"></div>
+                <div class="col-sm-10" style="margin-bottom: 30px;">
+                    <div class="col-sm-12" style="background: #F2F2F2; margin-top: 20px;">
+                        <h4 style="text-align: left;">数据导入</h4>
+                        <div class="col-sm-6" style="text-align: left;">
+                            <h4 style="text-align: left;"><small>多边形数据格式： polygon(纬度;经度|纬度;经度...), score</small></h4>
+                            <input type="file" id="polygon_data" style="display:inline-block;" onclick="csvPolygon()">
+                            <button type="button" class="btn btn-default btn-sm" style="display:inline-block;" onclick="jsonToTable(POLYGON_JSON, id='#table1', num=10, sub=true)">显示</button>
+                        </div>
 
-                    <textarea class="form-control" rows="10" id="text-input"></textarea>
-
-                    <table class="table table-striped" id="trans_data"></table>
-                    <div class="col-sm-3">
-                        <label for="inputlg">半径</label>
-                        <select id="circle_1"></select>
-                        <select id="circle_2"></select>
-                        <select id="circle_3"></select>
-                        <span class="glyphicon glyphicon-info-sign" title="打点覆盖半径"></span>
+                        <div class="col-sm-6" style="text-align: left;">
+                            <h4 style="text-align: left;"><small>门店数据格式： 纬度,经度</small></h4>
+                            <input type="file" id="store_data" style="display:inline-block;" onclick="csvStoreLoader()">
+                            <button type="button" class="btn btn-default btn-sm" style="display:inline-block;" onclick="jsonToTable(STORE_JSON, id='#table1')">显示</button>
+                        </div>
+                        <table class="table table-striped" id="table1"></table>
+                        <br>
                     </div>
-                    <div class="col-sm-3">
-                        <label for="inputlg">颜色</label>
-                        <select id="color-dd"></select>
-                    </div>
-                    <div class="col-sm-6">
-                        <select id="lat-lng-convert">
-                            <option>=不转化=</option>
-                            <option>转化为腾讯高德系（GCJ02）</option>
-                            <option>转化为百度系（BD09）</option>
-                        </select>
 
-                        <button type="button" class="btn btn-primary btn-sm" onclick="getPasteText()"><span class="glyphicon glyphicon-share-alt"></span>转化数据</button>
+                    <div class="col-sm-12" style="margin-top: 30px; margin-bottom: 10px; background: #F2F2F2; height: 130px; display: none;">
+                        <h4 style="text-align: left;">地图选项</h4>
+                        <div class="col-sm-6">
+                            <form action="#">
+                                <label for="pcc_show">您选择的是：
+                                <input type="text" value="" id="pcc_show">
+                                </label>
 
-                        <button type="button" class="btn btn-primary btn-sm" onclick="runPoint()"><span class="glyphicon glyphicon-globe"></span>生成地图</button>
+                                <select id="province_dropdown1" onchange="showCity(this)">
+                                    <option>=请选择省份=</option>
+                                </select>
+                                <button type="button" class="btn met2" onClick="showAdderss()">确定</button>
+                           </form>
+                        </div>
                     </div>
-                    <div class="heatmap" id="map-canvas"></div>
+
+                    <div class="col-sm-12" style="margin-top: 30px;">
+                        <div class="col-sm-6"></div>
+                        <div class="col-sm-6">
+                            <button type="button" class="btn btn-primary btn-lg" onclick="runPolygon()">生成地图</button>
+                            <button type="button" class="btn btn-info btn-lg" onclick="runPolygon(true)">输入经纬度</button>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12">
+                        <div id="polyinfo"></div>
+                        <div class="heatmap" id="map-canvas"></div>
+                    </div>
                 </div>
 
                 <div class="col-sm-1 sidenav"></div>
@@ -154,13 +166,12 @@
         <p>Copyright © 1998 - 2018 Tencent. All Rights Reserved.</p>
         <p> 腾讯公司 版权所有 </p>
     </footer>
-    
+
 <script src="https://d3js.org/d3.v5.min.js"></script>
 <script src="../bin/dropdown.js"></script>
 <script src="../bin/maploader.js"></script>
-<script src="../bin/interaction.js"> </script>
+<script src="../bin/interaction.js"></script>
 <script src="../bin/converter.js"></script>
-
-<script src="../bin/initial/colordropdown.js"></script>
-<script src="../bin/initial/circledropdown.js"></script>
+<script src="../bin/papaparse.min.js"></script>
+<script src="../bin/initial/map.js"></script>
 </html>
