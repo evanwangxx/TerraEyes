@@ -14,6 +14,7 @@ Terra Eyes:  https://evanwangxx.github.io/TerraEyes/
 
 Version Now: 2.1.0
 
+
 * word-cloud
 
 * point-map
