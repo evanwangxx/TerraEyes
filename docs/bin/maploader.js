@@ -240,7 +240,7 @@ function layerOfMarker(map, data,
 
 	for (var i = 0; i < data.length; i++) {
 		var point = new qq.maps.LatLng(data[i].lat, data[i].lng);
-		addMarker(map, point, data[i].详细);
+		addMarker(map, point, data[i].store);
 		if (circle) {
 			for (var j = 0; j < radius.length; ++j) {
 				addCircle(map, point, radius[j], fillWeight = 0.04, color = color, option = circleOption);
@@ -454,7 +454,7 @@ function runGeohash(pointer = false, data_geohash = GEOHASH_JSON, filter = 30) {
 	if (STORE_JSON !== undefined) {
 		layerOfMarker(MAP, STORE_JSON,
 			radius = [3000], circle = false, color = null,
-			reachRadius = true, circleOption = 'other');
+			reachRadius = false, circleOption = 'other');
 	}
 
 	var data_max = (parseInt(data_sort[0]["分数"]) - mean) / std;
@@ -488,7 +488,7 @@ function runPolygon(pointer = false, data_polygon = POLYGON_JSON, filter = 30, f
 	let std = standardDeviation(score_array)
 
 	var data_sort = quickSort(data);
-	// data_sort.pop(data_sort);
+	data_sort.pop(data_sort);
 	
 	if (pointer) {
 		console.log("INFO | pointer map");
@@ -535,4 +535,95 @@ function runPolygon(pointer = false, data_polygon = POLYGON_JSON, filter = 30, f
 	    }
 	    layerOfPolygon(MAP, polygon_array, fill_opacity, 3)
 	}
+}
+
+
+function runSegmentationAnalysis(pointer = false, data_geohash = GEOHASH_JSON, data_polygon = POLYGON_JSON, filter = 30, fill_color = false) {
+	let data = [];
+	let score_array = [];
+	for (var i = 0; i < data_geohash.length; ++i) {
+		var tmp_score = parseInt(data_geohash[i]["分数"]);
+		if (tmp_score >= filter) {
+			data.push(data_geohash[i]);
+			score_array.push(tmp_score);
+		}
+	}
+	let mean = average(score_array);
+	let std = standardDeviation(score_array)
+
+	var data_sort = quickSort(data);
+	data_sort.pop(data_sort);
+
+	if (pointer) {
+		console.log("INFO | pointer map");
+		let latlng = userInputLatLng();
+		let point = new qq.maps.LatLng(latlng[0], latlng[1]);
+		loadMap(point, zoom = 14);
+	} else {
+		var point = decodeGeoHash(data_sort[0]['geohash'])
+		var center = new qq.maps.LatLng(point.latitude[1], point.longitude[1]);
+		loadMap(center, zoom = 13);
+	}
+
+	var data_max = (parseInt(data_sort[0]["分数"]) - mean) / std;
+	var data_min = (parseInt(data_sort[data_sort.length - 1]["分数"] - mean)) / std;
+	var radius_max = 1.00;
+	var radius_min = 0.05;
+
+	for (var i = 0; i < data_sort.length; ++i) {
+		var geohash = data_sort[i]["geohash"];
+		var raw_score = data_sort[i]["分数"];
+		var normal_score = ((parseInt(raw_score) - mean) / std);
+		var score = ((normal_score - data_min) /
+			(data_max - data_min)) * (radius_max - radius_min) + radius_min;
+		layerOfGeohash(MAP, geohash, 0.92, score, raw_score);
+	}
+
+	if (STORE_JSON !== undefined) {
+		layerOfMarker(MAP, STORE_JSON,
+			radius = [3000], circle = false, color = null,
+			reachRadius = false, circleOption = 'other');
+	}
+
+
+	let data_pl = [];
+	let score_array_pl = [];
+	for (var i = 0; i < data_polygon.length; ++i) {
+		var tmp_score = parseInt(data_polygon[i]["分数"]);
+		data_pl.push(data_polygon[i]);
+		score_array_pl.push(tmp_score);
+	}
+
+	let mean_pl = average(score_array_pl);
+	let std_pl = standardDeviation(score_array_pl)
+
+	var data_sort_pl = quickSort(data_pl);
+	data_sort_pl.pop(data_sort_pl);
+	
+	var data_max_pl = (parseInt(data_sort_pl[0]["分数"]) - mean_pl) / std_pl;
+	var data_min_pl = (parseInt(data_sort_pl[data_sort_pl.length - 1]["分数"] - mean_pl)) / std_pl;
+	var radius_max_pl = 1.00;
+	var radius_min_pl = 0.05;
+	for (var i = 0; i < data_sort_pl.length; i++) {
+		var polygon_str = data_sort_pl[i]["polygon"];
+		var raw_score = data_sort_pl[i]["分数"];
+		var normal_score = ((parseInt(raw_score) - mean_pl) / std_pl);
+		var fill_opacity = 0.0000000001
+		if (fill_color){
+			fill_opacity = ((normal_score - data_min_pl) /
+			(data_max_pl - data_min_pl)) * (radius_max_pl - radius_min_pl) + radius_min_pl;
+		}		
+		
+		var point_array = polygon_str.split('|');
+	    var polygon_array = new Array();
+	    for(var j=0; j<point_array.length; j++){
+	        point = point_array[j].split(';');
+	        lat = parseFloat(point[0]);
+	        lng = parseFloat(point[1]);
+	        var point = new qq.maps.LatLng(lat,lng);
+	        polygon_array.push(point);
+	    }
+	    layerOfPolygon(MAP, polygon_array, fill_opacity, 3)
+	}
+
 }

@@ -12,11 +12,11 @@
 
 Terra Eyes:  https://evanwangxx.github.io/TerraEyes/
 
-Version Now: 2.1.0
+Version Now: 2.1.1
 
+* segmentation-analysis
 
 * word-cloud
-
 * point-map
 * heat-map
 * bubble-map
@@ -36,6 +36,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ### History
 
+2.1.1  | add Segmentation Analysis
 2.1.0  | Polygon Map
 2.0.0  | new structure, add word-cloud
 
