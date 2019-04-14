@@ -92,7 +92,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a href="strategy_locationDecision.html">辅助选址</a></li>
-                                <li class="disabled"><a href=>圈层分析</a></li>
+                                <li><a href="strategy_segmentation_analysis.html">圈层分析</a></li>
                                 <li class="disabled"><a href=>社区地推</a></li>
                                 <li class="disabled"><a href=>会员分析</a></li>
                             </ul>
@@ -113,15 +113,15 @@
                     <div class="col-sm-12" style="background: #F2F2F2; margin-top: 20px;">
                         <h4 style="text-align: left;">数据导入</h4>
                         <div class="col-sm-6" style="text-align: left;">
-                            <h4 style="text-align: left;"><small>Geohash 数据格式： geohash，分值</small></h4>
+                            <h4 style="text-align: left;"><small>（必选）Geohash 数据格式： geohash，分值</small></h4>
                             <input type="file" id="geohash_data" style="display:inline-block;" onclick="csvGeohash()">
                             <button type="button" class="btn btn-default btn-sm" style="display:inline-block;" onclick="jsonToTable(GEOHASH_JSON, id='#table1')">显示</button>
                         </div>
 
                         <div class="col-sm-6" style="text-align: left;">
-                            <h4 style="text-align: left;"><small>门店数据格式： 纬度，经度</small></h4>
-                            <input type="file" id="store_data" style="display:inline-block;" onclick="csvStoreLoaderWithPath()">
-                            <button type="button" class="btn btn-default btn-sm" style="display:inline-block;" onclick="jsonToTable(STORE_JSON, id='#table1', num=10, sub=true)">显示</button>
+                            <h4 style="text-align: left;"><small>（可选）门店数据格式： 店名,纬度,经度</small></h4>
+                            <input type="file" id="store_data" style="display:inline-block;" onclick="csvStoreLoader()">
+                            <button type="button" class="btn btn-default btn-sm" style="display:inline-block;" onclick="jsonToTable(STORE_JSON, id='#table1')">显示</button>
                         </div>
                         <table class="table table-striped" id="table1"></table>
                         <br>
