@@ -15,14 +15,15 @@
     <script src="../css/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
     <script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp&key=DDNBZ-VUNKF-VVJJA-NSN2B-66R5H-VFF23"></script>
     <style>
-    <style>
-        /* Remove the navbar's default margin-bottom and rounded borders */ 
+        /* Remove the navbar's default margin-bottom and rounded borders */
         .navbar {
             margin-bottom: 0;
             border-radius: 0;
         }
-        
-        .row.content {height: auto}
+
+        .row.content {
+            height: auto
+        }
 
         .heatmap {
             margin-top: 10px;
@@ -31,90 +32,93 @@
             width: 100%;
             height: 800px;
         }
-        
+
         .sidenav {
             background-color: #f1f1f1;
             height: 100%;
         }
-        
+
         footer {
             background-color: #555;
             color: white;
             padding: 15px;
         }
-        
+
         @media screen and (max-width: 767px) {
             .sidenav {
                 height: auto;
                 padding: 15px;
             }
-            .row.content {height:auto;} 
+
+            .row.content {
+                height: auto;
+            }
         }
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" title="Terra Eyes">Terra Eyes</a>
-            </div>
-            <div class="collapse navbar-collapse" id="myNavbar">
-                <ul class="nav navbar-nav">
-                        <li><a href="home.html">主页</a></li>
-
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                地图 <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="map_pointer.html">地图打点</a></li>
-                                <li><a href="map_bubble.html">泡泡图</a></li>
-                                <li><a href="map_polygon.html">画多边形</a></li>
-                                <li class="disabled"><a href=>取多边形</a></li>
-                                <li class="active"><a href="map_heat.html">ArcGIS 热力图</a></li>
-                                <li><a href="map_geohash.html">GeoHash 热力图</a></li>
-                            </ul>
-                        </li>
-
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                图表 <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="graph_wordcloud.html">词云图</a></li>
-                                <li class="disabled"><a href=>Circos 图</a></li>
-                            </ul>
-                        </li>
-
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                策略 <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="strategy_locationDecision.html">辅助选址</a></li>
-                                <li><a href="strategy_segmentation_analysis.html">圈层分析</a></li>
-                                <li class="disabled"><a href=>社区地推</a></li>
-                                <li class="disabled"><a href=>会员分析</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                <ul class="nav navbar-nav navbar-right">
-                        <li><a href="about.html"><span class="glyphicon glyphicon-log-in"></span> 关于 </a></li>
-                </ul>
-            </div>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" title="Terra Eyes">Terra Eyes</a>
         </div>
-    </nav>
-    
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li><a href="home.html">主页</a></li>
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        地图 <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="map_pointer.html">地图打点</a></li>
+                        <li><a href="map_bubble.html">泡泡图</a></li>
+                        <li><a href="map_polygon.html">画多边形</a></li>
+                        <li class="disabled"><a href=>取多边形</a></li>
+                        <li class="active"><a href="map_heat.html">ArcGIS 热力图</a></li>
+                        <li><a href="map_geohash.html">GeoHash 热力图</a></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        图表 <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="graph_wordcloud.html">词云图</a></li>
+                        <li class="disabled"><a href=>Circos 图</a></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        策略 <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="strategy_locationDecision.html">辅助选址</a></li>
+                        <li><a href="strategy_segmentation_analysis.html">圈层分析</a></li>
+                        <li class="disabled"><a href=>社区地推</a></li>
+                        <li class="disabled"><a href=>会员分析</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="about.html"><span class="glyphicon glyphicon-log-in"></span> 关于 </a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
 <div class="container-fluid text-center">
     <div class="row content">
         <div class="col-sm-1 sidenav"></div>
 
-        <div class="col-sm-10 text-left"> 
+        <div class="col-sm-10 text-left">
             <div class="col-sm-12" style="background: #F2F2F2; margin-top: 20px;">
                 <div class="col-sm-6" style="margin-top: 20px;">
                     <div class="col-sm-12">
@@ -123,7 +127,9 @@
                             <small>数据格式：纬度(latitude)，经度(longitude)，分值</small>
                         </h5>
                         <input type="file" id="heat_data" style="display:inline-block;" onclick="csvHeatLoader()">
-                        <button type="button" class="btn btn-default btn-sm" style="display:inline-block;" onclick="jsonToTable(HEAT_JSON, id='#table1')">显示</button>
+                        <button type="button" class="btn btn-default btn-sm" style="display:inline-block;"
+                                onclick="jsonToTable(HEAT_JSON, id='#table1')">显示
+                        </button>
                         <br>
                         <br>
                         <br>
@@ -131,7 +137,9 @@
                     <br>
                     <div class="col-sm-12">
                         <label>输入地点数据</label><span class="glyphicon glyphicon-info-sign" title="粘贴数据至输入框"></span>
-                        <h5><small>数据格式：纬度(latitude)，经度(longitude)，详细信息（可选）</small></h5>
+                        <h5>
+                            <small>数据格式：纬度(latitude)，经度(longitude)，详细信息（可选）</small>
+                        </h5>
                         <textarea class="form-control" rows="10" id="text-input"></textarea>
                         <div class="col-sm-8">
                             <select id="lat-lng-convert">
@@ -141,7 +149,9 @@
                             </select>
                         </div>
                         <div class="col-sm-4">
-                            <button type="button" class="btn btn-default btn-sm" onclick="getPasteText('#table1')"><span class="glyphicon glyphicon-share-alt"></span>转化数据</button>
+                            <button type="button" class="btn btn-default btn-sm" onclick="getPasteText('#table1')"><span
+                                    class="glyphicon glyphicon-share-alt"></span>转化数据
+                            </button>
                             <br><br>
                         </div>
                     </div>
@@ -162,7 +172,8 @@
                             <select id="city_dropdown" onchange="showCountry(this)">
                                 <option>=请选择省份=</option>
                             </select>
-                            <button type="button" class="btn met1" onClick="showAdderss()">确定</button><br>
+                            <button type="button" class="btn met1" onClick="showAdderss()">确定</button>
+                            <br>
 
                             <label for="pcc_show">您选择的是：
                                 <input type="text" value="" id="pcc_show">
@@ -179,7 +190,7 @@
                     </div>
 
                     <div class="col-sm-12">
-                        <label>打点名称  ：
+                        <label>打点名称 ：
                             <input type="text" id="marker-name" value="Call Me Terra">
                         </label>
                     </div>
@@ -195,7 +206,7 @@
 
                 <div class="col-sm-4">
                     <br><br><br><br><br>
-                    <button type="button" class="btn btn-primary btn-lg" onclick="runHeat()">双击生成地图</button>
+                    <button type="button" class="btn btn-primary btn-lg" onclick="runHeat(false)">双击生成地图</button>
                     <button type="button" class="btn btn-info btn-lg" onclick="runHeat(true)">输入经纬度</button>
                 </div>
             </div>
@@ -214,14 +225,13 @@
     <p>Copyright © 1998 - 2018 Tencent. All Rights Reserved.</p>
     <p> 腾讯公司 版权所有 </p>
 </footer>
-
 <script src="https://d3js.org/d3.v5.min.js"></script>
 <script src="../bin/heatmap.js"></script>
-
+<script src="../bin/papaparse.min.js"></script>
+<script src="../bin/converter.js"></script>
+<script src="../bin/utilcommon.js"></script>
 <script src="../bin/dropdown.js"></script>
-<script src="../bin/maploader.js"></script>
-<script src="../bin/interaction.js"> </script>
-<script src="../bin/initial/circledropdown.js"> </script>
-<script src="../bin/initial/provcitydropdown.js"></script>
-<script src="../bin/initial/map.js"> </script>
+<script src="../bin/map/basic.js"></script>
+<script src="../bin/map/layer.js"></script>
+<script src="../bin/map/func/arcgis.js"></script>
 </html>
