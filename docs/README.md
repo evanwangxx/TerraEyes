@@ -1,4 +1,4 @@
-### Terra Eyes
+
 
 
      _____                        __                
@@ -9,23 +9,29 @@
                                     |___/           
 
 
+#### Link:  https://evanwangxx.github.io/TerraEyes/
 
-Terra Eyes:  https://evanwangxx.github.io/TerraEyes/
+#### Version: 2.2.0s
 
-Version Now: 2.1.1
+#####map
 
-* segmentation-analysis
-
-* word-cloud
 * point-map
 * heat-map
 * bubble-map
 * geohash-map
 * polygon-map
+
+#####graph
+
+* word-cloud
+
+#####strategy
+
 * location-decision helper
+* segmentation-analysis
 
 ### License
-Copyright (C) 2018 Hongbo Wang 
+Copyright (C) 2019 Hongbo Wang, Xipengliu 
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
@@ -36,20 +42,32 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 ### History
 
+2.2.0s  | change structure, add several functions for segmentation/polygon/geohash
+
 2.1.1  | add Segmentation Analysis
+
 2.1.0  | Polygon Map
+
 2.0.0  | new structure, add word-cloud
 
 1.5.1  | div arrange; max_bubble; bubble color 
+
 1.5.0  | add move interval by time; bug fix; split dropdown and interaction
 
 1.4.7  | data parser in Heatmap & Bubblemap
+
 1.4.6  | bubble maintenance
+
 1.4.5  | Heatmap maintenance
+
 1.4.4  | pointer map add circle and color option
+
 1.4.3  | pointer add map lat-lng converter
+
 1.4.2  | Geohash Store Add Marker and Info Window
+
 1.4.1  | Geohash Map Info Listener
+
 1.4.0  | Geohash Map
 
 1.3.0  | Bubble map
