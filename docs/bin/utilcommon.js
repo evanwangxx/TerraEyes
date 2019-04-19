@@ -154,16 +154,6 @@ function userInputLatLng() {
     return [Number(lat), Number(lng)];
 }
 
-let ADDRESS_POINT;
-
-function addressToLatLng(address) {
-    let geocoder = new qq.maps.Geocoder();
-    geocoder.getLocation(address);
-    geocoder.setComplete(function (result) {
-        ADDRESS_POINT = result.detail.location;
-    });
-}
-
 function $$(str) {
     return document.getElementById(str);
 }
