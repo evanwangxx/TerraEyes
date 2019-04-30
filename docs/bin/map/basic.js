@@ -125,7 +125,7 @@ function addPolygon(map, polygonArray, fillColor, alpha) {
         map: map,
         path: polygonArray,
         strokeColor: fillColor,
-        strokeWeight: 0,
+        strokeWeight: 2,
         fillColor: qq.maps.Color.fromHex(fillColor, alpha),
         zIndex: bottHeight
     });
