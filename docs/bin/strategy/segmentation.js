@@ -8,7 +8,7 @@ let POLYGON_JSON;
 let GEOHASH_JSON;
 let STORE_JSON;
 
-window.onload = function () {
+window.onload = function() {
     let point = new qq.maps.LatLng(22.5228070000, 113.9353380000);
     loadMap(point, 15);
 };
@@ -30,13 +30,13 @@ for (let i = 0; i < MARKER_DROP_DOWN.length; i++) {
 }
 
 function csvPolygon() {
-    $('#polygon_data').change(function () {
+    $('#polygon_data').change(function() {
         let fileSelector = $('#polygon_data')[0].files;
         let file = fileSelector[0];
 
         $("fileNamesDes").text(fileSelector[0].name);
         let reader = new FileReader();
-        reader.onload = function () {
+        reader.onload = function() {
             POLYGON_JSON = quickSort(processDataToJSON(this.result, ['polygon', 'score']));
         };
         reader.readAsText(file);
@@ -44,13 +44,13 @@ function csvPolygon() {
 }
 
 function csvGeohash() {
-    $('#geohash_data').change(function () {
+    $('#geohash_data').change(function() {
         let fileSelector = $('#geohash_data')[0].files;
         let file = fileSelector[0];
 
         $("fileNamesDes").text(fileSelector[0].name);
         let reader = new FileReader();
-        reader.onload = function () {
+        reader.onload = function() {
             GEOHASH_JSON = quickSort(processDataToJSON(this.result, ['geohash', 'score']));
         };
         reader.readAsText(file);
@@ -58,13 +58,13 @@ function csvGeohash() {
 }
 
 function csvStoreLoader(header = ["detail", "lat", "lng", "others"]) {
-    $("#store_data").change(function () {
+    $("#store_data").change(function() {
         let fileSelector = $("#store_data")[0].files;
         let file = fileSelector[0];
 
         $("fileNamesDes").text(fileSelector[0].name);
         let reader = new FileReader();
-        reader.onload = function () {
+        reader.onload = function() {
             STORE_JSON = processDataToJSON(this.result, header, ',');
         };
         reader.readAsText(file);
@@ -137,7 +137,17 @@ function runSegmentation(pointer, geohashData = GEOHASH_JSON, polyData = POLYGON
     }
 
     if (STORE_JSON !== undefined) {
-        layerOfMarker(MAP, STORE_JSON, [3000], false, null, false, 'other', markerImage);
+        // layerOfMarker(MAP, STORE_JSON, [3000], false, null, false, 'other', markerImage);
+        for (let i = 0; i < STORE_JSON.length; i++) {
+            let center = new qq.maps.LatLng(STORE_JSON[i].lat, STORE_JSON[i].lng);
+            let image = MARKER_DROP_DOWN[0].path
+            for (let j = 0; j < MARKER_DROP_DOWN.length; j++){
+                if (MARKER_DROP_DOWN[j].name == STORE_JSON[i].others) {
+                    image = MARKER_DROP_DOWN[j].path
+                }
+            }
+            addMarker(MAP, center, STORE_JSON[i].detail, image);
+        }
     }
     selectArea()
 }
