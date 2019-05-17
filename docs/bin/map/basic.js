@@ -110,7 +110,7 @@ function addGeohash(map, polygonArray, fillColor, score, listenerScore, rawScore
         qq.maps.event.addListener(polygon, 'click', function () {
             let info = new qq.maps.InfoWindow({map: map});
             info.open();
-            info.setContent('<div style="text-align:center;white-space:nowrap;' + 'margin:10px;">' + '量级：' + rawScore + '<br>浓度：' + score.toFixed(2) + '</div>');
+            info.setContent('<div style="text-align:center;white-space:nowrap;' + 'margin:10px;">' + '量级：' + rawScore + '<br>浓度：' + listenerScore.toFixed(2) + '</div>');
             info.setPosition(centerOfPoly);
         });
 
