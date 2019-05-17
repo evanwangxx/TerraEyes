@@ -79,7 +79,7 @@ function runGeohash(pointer = false, dataGeohash = GEOHASH_JSON, filter = 30) {
         let rawScore = dataGeohashFilter[i]["score"];
         let normalScore = ((parseInt(rawScore) - mean) / std);
         let score = ((normalScore - dataMin) / (dataMax - dataMin)) * (radiusMax - radiusMin) + radiusMin;
-        layerOfGeohash(MAP, geohash, score, rawScore);
+        layerOfGeohash(MAP, geohash, score, score, rawScore);
     }
 
 }

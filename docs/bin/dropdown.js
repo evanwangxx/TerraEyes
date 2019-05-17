@@ -36,6 +36,18 @@ var CIRCLE_DROP_DOWN = [{
     length: 5000,
 }]
 
+
+var MARKER_DROP_DOWN = [{
+    name: "red with point",
+    path: "http://webapi.amap.com/images/marker_sprite.png"
+}, {
+    name: "red",
+    path: "http://webapi.amap.com/theme/v1.3/markers/n/mark_r.png"
+}, {
+    name: "red flag",
+    path: "http://amappc.cn-hangzhou.oss-pub.aliyun-inc.com/lbs/static/img/marker.png"
+}]
+
 var CORLOR_DROP_DOWN = [{
     name: "=透明=",
     length: "#A4A4A4"

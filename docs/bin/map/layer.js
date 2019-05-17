@@ -39,7 +39,7 @@ function layerOfHeat(map, heatData, valueField = 'score', radius = 1, maxOpacity
     });
 }
 
-function layerOfGeohash(map, geohash, score, rawScore) {
+function layerOfGeohash(map, geohash, score, listenerScore, rawScore) {
     this.box = decodeGeoHash(geohash);
     let color = getColr(0.92);
 
@@ -50,17 +50,21 @@ function layerOfGeohash(map, geohash, score, rawScore) {
 
     let centerOfPoly = new qq.maps.LatLng(
         (this.box.latitude[1] + this.box.latitude[0]) / 2.0, (this.box.longitude[1] + this.box.longitude[0]) / 2);
-    addGeohash(map, polygonArr, color, score, rawScore, centerOfPoly);
+    addGeohash(map, polygonArr, color, score, listenerScore, rawScore, centerOfPoly);
 }
 
 function layerOfPolygon(map, polygon_array, color, alpha) {
     addPolygon(map, polygon_array, color, alpha)
 }
 
-function layerOfMarker(map, markerData, radius = [3000], isCircle = false, color = '#FA5858', reachRadius = false, circleOption = 'dashcircle') {
+function layerOfMarker(map, markerData, radius = [3000], isCircle = false, color = '#FA5858', reachRadius = false, circleOption = 'dashcircle', image = null) {
     for (let i = 0; i < markerData.length; i++) {
         let center = new qq.maps.LatLng(markerData[i].lat, markerData[i].lng);
-        addMarker(map, center, markerData[i].detail);
+        if (image === null) {
+            addMarker(map, center, markerData[i].detail);
+        } else {
+            addMarker(map, center, markerData[i].detail, image);
+        }
 
         if (isCircle) {
             for (let j = 0; j < radius.length; ++j) {

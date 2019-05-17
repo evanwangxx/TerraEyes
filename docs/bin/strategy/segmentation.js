@@ -21,6 +21,14 @@ for (let i = 0; i < CORLOR_DROP_DOWN.length; i++) {
     }
 }
 
+const marker_drop_down = document.getElementById("marker-dd");
+for (let i = 0; i < MARKER_DROP_DOWN.length; i++) {
+    marker_drop_down.options.add(new Option(MARKER_DROP_DOWN[i].name, MARKER_DROP_DOWN[i].path));
+    if (i === 1) {
+        marker_drop_down.options[i].selected = true;
+    }
+}
+
 function csvPolygon() {
     $('#polygon_data').change(function () {
         let fileSelector = $('#polygon_data')[0].files;
@@ -49,7 +57,7 @@ function csvGeohash() {
     });
 }
 
-function csvStoreLoader(header = ["store", "lat", "lng", "detail"]) {
+function csvStoreLoader(header = ["detail", "lat", "lng", "others"]) {
     $("#store_data").change(function () {
         let fileSelector = $("#store_data")[0].files;
         let file = fileSelector[0];
@@ -66,6 +74,7 @@ function csvStoreLoader(header = ["store", "lat", "lng", "detail"]) {
 function runSegmentation(pointer, geohashData = GEOHASH_JSON, polyData = POLYGON_JSON, filterGeo = 30, filterPoly = 30) {
     const polygonAlpha = parseFloat(document.getElementById("polygon-alpha").value);
     let color = clickColorList("color-dd");
+    let markerImage = clickColorList("marker-dd");
 
     // polygon
     let polyDataFilter = [];
@@ -114,18 +123,21 @@ function runSegmentation(pointer, geohashData = GEOHASH_JSON, polyData = POLYGON
     const std = standardDeviation(scoreArray);
     const dataMax = parseInt(dataGeohashFilter[0]["score"] - mean) / std;
     const dataMin = parseInt(dataGeohashFilter[dataGeohashFilter.length - 1]["score"] - mean) / std;
-    const radiusMax = 1.00;
+    const radiusMax = 1.0;
     const radiusMin = 0.05;
+    const concentMax = parseFloat(document.getElementById("concentration").value);
 
     for (let i = 0; i < dataGeohashFilter.length; ++i) {
         let geohash = dataGeohashFilter[i]["geohash"];
         let rawScore = dataGeohashFilter[i]["score"];
         let normalScore = ((parseInt(rawScore) - mean) / std);
         let score = ((normalScore - dataMin) / (dataMax - dataMin)) * (radiusMax - radiusMin) + radiusMin;
-        layerOfGeohash(MAP, geohash, score, rawScore);
+        let outputConcentration = ((normalScore - dataMin) / (dataMax - dataMin)) * (concentMax - radiusMin) + radiusMin;
+        layerOfGeohash(MAP, geohash, score, outputConcentration, rawScore);
     }
 
     if (STORE_JSON !== undefined) {
-        layerOfMarker(MAP, STORE_JSON, [3000], false, null, false, 'other');
+        layerOfMarker(MAP, STORE_JSON, [3000], false, null, false, 'other', markerImage);
     }
+    selectArea()
 }

@@ -153,9 +153,12 @@
             <div class="col-sm-12" style="margin-top: 30px;">
                 <div class="col-sm-6">
                     <label>透明度：<input type="text" id="polygon-alpha" value="0.5"></label><br>
+                    <label>浓度最大度：<input type="text" id="concentration" value="1.0"></label><br>
                     <label for="inputlg">多边形颜色 ： </label>
                     <select id="color-dd"></select>
-                    <button id="visible-polygon" class="btn btn-default btn-sm">显示多边形</button>
+                    <button id="visible-polygon" class="btn btn-default btn-sm">显示多边形</button><br>
+                    <label for="inputlg">图标类型 ： </label>
+                    <select id="marker-dd"></select>
                 </div>
                 <div class="col-sm-6">
                     <button type="button" class="btn btn-primary btn-lg" onclick="runSegmentation(false)">生成地图
@@ -163,6 +166,20 @@
                     <button type="button" class="btn btn-info btn-lg" onclick="runSegmentation(true)">输入经纬度
                     </button>
                 </div>
+
+                <!-- <div class="col-sm-12" style="margin-top:30px;">
+                    <div class="col-sm-6" style="margin-top: 30px;">
+                        <pre id="out_pre"></pre>
+                    </div>
+                    <div class="col-sm-6" style="margin:10px;">
+                        <div class="col-sm-6"></div>
+                        <div class="col-sm-6">
+                            <button id="startDraw" type="button" class="btn btn-info btn-sm">开始</button>
+                            <button id="delDraw" type="button" class="btn btn-warning btn-sm">重置</button>
+                            <button id="stopDraw" type="button" class="btn btn-primary btn-sm">生成</button>
+                        </div>
+                    </div>
+                </div> -->
             </div>
 
             <div class="col-sm-12">
@@ -187,5 +204,6 @@
 <script src="../bin/utilcommon.js"></script>
 <script src="../bin/map/basic.js"></script>
 <script src="../bin/map/layer.js"></script>
+<script src="../bin/map/func/areaselect.js"></script>
 <script src="../bin/strategy/segmentation.js"></script>
 </html>

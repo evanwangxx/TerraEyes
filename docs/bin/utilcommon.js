@@ -251,3 +251,9 @@ function clickCircleList(id) {
     return Number(distance);
 }
 
+function clickMarkerList(id) {
+    const myselect = document.getElementById(id);
+    let index = myselect.selectedIndex;
+    let marker = myselect.options[index].value;
+    return Number(marker);
+}

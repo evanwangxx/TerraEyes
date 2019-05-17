@@ -5,7 +5,7 @@
 
 let startPoint = null, midPoint = null, listener = null, path = [];
 let map, marker = null;
-showProvince();
+// showProvince();
 const center = new qq.maps.LatLng(39.916527, 116.397128);
 map = new qq.maps.Map(document.getElementById('map-canvas'), {
     center: center,
@@ -16,6 +16,33 @@ map = new qq.maps.Map(document.getElementById('map-canvas'), {
 });
 selectArea();
 
+let polyline = new qq.maps.Polyline({
+    clickable: true,
+    cursor: 'crosshair',
+    editable: true,
+    map: map,
+    path: path,
+    strokeColor: '#1844ab',
+    strokeDashStyle: 'dash',
+    strokeWeight: 3,
+    visible: true,
+    zIndex: 1000
+});
+
+let polygon = new qq.maps.Polygon({
+    clickable: true,
+    cursor: 'crosshair',
+    editable: true,
+    fillColor: new qq.maps.Color(24, 68, 171, 0.4),
+    map: map,
+    path: path,
+    strokeColor: '#1844ab',
+    strokeDashStyle: 'dash',
+    strokeWeight: 3,
+    visible: true,
+    zIndex: 1000
+});
+
 function reNewMap() {
     showAdderss();
     console.log(LOCATION_SELECT);
@@ -25,39 +52,13 @@ function reNewMap() {
         center: ADDRESS_POINT,
         zoom: 14,
         disableDoubleClickZoom: true,
-        scrollwheel: false,
+        scrollwheel: true,
         mapTypeControl: false
     });
     selectArea()
 }
 
 function selectArea() {
-    var polyline = new qq.maps.Polyline({
-        clickable: true,
-        cursor: 'crosshair',
-        editable: true,
-        map: map,
-        path: path,
-        strokeColor: '#1844ab',
-        strokeDashStyle: 'dash',
-        strokeWeight: 3,
-        visible: true,
-        zIndex: 1000
-    });
-    var polygon = new qq.maps.Polygon({
-        clickable: true,
-        cursor: 'crosshair',
-        editable: true,
-        fillColor: new qq.maps.Color(24, 68, 171, 0.4),
-        map: map,
-        path: path,
-        strokeColor: '#1844ab',
-        strokeDashStyle: 'dash',
-        strokeWeight: 3,
-        visible: true,
-        zIndex: 1000
-    });
-
     $("#startDraw").bind("click", function () {
         listener = qq.maps.event.addListener(map, 'dblclick', function (event) {
             if (startPoint == null) {
@@ -65,7 +66,6 @@ function selectArea() {
                 startPoint = event.latLng;
                 path.push(event.latLng);
                 polyline.setPath(path);
-
             }
         });
     });

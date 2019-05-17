@@ -95,7 +95,7 @@ function addMarker(map, center, text, markerImage = "http://webapi.amap.com/them
     });
 }
 
-function addGeohash(map, polygonArray, fillColor, score, rawScore = null, centerOfPoly = null) {
+function addGeohash(map, polygonArray, fillColor, score, listenerScore, rawScore = null, centerOfPoly = null) {
     let polygon = new qq.maps.Polygon({
         map: map,
         path: polygonArray,
@@ -115,7 +115,7 @@ function addGeohash(map, polygonArray, fillColor, score, rawScore = null, center
         });
 
         qq.maps.event.addListener(polygon, 'mousemove', function (event) {
-            document.getElementById("polyinfo").innerHTML = "量级：" + rawScore + "<br>浓度：" + score.toFixed(2);
+            document.getElementById("polyinfo").innerHTML = "量级：" + rawScore + "<br>浓度：" + listenerScore.toFixed(2);
         });
     }
 }
