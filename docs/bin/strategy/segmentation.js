@@ -226,10 +226,11 @@ function runSegmentation(pointer, geohashData = GEOHASH_JSON, polyData = POLYGON
                 for (let i = 0; i < dataGeohashFilter.length; ++i) {
                     let geohash = dataGeohashFilter[i]["geohash"];
                     let rawScore = dataGeohashFilter[i]["score"];
-                    let normalScore = ((parseInt(rawScore) - mean) / std);
-                    let score = ((normalScore - dataMin) / (dataMax - dataMin)) * (radiusMax - radiusMin) + radiusMin;
-                    let outputConcentration = ((normalScore - dataMin) / (dataMax - dataMin)) * (concentMax - radiusMin) + radiusMin;
-                    let center = layerOfGeohash(MAP, geohash, score, outputConcentration, rawScore);
+
+                    this.box = decodeGeoHash(geohash);
+                    let center = new qq.maps.LatLng(
+                        (this.box.latitude[1] + this.box.latitude[0]) / 2.0, (this.box.longitude[1] + this.box.longitude[0]) / 2);
+
                     if (path.length !== 0) {
                         let containOrNot = polygon.getBounds().contains(center);
                         console.log(containOrNot);
