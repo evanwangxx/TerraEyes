@@ -4,7 +4,7 @@
 // Copyright © 1998 - 2018 Tencent. All Rights Reserved.
 
 
-var CIRCLE_DROP_DOWN = [{
+const CIRCLE_DROP_DOWN = [{
     name: "=无=",
     length: 0
 }, {
@@ -34,10 +34,10 @@ var CIRCLE_DROP_DOWN = [{
 }, {
     name: "5000m",
     length: 5000,
-}]
+}];
 
 
-var MARKER_DROP_DOWN = [{
+const MARKER_DROP_DOWN = [{
     name: "red with point",
     path: "http://webapi.amap.com/images/marker_sprite.png"
 }, {
@@ -46,9 +46,9 @@ var MARKER_DROP_DOWN = [{
 }, {
     name: "red flag",
     path: "http://amappc.cn-hangzhou.oss-pub.aliyun-inc.com/lbs/static/img/marker.png"
-}]
+}];
 
-var CORLOR_DROP_DOWN = [{
+const CORLOR_DROP_DOWN = [{
     name: "=透明=",
     length: "#A4A4A4"
 }, {
@@ -81,9 +81,9 @@ var CORLOR_DROP_DOWN = [{
 }, {
     name: "灰色",
     length: null
-}]
+}];
 
-var PROVINCE_CITY_COUNTRY = [{
+const PROVINCE_CITY_COUNTRY = [{
     name: "北京市",
     city: [{
         name: "北京市",

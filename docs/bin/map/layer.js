@@ -51,6 +51,7 @@ function layerOfGeohash(map, geohash, score, listenerScore, rawScore) {
     let centerOfPoly = new qq.maps.LatLng(
         (this.box.latitude[1] + this.box.latitude[0]) / 2.0, (this.box.longitude[1] + this.box.longitude[0]) / 2);
     addGeohash(map, polygonArr, color, score, listenerScore, rawScore, centerOfPoly);
+    return centerOfPoly;
 }
 
 function layerOfPolygon(map, polygon_array, color, alpha) {

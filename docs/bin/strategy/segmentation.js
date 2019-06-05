@@ -7,6 +7,7 @@
 let POLYGON_JSON;
 let GEOHASH_JSON;
 let STORE_JSON;
+let MAP;
 
 window.onload = function() {
     let point = new qq.maps.LatLng(22.5228070000, 113.9353380000);
@@ -127,27 +128,158 @@ function runSegmentation(pointer, geohashData = GEOHASH_JSON, polyData = POLYGON
     const radiusMin = 0.05;
     const concentMax = parseFloat(document.getElementById("concentration").value);
 
+    selectArea();
+
+    let startPoint = null, midPoint = null, listener = null, path = [];
+    let marker = null;
+
+    let polyline = new qq.maps.Polyline({
+        clickable: true,
+        cursor: 'crosshair',
+        editable: true,
+        map: MAP,
+        path: path,
+        strokeColor: '#FF0080',
+        strokeDashStyle: 'dash',
+        strokeWeight: 3,
+        visible: true,
+        zIndex: 100
+    });
+
+    let polygon = new qq.maps.Polygon({
+        clickable: true,
+        cursor: 'crosshair',
+        editable: true,
+        fillColor: new qq.maps.Color(24, 68, 171, 0.2),
+        map: MAP,
+        path: path,
+        strokeColor: '#FF0080',
+        strokeDashStyle: 'dash',
+        strokeWeight: 3,
+        visible: true,
+        zIndex: 100
+    });
+
+    function reNewMap() {
+        showAdderss();
+        console.log(LOCATION_SELECT);
+        addressToLatLng(LOCATION_SELECT);
+        console.log(ADDRESS_POINT);
+        MAP = new qq.maps.Map(document.getElementById('map-canvas'), {
+            center: ADDRESS_POINT,
+            zoom: 14,
+            disableDoubleClickZoom: true,
+            scrollwheel: true,
+            mapTypeControl: false
+        });
+        selectArea()
+    }
+
+    function selectArea() {
+        $("#startDraw").bind("click", function () {
+            listener = qq.maps.event.addListener(MAP, 'dblclick', function (event) {
+                if (startPoint == null) {
+                    path = [];
+                    startPoint = event.latLng;
+                    path.push(event.latLng);
+                    polyline.setPath(path);
+                }
+            });
+        });
+
+        $("#delDraw").bind("click", function () {
+            polyline.setPath([]);
+            polygon.setPath([]);
+            startPoint = midPoint = null;
+        });
+
+        $("#resetDraw").bind("click", function () {
+            location.reload();
+        });
+
+        $("#stopDraw").bind("click", function () {
+            if (path) {
+                path = [];
+                if (polyline.getPath().getLength() > 0) {
+                    polyline.getPath().forEach(function (element, index) {
+                        path.push(element);
+                    });
+                    polyline.setPath([]);
+                }
+                if (polygon.getPath().getLength() > 0) {
+                    polygon.getPath().forEach(function (element, index) {
+                        path.push(element);
+                    })
+                }
+                polygon.setPath(path);
+                console.log(path);
+                let jsonPrint = "";
+                for (let index in path) {
+                    jsonPrint = jsonPrint + path[index] + '\n'
+                }
+                console.log(jsonPrint);
+                document.getElementById('out_pre').innerText = jsonPrint;
+                startPoint = midPoint = null;
+                qq.maps.event.removeListener(listener);
+
+                let sumOfGeohashInBound = 0;
+                for (let i = 0; i < dataGeohashFilter.length; ++i) {
+                    let geohash = dataGeohashFilter[i]["geohash"];
+                    let rawScore = dataGeohashFilter[i]["score"];
+                    let normalScore = ((parseInt(rawScore) - mean) / std);
+                    let score = ((normalScore - dataMin) / (dataMax - dataMin)) * (radiusMax - radiusMin) + radiusMin;
+                    let outputConcentration = ((normalScore - dataMin) / (dataMax - dataMin)) * (concentMax - radiusMin) + radiusMin;
+                    let center = layerOfGeohash(MAP, geohash, score, outputConcentration, rawScore);
+                    if (path.length !== 0) {
+                        let containOrNot = polygon.getBounds().contains(center);
+                        console.log(containOrNot);
+                        if (containOrNot) {
+                            sumOfGeohashInBound = sumOfGeohashInBound + parseInt(rawScore);
+                            console.log(sumOfGeohashInBound, rawScore)
+                        }
+                    }
+                }
+                console.log(sumOfGeohashInBound);
+                document.getElementById('out_sumOfGeohashInBound').innerText = sumOfGeohashInBound.toString();
+            }
+        });
+
+        qq.maps.event.addListener(MAP, 'click', function (event) {
+            if (startPoint != null) {
+                path = [];
+                polyline.getPath().forEach(function (element, index) {
+                    path.push(element);
+                });
+                path.push(event.latLng);
+                midPoint = event.latLng;
+                polyline.setPath(path);
+            }
+        });
+    }
+
+
     for (let i = 0; i < dataGeohashFilter.length; ++i) {
         let geohash = dataGeohashFilter[i]["geohash"];
         let rawScore = dataGeohashFilter[i]["score"];
         let normalScore = ((parseInt(rawScore) - mean) / std);
         let score = ((normalScore - dataMin) / (dataMax - dataMin)) * (radiusMax - radiusMin) + radiusMin;
         let outputConcentration = ((normalScore - dataMin) / (dataMax - dataMin)) * (concentMax - radiusMin) + radiusMin;
-        layerOfGeohash(MAP, geohash, score, outputConcentration, rawScore);
+        layerOfGeohash(MAP, geohash, score, outputConcentration, rawScore)
     }
+
 
     if (STORE_JSON !== undefined) {
         // layerOfMarker(MAP, STORE_JSON, [3000], false, null, false, 'other', markerImage);
         for (let i = 0; i < STORE_JSON.length; i++) {
             let center = new qq.maps.LatLng(STORE_JSON[i].lat, STORE_JSON[i].lng);
-            let image = MARKER_DROP_DOWN[0].path
+            let image = MARKER_DROP_DOWN[0].path;
             for (let j = 0; j < MARKER_DROP_DOWN.length; j++){
-                if (MARKER_DROP_DOWN[j].name == STORE_JSON[i].others) {
+                if (MARKER_DROP_DOWN[j].name === STORE_JSON[i].others) {
                     image = MARKER_DROP_DOWN[j].path
                 }
             }
             addMarker(MAP, center, STORE_JSON[i].detail, image);
         }
     }
-    selectArea()
 }
+

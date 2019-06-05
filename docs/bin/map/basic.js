@@ -118,6 +118,18 @@ function addGeohash(map, polygonArray, fillColor, score, listenerScore, rawScore
             document.getElementById("polyinfo").innerHTML = "量级：" + rawScore + "<br>浓度：" + listenerScore.toFixed(2);
         });
     }
+
+    let invisible = document.getElementById("startDraw");
+    qq.maps.event.addDomListener(invisible, "click", function () {
+        polygon.setMap(map);
+        polygon.setVisible(false)
+    });
+
+    let visible = document.getElementById("stopDraw");
+    qq.maps.event.addDomListener(visible, "click", function () {
+        polygon.setMap(map);
+        polygon.setVisible(true)
+    });
 }
 
 function addPolygon(map, polygonArray, fillColor, alpha) {
@@ -139,6 +151,18 @@ function addPolygon(map, polygonArray, fillColor, alpha) {
         } else {
             polygon.setVisible(true)
         }
+    });
+
+    let invisible_plot_polygon = document.getElementById("startDraw");
+    qq.maps.event.addDomListener(invisible_plot_polygon, "click", function () {
+        polygon.setMap(map);
+        polygon.setVisible(false)
+    });
+
+    let visible_plot_polygon = document.getElementById("stopDraw");
+    qq.maps.event.addDomListener(visible_plot_polygon, "click", function () {
+        polygon.setMap(map);
+        polygon.setVisible(true)
     });
 }
 
