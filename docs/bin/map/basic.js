@@ -107,12 +107,12 @@ function addGeohash(map, polygonArray, fillColor, score, listenerScore, rawScore
 
     // TODO: check sugar
     if (rawScore != null && centerOfPoly != null) {
-        qq.maps.event.addListener(polygon, 'click', function () {
-            let info = new qq.maps.InfoWindow({map: map});
-            info.open();
-            info.setContent('<div style="text-align:center;white-space:nowrap;' + 'margin:10px;">' + '量级：' + rawScore + '<br>浓度：' + listenerScore.toFixed(2) + '</div>');
-            info.setPosition(centerOfPoly);
-        });
+        // qq.maps.event.addListener(polygon, 'click', function () {
+        //     let info = new qq.maps.InfoWindow({map: map});
+        //     info.open();
+        //     info.setContent('<div style="text-align:center;white-space:nowrap;' + 'margin:10px;">' + '量级：' + rawScore + '<br>浓度：' + listenerScore.toFixed(2) + '</div>');
+        //     info.setPosition(centerOfPoly);
+        // });
 
         qq.maps.event.addListener(polygon, 'mousemove', function (event) {
             document.getElementById("polyinfo").innerHTML = "量级：" + rawScore + "<br>浓度：" + listenerScore.toFixed(2);
