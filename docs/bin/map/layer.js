@@ -39,7 +39,7 @@ function layerOfHeat(map, heatData, valueField = 'score', radius = 1, maxOpacity
     });
 }
 
-function layerOfGeohash(map, geohash, score, listenerScore, rawScore) {
+function layerOfGeohash(map, geohash, score, listenerScore, rawScore, text = null) {
     this.box = decodeGeoHash(geohash);
     let color = getColr(0.92);
 
@@ -50,7 +50,7 @@ function layerOfGeohash(map, geohash, score, listenerScore, rawScore) {
 
     let centerOfPoly = new qq.maps.LatLng(
         (this.box.latitude[1] + this.box.latitude[0]) / 2.0, (this.box.longitude[1] + this.box.longitude[0]) / 2);
-    addGeohash(map, polygonArr, color, score, listenerScore, rawScore, centerOfPoly);
+    addGeohash(map, polygonArr, color, score, listenerScore, rawScore, centerOfPoly, text);
     return centerOfPoly;
 }
 

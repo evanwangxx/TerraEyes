@@ -95,7 +95,7 @@ function addMarker(map, center, text, markerImage = "http://webapi.amap.com/them
     });
 }
 
-function addGeohash(map, polygonArray, fillColor, score, listenerScore, rawScore = null, centerOfPoly = null) {
+function addGeohash(map, polygonArray, fillColor, score, listenerScore, rawScore = null, centerOfPoly = null, text = null) {
     let polygon = new qq.maps.Polygon({
         map: map,
         path: polygonArray,
@@ -114,20 +114,65 @@ function addGeohash(map, polygonArray, fillColor, score, listenerScore, rawScore
         //     info.setPosition(centerOfPoly);
         // });
 
-        qq.maps.event.addListener(polygon, 'mousemove', function (event) {
-            document.getElementById("polyinfo").innerHTML = "量级：" + rawScore + "<br>浓度：" + listenerScore.toFixed(2);
+        var textShow = "量级：" + rawScore + "<br>浓度：" + listenerScore.toFixed(2);
+        var textWithinGeohash;
+        if (text) {
+            textWithinGeohash = text.replace(" ", "<br>");
+
+            var label = addText(map, textWithinGeohash, polygonArray[0]);
+            var labelInfo = addText(map, textWithinGeohash, polygonArray[0]);
+
+            qq.maps.event.addDomListener(polygon, 'click', function (event) {
+                if (labelInfo.getVisible()) {
+                    labelInfo.setVisible(false);
+                } else {
+                    labelInfo.setVisible(true);
+                }
+            });
+
+            qq.maps.event.addDomListener(label, "click", function(event) {
+                // label.setMap(map);
+                if (labelInfo.getVisible()) {
+                    labelInfo.setVisible(false);
+                } else {
+                    labelInfo.setVisible(true);
+                }
+            });
+
+            qq.maps.event.addDomListener(labelInfo, "click", function(event) {
+                // label.setMap(map);
+                if (labelInfo.getVisible()) {
+                    labelInfo.setVisible(false);
+                } else {
+                    labelInfo.setVisible(true);
+                }
+            });
+
+            qq.maps.event.addDomListener(polygon, 'mouseover', function (event) {
+                label.setVisible(true);
+                qq.maps.event.addDomListener(polygon, 'mouseout', function (event) {
+                    label.setVisible(false);
+                });
+            });
+        }
+
+        qq.maps.event.addListener(polygon, 'mouseover', function (event) {
+            document.getElementById("polyinfo").innerHTML = textShow;
+        });
+
+        let visible = document.getElementById("visible-geohash");
+        qq.maps.event.addDomListener(visible, "click", function () {
+            polygon.setMap(map);
+            if (polygon.getVisible()) {
+                polygon.setVisible(false)
+            } else {
+                polygon.setVisible(true)
+            }
         });
     }
 
-    let visible = document.getElementById("visible-geohash");
-    qq.maps.event.addDomListener(visible, "click", function () {
-        polygon.setMap(map);
-        if (polygon.getVisible()) {
-            polygon.setVisible(false)
-        } else {
-            polygon.setVisible(true)
-        }
-    });
+
+
 }
 
 function addPolygon(map, polygonArray, fillColor, alpha) {
@@ -151,7 +196,6 @@ function addPolygon(map, polygonArray, fillColor, alpha) {
     });
 }
 
-
 function addPolyline(map, path, strokeColor = '#610B21', strokeWeight = 3) {
     let polyline = new qq.maps.Polyline({
         map: map,
@@ -171,6 +215,36 @@ function addPolyline(map, path, strokeColor = '#610B21', strokeWeight = 3) {
             polyline.setVisible(true)
         }
     });
+}
+
+function addText(map, text, center) {
+    let cssP = {
+        color: "#000",
+        fontSize: document.getElementById("text-size").value + "px",
+        fontWeight: "dash",
+        backgroundColor: null
+    };
+
+    let label = new qq.maps.Label({
+        position: center,
+        map: map,
+        content: text,
+        zIndex: bottHeight
+    });
+
+    label.setStyle(cssP);
+
+    let visibleF = document.getElementById("visible-text");
+    qq.maps.event.addDomListener(visibleF, "click", function() {
+        // label.setMap(map);
+        if (label.getVisible()) {
+            label.setVisible(false);
+        } else {
+            label.setVisible(true);
+        }
+    });
+
+    return label;
 }
 
 function loadMap(point, zoom = 3, mapTypeId = qq.maps.MapTypeId.ROADMAP) {

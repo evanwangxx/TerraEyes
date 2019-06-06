@@ -11,7 +11,7 @@
 
 #### Link:  https://evanwangxx.github.io/TerraEyes/
 
-#### Version: 2.3.2s
+#### Version: 2.3.3s
 
 #####map
 
@@ -42,6 +42,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 
 ### History
+
+2.3.3s  | segmentation_analysis: + text info & dynamic info
 
 2.3.2s  | segmentation_analysis: + area select and area summary
 

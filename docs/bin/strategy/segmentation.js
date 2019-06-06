@@ -52,7 +52,7 @@ function csvGeohash() {
         $("fileNamesDes").text(fileSelector[0].name);
         let reader = new FileReader();
         reader.onload = function() {
-            GEOHASH_JSON = quickSort(processDataToJSON(this.result, ['geohash', 'score']));
+            GEOHASH_JSON = quickSort(processDataToJSON(this.result, ['geohash', 'score', 'text']));
         };
         reader.readAsText(file);
     });
@@ -74,6 +74,7 @@ function csvStoreLoader(header = ["detail", "lat", "lng", "others"]) {
 
 function runSegmentation(pointer, geohashData = GEOHASH_JSON, polyData = POLYGON_JSON, filterGeo = 30, filterPoly = 30) {
     const polygonAlpha = parseFloat(document.getElementById("polygon-alpha").value);
+    const mapZoomLevel = parseInt(document.getElementById("map-zoom-level").value);
     let color = clickColorList("color-dd");
     let markerImage = clickColorList("marker-dd");
 
@@ -92,10 +93,10 @@ function runSegmentation(pointer, geohashData = GEOHASH_JSON, polyData = POLYGON
     if (pointer) {
         let latlng = userInputLatLng();
         let point = new qq.maps.LatLng(latlng[0], latlng[1]);
-        loadMap(point, 14);
+        loadMap(point, mapZoomLevel);
     } else {
         let center = new qq.maps.LatLng(maxBubbleLocation[0], maxBubbleLocation[1]);
-        loadMap(center, 13);
+        loadMap(center, mapZoomLevel);
     }
 
     for (let i = 0; i < polyDataFilterSort.length; i++) {
@@ -262,10 +263,11 @@ function runSegmentation(pointer, geohashData = GEOHASH_JSON, polyData = POLYGON
     for (let i = 0; i < dataGeohashFilter.length; ++i) {
         let geohash = dataGeohashFilter[i]["geohash"];
         let rawScore = dataGeohashFilter[i]["score"];
+        let textShow = dataGeohashFilter[i]["text"];
         let normalScore = ((parseInt(rawScore) - mean) / std);
         let score = ((normalScore - dataMin) / (dataMax - dataMin)) * (radiusMax - radiusMin) + radiusMin;
         let outputConcentration = ((normalScore - dataMin) / (dataMax - dataMin)) * (concentMax - radiusMin) + radiusMin;
-        layerOfGeohash(MAP, geohash, score, outputConcentration, rawScore)
+        layerOfGeohash(MAP, geohash, score, outputConcentration, rawScore, textShow);
     }
 
 
