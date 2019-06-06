@@ -152,6 +152,9 @@
 
             <div class="col-sm-12" style="margin-top: 30px;">
                 <div class="col-sm-3" style="text-align: left;">
+                    <h4 style="text-align: left;">
+                        <small>个性化设置</small>
+                    </h4>
                     <label>地图缩放：<input type="text" id="map-zoom-level" value="13"></label><br>
                     <label>透明度：<input type="text" id="polygon-alpha" value="0.1"></label><br>
                     <label>浓度最大值：<input type="text" id="concentration" value="1.0"></label><br>
@@ -168,21 +171,19 @@
                                 <small>圈选多边形路径</small>
                             </h4>
                             <pre id="out_pre"></pre>
-                            <button id="startDraw" type="button" class="btn btn-default btn-sm">绘制多边形</button>
-                            <button id="stopDraw" type="button" class="btn btn-default btn-sm">生成多边形</button>
-                            <button id="delDraw" type="button" class="btn btn-default btn-sm">重置多边形</button>
                         </div>
+
                         <div class="col-sm-6">
                             <h4 style="text-align: left;">
                                 <small>圈选多边形范围内指标</small>
                             </h4>
                             <pre id="out_sumOfGeohashInBound"></pre>
-                            <button id="visible-geohash" type="button" class="btn btn-default btn-sm">显示 Geohash
-                            </button>
-                            <button id="visible-polygon" type="button" class="btn btn-default btn-sm">显示多边形</button>
-                            <button id="visible-text" type="button" class="btn btn-default btn-sm">显示文字</button>
-                            <br><br>
+                            <br>
+                            <button id="startDraw" type="button" class="btn btn-default btn-sm">绘制多边形</button>
+                            <button id="stopDraw" type="button" class="btn btn-default btn-sm">生成多边形</button>
+                            <button id="delDraw" type="button" class="btn btn-default btn-sm">重置多边形</button>
                         </div>
+
                     </div>
                 </div>
                 <div class="col-sm-3">
@@ -190,6 +191,15 @@
                         <small>Geohash 指标</small>
                     </h4>
                     <pre id="polyinfo"></pre>
+                    <h4 style="text-align: left;">
+                        <small>图层显示设置</small>
+                    </h4>
+                    <button id="visible-geohash" type="button" class="btn btn-default btn-sm">显示 Geohash
+                    </button>
+                    <button id="visible-polygon" type="button" class="btn btn-default btn-sm">显示多边形</button>
+                    <button id="visible-text" type="button" class="btn btn-default btn-sm">显示全量文本信息</button>
+                    <br><br>
+
                 </div>
             </div>
 
