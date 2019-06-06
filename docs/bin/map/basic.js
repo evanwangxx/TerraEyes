@@ -119,16 +119,14 @@ function addGeohash(map, polygonArray, fillColor, score, listenerScore, rawScore
         });
     }
 
-    let invisible = document.getElementById("startDraw");
-    qq.maps.event.addDomListener(invisible, "click", function () {
-        polygon.setMap(map);
-        polygon.setVisible(false)
-    });
-
-    let visible = document.getElementById("stopDraw");
+    let visible = document.getElementById("visible-geohash");
     qq.maps.event.addDomListener(visible, "click", function () {
         polygon.setMap(map);
-        polygon.setVisible(true)
+        if (polygon.getVisible()) {
+            polygon.setVisible(false)
+        } else {
+            polygon.setVisible(true)
+        }
     });
 }
 
@@ -143,7 +141,6 @@ function addPolygon(map, polygonArray, fillColor, alpha) {
     });
 
     let visible = document.getElementById("visible-polygon");
-    console.log(visible);
     qq.maps.event.addDomListener(visible, "click", function () {
         polygon.setMap(map);
         if (polygon.getVisible()) {
@@ -152,29 +149,27 @@ function addPolygon(map, polygonArray, fillColor, alpha) {
             polygon.setVisible(true)
         }
     });
-
-    let invisible_plot_polygon = document.getElementById("startDraw");
-    qq.maps.event.addDomListener(invisible_plot_polygon, "click", function () {
-        polygon.setMap(map);
-        polygon.setVisible(false)
-    });
-
-    let visible_plot_polygon = document.getElementById("stopDraw");
-    qq.maps.event.addDomListener(visible_plot_polygon, "click", function () {
-        polygon.setMap(map);
-        polygon.setVisible(true)
-    });
 }
 
 
 function addPolyline(map, path, strokeColor = '#610B21', strokeWeight = 3) {
-    new qq.maps.Polyline({
+    let polyline = new qq.maps.Polyline({
         map: map,
         path: path,
         strokeColor: strokeColor,
         strokeWeight: strokeWeight,
         editable: false,
         zIndex: topHeight
+    });
+
+    let visible = document.getElementById("visible-polyline");
+    qq.maps.event.addDomListener(visible, "click", function () {
+        polyline.setMap(map);
+        if (polyline.getVisible()) {
+            polyline.setVisible(false)
+        } else {
+            polyline.setVisible(true)
+        }
     });
 }
 
