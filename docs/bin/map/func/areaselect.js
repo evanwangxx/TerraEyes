@@ -5,7 +5,6 @@
 
 let startPoint = null, midPoint = null, listener = null, path = [];
 let map, marker = null;
-// showProvince();
 const center = new qq.maps.LatLng(39.916527, 116.397128);
 map = new qq.maps.Map(document.getElementById('map-canvas'), {
     center: center,
@@ -15,33 +14,7 @@ map = new qq.maps.Map(document.getElementById('map-canvas'), {
     mapTypeControl: false
 });
 selectArea();
-
-let polyline = new qq.maps.Polyline({
-    clickable: true,
-    cursor: 'crosshair',
-    editable: true,
-    map: map,
-    path: path,
-    strokeColor: '#1844ab',
-    strokeDashStyle: 'dash',
-    strokeWeight: 3,
-    visible: true,
-    zIndex: 1000
-});
-
-let polygon = new qq.maps.Polygon({
-    clickable: true,
-    cursor: 'crosshair',
-    editable: true,
-    fillColor: new qq.maps.Color(24, 68, 171, 0.4),
-    map: map,
-    path: path,
-    strokeColor: '#1844ab',
-    strokeDashStyle: 'dash',
-    strokeWeight: 3,
-    visible: true,
-    zIndex: 1000
-});
+showProvince();
 
 function reNewMap() {
     showAdderss();
@@ -59,6 +32,33 @@ function reNewMap() {
 }
 
 function selectArea() {
+    let polyline = new qq.maps.Polyline({
+        clickable: true,
+        cursor: 'crosshair',
+        editable: true,
+        map: map,
+        path: path,
+        strokeColor: '#1844ab',
+        strokeDashStyle: 'dash',
+        strokeWeight: 3,
+        visible: true,
+        zIndex: 1000
+    });
+
+    let polygon = new qq.maps.Polygon({
+        clickable: true,
+        cursor: 'crosshair',
+        editable: true,
+        fillColor: new qq.maps.Color(24, 68, 171, 0.4),
+        map: map,
+        path: path,
+        strokeColor: '#1844ab',
+        strokeDashStyle: 'dash',
+        strokeWeight: 3,
+        visible: true,
+        zIndex: 1000
+    });
+
     $("#startDraw").bind("click", function () {
         listener = qq.maps.event.addListener(map, 'dblclick', function (event) {
             if (startPoint == null) {
@@ -71,7 +71,9 @@ function selectArea() {
     });
 
     $("#delDraw").bind("click", function () {
-        location.reload();
+        polyline.setPath([]);
+        polygon.setPath([]);
+        startPoint = midPoint = null;
     });
 
     $("#resetDraw").bind("click", function () {
@@ -116,5 +118,6 @@ function selectArea() {
             polyline.setPath(path);
         }
     });
+    showProvince();
 }
 

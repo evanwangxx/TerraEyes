@@ -201,19 +201,19 @@ function showCountry(object) {
     CURRENT_PCC.city = value;
 
     if (value != null) {
-        COUN_DROPDOWN.length = 1; // leave 1 item - default selection
+        // COUN_DROPDOWN.length = 1; // leave 1 item - default selection
         let length = PROVINCE_CITY_COUNTRY[CURRENT_PCC.prov]["city"][value].districtAndCounty.length;
 
         if (length === 0) {
             ADDRESS_PROV_CITY_COUN.value = PROVINCE_CITY_COUNTRY[CURRENT_PCC.prov].name +
-                PROVINCE_CITY_COUNTRY[CURRENT_PCC.prov]["city"][CURRENT_PCC.city].name
+                PROVINCE_CITY_COUNTRY[CURRENT_PCC.prov]["city"][CURRENT_PCC.city].name;
             return;
         }
         for (let i = 0; i < length; i++) {
             let country_option = document.createElement("option");
             country_option.innerText = PROVINCE_CITY_COUNTRY[CURRENT_PCC.prov]["city"][value].districtAndCounty[i];
             country_option.value = i;
-            COUN_DROPDOWN.appendChild(country_option);
+            // COUN_DROPDOWN.appendChild(country_option);
         }
     }
 }

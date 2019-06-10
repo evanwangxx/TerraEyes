@@ -121,7 +121,7 @@
                         <option>=请选择省份=</option>
                     </select>
                     <select id="city_dropdown" onchange="showCountry(this)">
-                        <option>=请选择省份=</option>
+                        <option>=请选择城市=</option>
                     </select>
                     <button type="button" class="btn btn-default btn-sm" onClick="reNewMap()">确定</button>
                     <br>
@@ -140,9 +140,9 @@
                 <div class="col-sm-12" style="margin:10px;">
                     <div class="col-sm-6"></div>
                     <div class="col-sm-6">
-                        <button id="startDraw" type="button" class="btn btn-info btn-sm">开始</button>
-                        <button id="delDraw" type="button" class="btn btn-warning btn-sm">重置</button>
-                        <button id="stopDraw" type="button" class="btn btn-primary btn-sm">生成</button>
+                        <button id="startDraw" type="button" class="btn btn-info btn-sm">绘制多边形</button>
+                        <button id="stopDraw" type="button" class="btn btn-primary btn-sm">生成多边形</button>
+                        <button id="delDraw" type="button" class="btn btn-warning btn-sm">重置多边形</button>
                     </div>
                 </div>
                 <div class="heatmap" id="map-canvas"></div>
