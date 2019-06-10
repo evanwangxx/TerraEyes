@@ -150,6 +150,9 @@ function addGeohash(map, polygonArray, fillColor, score, listenerScore, rawScore
 
             qq.maps.event.addDomListener(polygon, 'mouseover', function (event) {
                 label.setVisible(true);
+                qq.maps.event.addDomListener(label, "click", function(event) {
+                    label.setVisible(false)
+                });
                 qq.maps.event.addDomListener(polygon, 'mouseout', function (event) {
                     label.setVisible(false);
                 });
@@ -170,9 +173,6 @@ function addGeohash(map, polygonArray, fillColor, score, listenerScore, rawScore
             }
         });
     }
-
-
-
 }
 
 function addPolygon(map, polygonArray, fillColor, alpha) {
@@ -225,26 +225,26 @@ function addText(map, text, center) {
         backgroundColor: null
     };
 
-    let label = new qq.maps.Label({
+    let textBlock = new qq.maps.Label({
         position: center,
         map: map,
         content: text,
         zIndex: bottHeight
     });
 
-    label.setStyle(cssP);
+    textBlock.setStyle(cssP);
 
     let visibleF = document.getElementById("visible-text");
     qq.maps.event.addDomListener(visibleF, "click", function() {
-        // label.setMap(map);
-        if (label.getVisible()) {
-            label.setVisible(false);
+        // textBlock.setMap(map);
+        if (textBlock.getVisible()) {
+            textBlock.setVisible(false);
         } else {
-            label.setVisible(true);
+            textBlock.setVisible(true);
         }
     });
 
-    return label;
+    return textBlock;
 }
 
 function loadMap(point, zoom = 3, mapTypeId = qq.maps.MapTypeId.ROADMAP) {
@@ -258,7 +258,8 @@ function loadMap(point, zoom = 3, mapTypeId = qq.maps.MapTypeId.ROADMAP) {
         zoomControl: true,
         zoomControlOptions: {position: qq.maps.ControlPosition.TOP_LEFT},
         scaleControl: true,
-        scaleControlOptions: {position: qq.maps.ControlPosition.BOTTOM_RIGHT}
+        scaleControlOptions: {position: qq.maps.ControlPosition.BOTTOM_RIGHT},
+        disableDoubleClickZoom: true
     };
     MAP = new qq.maps.Map(mapContainer, options);
 }
