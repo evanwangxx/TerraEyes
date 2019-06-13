@@ -67,6 +67,7 @@ function getPasteText(table_id = "#trans_data") {
                     let latLng = convertGcj02Bd09(json[i].lat, json[i].lng);
                     json[i].lat = latLng[0];
                     json[i].lng = latLng[1];
+                    // json[i].transfer_paste = latLng[0] + "," + latLng[1];
                 }
                 console.log("INFO: To Baidu Map");
             } else if (myselect === 1) {
@@ -74,12 +75,13 @@ function getPasteText(table_id = "#trans_data") {
                     let latLng = convertBd09Gcj02(json[i].lat, json[i].lng);
                     json[i].lat = latLng[0];
                     json[i].lng = latLng[1];
+                    // json[i].transfer_paste = latLng[0] + "," + latLng[1];
                 }
                 console.log("INFO: To Tencent/Gaode Map");
             } else {
                 console.log("INFO: Stay");
             }
-            jsonToTable(json, table_id, 10);
+            jsonToTable(json, table_id, json.length);
             TEXT_DATA = json;
         } else {
             alert("输入的字符是空的~~")
