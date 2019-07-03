@@ -11,7 +11,7 @@
 
 #### Link:  https://evanwangxx.github.io/TerraEyes/
 
-#### Version: 2.2.0s
+#### Version: 2.3.3s
 
 #####map
 
@@ -20,6 +20,7 @@
 * bubble-map
 * geohash-map
 * polygon-map
+* areaselct-map
 
 #####graph
 
@@ -41,6 +42,14 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 
 ### History
+
+2.3.3s  | segmentation_analysis: + text info & dynamic info
+
+2.3.2s  | segmentation_analysis: + area select and area summary
+
+2.3.1s  | segmentation_analysis: + marker selection, custom scale, marker name
+
+2.3.0s  | add areaselect
 
 2.2.0s  | change structure, add several functions for segmentation/polygon/geohash
 

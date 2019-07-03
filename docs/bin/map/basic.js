@@ -95,7 +95,7 @@ function addMarker(map, center, text, markerImage = "http://webapi.amap.com/them
     });
 }
 
-function addGeohash(map, polygonArray, fillColor, score, rawScore = null, centerOfPoly = null) {
+function addGeohash(map, polygonArray, fillColor, score, listenerScore, rawScore = null, centerOfPoly = null, text = null) {
     let polygon = new qq.maps.Polygon({
         map: map,
         path: polygonArray,
@@ -107,15 +107,70 @@ function addGeohash(map, polygonArray, fillColor, score, rawScore = null, center
 
     // TODO: check sugar
     if (rawScore != null && centerOfPoly != null) {
-        qq.maps.event.addListener(polygon, 'click', function () {
-            let info = new qq.maps.InfoWindow({map: map});
-            info.open();
-            info.setContent('<div style="text-align:center;white-space:nowrap;' + 'margin:10px;">' + '量级：' + rawScore + '<br>浓度：' + score.toFixed(2) + '</div>');
-            info.setPosition(centerOfPoly);
+        // qq.maps.event.addListener(polygon, 'click', function () {
+        //     let info = new qq.maps.InfoWindow({map: map});
+        //     info.open();
+        //     info.setContent('<div style="text-align:center;white-space:nowrap;' + 'margin:10px;">' + '量级：' + rawScore + '<br>浓度：' + listenerScore.toFixed(2) + '</div>');
+        //     info.setPosition(centerOfPoly);
+        // });
+
+        var textShow = "量级：" + rawScore + "<br>浓度：" + listenerScore.toFixed(2);
+        var textWithinGeohash;
+        if (text) {
+            textWithinGeohash = text.replace(" ", "<br>");
+
+            var label = addText(map, textWithinGeohash, polygonArray[0]);
+            var labelInfo = addText(map, textWithinGeohash, polygonArray[0]);
+
+            qq.maps.event.addDomListener(polygon, 'click', function (event) {
+                if (labelInfo.getVisible()) {
+                    labelInfo.setVisible(false);
+                } else {
+                    labelInfo.setVisible(true);
+                }
+            });
+
+            qq.maps.event.addDomListener(label, "click", function(event) {
+                // label.setMap(map);
+                if (labelInfo.getVisible()) {
+                    labelInfo.setVisible(false);
+                } else {
+                    labelInfo.setVisible(true);
+                }
+            });
+
+            qq.maps.event.addDomListener(labelInfo, "click", function(event) {
+                // label.setMap(map);
+                if (labelInfo.getVisible()) {
+                    labelInfo.setVisible(false);
+                } else {
+                    labelInfo.setVisible(true);
+                }
+            });
+
+            qq.maps.event.addDomListener(polygon, 'mouseover', function (event) {
+                label.setVisible(true);
+                qq.maps.event.addDomListener(label, "click", function(event) {
+                    label.setVisible(false)
+                });
+                qq.maps.event.addDomListener(polygon, 'mouseout', function (event) {
+                    label.setVisible(false);
+                });
+            });
+        }
+
+        qq.maps.event.addListener(polygon, 'mouseover', function (event) {
+            document.getElementById("polyinfo").innerHTML = textShow;
         });
 
-        qq.maps.event.addListener(polygon, 'mousemove', function (event) {
-            document.getElementById("polyinfo").innerHTML = "量级：" + rawScore + "<br>浓度：" + score.toFixed(2);
+        let visible = document.getElementById("visible-geohash");
+        qq.maps.event.addDomListener(visible, "click", function () {
+            polygon.setMap(map);
+            if (polygon.getVisible()) {
+                polygon.setVisible(false)
+            } else {
+                polygon.setVisible(true)
+            }
         });
     }
 }
@@ -131,7 +186,6 @@ function addPolygon(map, polygonArray, fillColor, alpha) {
     });
 
     let visible = document.getElementById("visible-polygon");
-    console.log(visible);
     qq.maps.event.addDomListener(visible, "click", function () {
         polygon.setMap(map);
         if (polygon.getVisible()) {
@@ -142,9 +196,8 @@ function addPolygon(map, polygonArray, fillColor, alpha) {
     });
 }
 
-
 function addPolyline(map, path, strokeColor = '#610B21', strokeWeight = 3) {
-    new qq.maps.Polyline({
+    let polyline = new qq.maps.Polyline({
         map: map,
         path: path,
         strokeColor: strokeColor,
@@ -152,6 +205,46 @@ function addPolyline(map, path, strokeColor = '#610B21', strokeWeight = 3) {
         editable: false,
         zIndex: topHeight
     });
+
+    let visible = document.getElementById("visible-polyline");
+    qq.maps.event.addDomListener(visible, "click", function () {
+        polyline.setMap(map);
+        if (polyline.getVisible()) {
+            polyline.setVisible(false)
+        } else {
+            polyline.setVisible(true)
+        }
+    });
+}
+
+function addText(map, text, center) {
+    let cssP = {
+        color: "#000",
+        fontSize: document.getElementById("text-size").value + "px",
+        fontWeight: "dash",
+        backgroundColor: null
+    };
+
+    let textBlock = new qq.maps.Label({
+        position: center,
+        map: map,
+        content: text,
+        zIndex: bottHeight
+    });
+
+    textBlock.setStyle(cssP);
+
+    let visibleF = document.getElementById("visible-text");
+    qq.maps.event.addDomListener(visibleF, "click", function() {
+        // textBlock.setMap(map);
+        if (textBlock.getVisible()) {
+            textBlock.setVisible(false);
+        } else {
+            textBlock.setVisible(true);
+        }
+    });
+
+    return textBlock;
 }
 
 function loadMap(point, zoom = 3, mapTypeId = qq.maps.MapTypeId.ROADMAP) {
@@ -165,7 +258,8 @@ function loadMap(point, zoom = 3, mapTypeId = qq.maps.MapTypeId.ROADMAP) {
         zoomControl: true,
         zoomControlOptions: {position: qq.maps.ControlPosition.TOP_LEFT},
         scaleControl: true,
-        scaleControlOptions: {position: qq.maps.ControlPosition.BOTTOM_RIGHT}
+        scaleControlOptions: {position: qq.maps.ControlPosition.BOTTOM_RIGHT},
+        disableDoubleClickZoom: true
     };
     MAP = new qq.maps.Map(mapContainer, options);
 }

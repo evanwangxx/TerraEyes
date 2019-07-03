@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>画多边形</title>
+    <title>取多边形</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
     <meta name="application-name" content="Terra_Eyes v1.1.0">
@@ -74,8 +74,8 @@
                     <ul class="dropdown-menu">
                         <li><a href="map_pointer.html">地图打点</a></li>
                         <li><a href="map_bubble.html">泡泡图</a></li>
-                        <li class="active"><a href="map_polygon.html">画多边形</a></li>
-                        <li><a href="map_areaselect.html">取多边形</a></li>
+                        <li><a href="map_polygon.html">画多边形</a></li>
+                        <li class="active"><a href="map_areaselect.html">取多边形</a></li>
                         <li><a href="map_heat.html">ArcGIS 热力图</a></li>
                         <li><a href="map_geohash.html">GeoHash 热力图</a></li>
                     </ul>
@@ -114,47 +114,37 @@
     <div class="row content">
         <div class="col-sm-1 sidenav"></div>
 
-        <div class="col-sm-10" style="margin-bottom: 30px;">
-            <div class="col-sm-12" style="background: #F2F2F2; margin-top: 20px;">
-                <h4 style="text-align: left;">数据导入</h4>
-                <div class="col-sm-6" style="text-align: left;">
-                    <h4 style="text-align: left;">
-                        <small>（必选）多边形数据格式： polygon(纬度;经度|纬度;经度...), score</small>
-                    </h4>
-                    <input type="file" id="polygon_data" style="display:inline-block;" onclick="csvPolygon()">
-                    <button type="button" class="btn btn-default btn-sm" style="display:inline-block;"
-                            onclick="jsonToTable(POLYGON_JSON, id='#table1', num=10, sub=true)">显示
-                    </button>
+        <div class="col-sm-10" style="margin-bottom:30px;">
+            <div class="col-sm-12" style="margin-top:30px;background: #F2F2F2;">
+                <div class="col-sm-6" style="margin-top: 30px;">
+                    <select id="province_dropdown" onchange="showCity(this)">
+                        <option>=请选择省份=</option>
+                    </select>
+                    <select id="city_dropdown" onchange="showCountry(this)">
+                        <option>=请选择城市=</option>
+                    </select>
+                    <button type="button" class="btn btn-default btn-sm" onClick="reNewMap()">确定</button>
+                    <br>
+
+                    <label for="pcc_show">您选择的是：
+                        <input type="text" value="" id="pcc_show">
+                    </label>
                 </div>
 
-                <div class="col-sm-6" style="text-align: left;">
-                    <h4 style="text-align: left;">
-                        <small>（可选）门店数据格式： 店名,纬度,经度</small>
-                    </h4>
-                    <input type="file" id="store_data" style="display:inline-block;" onclick="csvStoreLoader()">
-                    <button type="button" class="btn btn-default btn-sm" style="display:inline-block;"
-                            onclick="jsonToTable(STORE_JSON, id='#table1')">显示
-                    </button>
-                </div>
-                <table class="table table-striped" id="table1"></table>
-                <br>
-            </div>
-
-            <div class="col-sm-12" style="margin-top: 30px;">
-                <div class="col-sm-6">
-                    <label>透明度：<input type="text" id="polygon-alpha" value="0.5"></label><br>
-                    <label for="inputlg">多边形颜色 ： </label>
-                    <select id="color-dd"></select>
-                    <button id="visible-polygon" class="btn btn-default btn-sm">显示多边形</button>
-                </div>
-                <div class="col-sm-6">
-                    <button type="button" class="btn btn-primary btn-lg" onclick="runPolygon(false)">生成地图</button>
-                    <button type="button" class="btn btn-info btn-lg" onclick="runPolygon(true)">输入经纬度</button>
+                <div class="col-sm-6" style="margin-top: 30px;">
+                    <pre id="out_pre"></pre>
                 </div>
             </div>
 
-            <div class="col-sm-12">
-                <div id="polyinfo"></div>
+            <div class="col-sm-12" style="margin-top:30px;">
+                <div class="col-sm-12" style="margin:10px;">
+                    <div class="col-sm-6"></div>
+                    <div class="col-sm-6">
+                        <button id="startDraw" type="button" class="btn btn-info btn-sm">绘制多边形</button>
+                        <button id="stopDraw" type="button" class="btn btn-primary btn-sm">生成多边形</button>
+                        <button id="delDraw" type="button" class="btn btn-warning btn-sm">重置多边形</button>
+                    </div>
+                </div>
                 <div class="heatmap" id="map-canvas"></div>
             </div>
         </div>
@@ -176,5 +166,5 @@
 <script src="../bin/dropdown.js"></script>
 <script src="../bin/map/basic.js"></script>
 <script src="../bin/map/layer.js"></script>
-<script src="../bin/map/func/polygon.js"></script>
+<script src="../bin/map/func/areaselect.js"></script>
 </html>

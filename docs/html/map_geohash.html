@@ -75,7 +75,7 @@
                         <li><a href="map_pointer.html">地图打点</a></li>
                         <li><a href="map_bubble.html">泡泡图</a></li>
                         <li><a href="map_polygon.html">画多边形</a></li>
-                        <li class="disabled"><a href=>取多边形</a></li>
+                        <li><a href="map_areaselect.html">取多边形</a></li>
                         <li><a href="map_heat.html">ArcGIS 热力图</a></li>
                         <li class="active"><a href="map_geohash.html">GeoHash 热力图</a></li>
                     </ul>
@@ -158,7 +158,10 @@
             </div>
 
             <div class="col-sm-12" style="margin-top: 30px;">
-                <div class="col-sm-6"></div>
+                <div class="col-sm-6">
+                    <button id="visible-geohash" type="button" class="btn btn-default btn-sm">显示 Geohash</button>
+                    <button id="visible-polyline" type="button" class="btn btn-default btn-sm">显示多边形</button>
+                </div>
                 <div class="col-sm-6">
                     <button type="button" class="btn btn-primary btn-lg" onclick="runGeohash()">生成地图</button>
                     <button type="button" class="btn btn-info btn-lg" onclick="runGeohash(true)">输入经纬度</button>

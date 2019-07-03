@@ -67,6 +67,7 @@ function getPasteText(table_id = "#trans_data") {
                     let latLng = convertGcj02Bd09(json[i].lat, json[i].lng);
                     json[i].lat = latLng[0];
                     json[i].lng = latLng[1];
+                    // json[i].transfer_paste = latLng[0] + "," + latLng[1];
                 }
                 console.log("INFO: To Baidu Map");
             } else if (myselect === 1) {
@@ -74,12 +75,13 @@ function getPasteText(table_id = "#trans_data") {
                     let latLng = convertBd09Gcj02(json[i].lat, json[i].lng);
                     json[i].lat = latLng[0];
                     json[i].lng = latLng[1];
+                    // json[i].transfer_paste = latLng[0] + "," + latLng[1];
                 }
                 console.log("INFO: To Tencent/Gaode Map");
             } else {
                 console.log("INFO: Stay");
             }
-            jsonToTable(json, table_id, 10);
+            jsonToTable(json, table_id, json.length);
             TEXT_DATA = json;
         } else {
             alert("输入的字符是空的~~")
@@ -154,16 +156,6 @@ function userInputLatLng() {
     return [Number(lat), Number(lng)];
 }
 
-let ADDRESS_POINT;
-
-function addressToLatLng(address) {
-    let geocoder = new qq.maps.Geocoder();
-    geocoder.getLocation(address);
-    geocoder.setComplete(function (result) {
-        ADDRESS_POINT = result.detail.location;
-    });
-}
-
 function $$(str) {
     return document.getElementById(str);
 }
@@ -211,19 +203,19 @@ function showCountry(object) {
     CURRENT_PCC.city = value;
 
     if (value != null) {
-        COUN_DROPDOWN.length = 1; // leave 1 item - default selection
+        // COUN_DROPDOWN.length = 1; // leave 1 item - default selection
         let length = PROVINCE_CITY_COUNTRY[CURRENT_PCC.prov]["city"][value].districtAndCounty.length;
 
         if (length === 0) {
             ADDRESS_PROV_CITY_COUN.value = PROVINCE_CITY_COUNTRY[CURRENT_PCC.prov].name +
-                PROVINCE_CITY_COUNTRY[CURRENT_PCC.prov]["city"][CURRENT_PCC.city].name
+                PROVINCE_CITY_COUNTRY[CURRENT_PCC.prov]["city"][CURRENT_PCC.city].name;
             return;
         }
         for (let i = 0; i < length; i++) {
             let country_option = document.createElement("option");
             country_option.innerText = PROVINCE_CITY_COUNTRY[CURRENT_PCC.prov]["city"][value].districtAndCounty[i];
             country_option.value = i;
-            COUN_DROPDOWN.appendChild(country_option);
+            // COUN_DROPDOWN.appendChild(country_option);
         }
     }
 }
@@ -261,3 +253,9 @@ function clickCircleList(id) {
     return Number(distance);
 }
 
+function clickMarkerList(id) {
+    const myselect = document.getElementById(id);
+    let index = myselect.selectedIndex;
+    let marker = myselect.options[index].value;
+    return Number(marker);
+}

@@ -3,7 +3,7 @@
 // (c) 2019 Hongbo Wang
 // Copyright © 1998 - 2019 Tencent. All Rights Reserved.
 
-
+let ADDRESS_POINT;
 function addressToLatLng(address) {
     geocoder = new qq.maps.Geocoder();
     geocoder.getLocation(address);
@@ -31,8 +31,8 @@ function convertBd09Gcj02(lat, lng) {
     var y = parseFloat(lat) - 0.006;
     var z = Math.sqrt(x * x + y * y) + 0.00002 * Math.sin(y * x_pi);
     var theta = Math.atan2(y, x) + 0.000003 * Math.cos(x * x_pi);
-    lat = z * Math.sin(theta)
-    lng = z * Math.cos(theta)
+    lat = z * Math.sin(theta);
+    lng = z * Math.cos(theta);
     return [lat, lng];
 }
 

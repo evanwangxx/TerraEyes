@@ -75,7 +75,7 @@
                         <li><a href="map_pointer.html">地图打点</a></li>
                         <li><a href="map_bubble.html">泡泡图</a></li>
                         <li><a href="map_polygon.html">画多边形</a></li>
-                        <li class="disabled"><a href=>取多边形</a></li>
+                        <li><a href="map_areaselect.html">取多边形</a></li>
                         <li><a href="map_heat.html">ArcGIS 热力图</a></li>
                         <li><a href="map_geohash.html">GeoHash 热力图</a></li>
                     </ul>
@@ -151,22 +151,70 @@
             </div>
 
             <div class="col-sm-12" style="margin-top: 30px;">
-                <div class="col-sm-6">
-                    <label>透明度：<input type="text" id="polygon-alpha" value="0.5"></label><br>
+                <div class="col-sm-3" style="text-align: left;">
+                    <h4 style="text-align: left;">
+                        <small>个性化设置</small>
+                    </h4>
+                    <label>地图缩放：<input type="text" id="map-zoom-level" value="13"></label><br>
+                    <label>透明度：<input type="text" id="polygon-alpha" value="0.1"></label><br>
+                    <label>浓度最大值：<input type="text" id="concentration" value="1.0"></label><br>
+                    <label>字体大小：<input type="text" id="text-size" value="4"></label><br>
                     <label for="inputlg">多边形颜色 ： </label>
-                    <select id="color-dd"></select>
-                    <button id="visible-polygon" class="btn btn-default btn-sm">显示多边形</button>
+                    <select id="color-dd"></select><br>
+                    <label for="inputlg">图标类型 ： </label>
+                    <select id="marker-dd"></select>
                 </div>
                 <div class="col-sm-6">
-                    <button type="button" class="btn btn-primary btn-lg" onclick="runSegmentation(false)">生成地图
+                    <div class="col-sm-12">
+                        <div class="col-sm-6">
+                            <h4 style="text-align: left;">
+                                <small>圈选多边形路径</small>
+                            </h4>
+                            <pre id="out_pre"></pre>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <h4 style="text-align: left;">
+                                <small>圈选多边形范围内指标</small>
+                            </h4>
+                            <pre id="out_sumOfGeohashInBound"></pre>
+                            <br>
+                            <button id="startDraw" type="button" class="btn btn-default btn-sm">绘制多边形</button>
+                            <button id="stopDraw" type="button" class="btn btn-default btn-sm">生成多边形</button>
+                            <button id="delDraw" type="button" class="btn btn-default btn-sm">重置多边形</button>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <h4 style="text-align: left;">
+                        <small>Geohash 指标</small>
+                    </h4>
+                    <pre id="polyinfo"></pre>
+                    <h4 style="text-align: left;">
+                        <small>图层显示设置</small>
+                    </h4>
+                    <button id="visible-geohash" type="button" class="btn btn-default btn-sm">显示 Geohash
                     </button>
-                    <button type="button" class="btn btn-info btn-lg" onclick="runSegmentation(true)">输入经纬度
-                    </button>
+                    <button id="visible-polygon" type="button" class="btn btn-default btn-sm">显示多边形</button>
+                    <button id="visible-text" type="button" class="btn btn-default btn-sm">显示全量文本信息</button>
+                    <br><br>
+
                 </div>
             </div>
 
             <div class="col-sm-12">
-                <div id="polyinfo"></div>
+                <div class="col-sm-9"></div>
+                <div class="col-sm-3">
+                    <button type="button" class="btn btn-primary btn-md" onclick="runSegmentation(false)">生成地图
+                    </button>
+                    <button type="button" class="btn btn-info btn-md" onclick="runSegmentation(true)">输入经纬度
+                    </button>
+                    <button id="resetDraw" type="button" class="btn btn-danger btn-md">重置地图</button>
+                </div>
+            </div>
+
+            <div class="col-sm-12">
                 <div class="heatmap" id="map-canvas"></div>
             </div>
         </div>
@@ -187,5 +235,6 @@
 <script src="../bin/utilcommon.js"></script>
 <script src="../bin/map/basic.js"></script>
 <script src="../bin/map/layer.js"></script>
+<!--<script src="../bin/map/func/areaselect.js"></script>-->
 <script src="../bin/strategy/segmentation.js"></script>
 </html>
