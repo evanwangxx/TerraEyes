@@ -54,9 +54,9 @@ function csvBubbleLoader() {
 }
 
 function runBubble(pointer, data = BUBBLE_JSON, store = TEXT_DATA) {
-    const path = getIconPath();
-    const maxBubbleNumber = parseInt(document.getElementById("max-bubble").value);
-    const markerName = document.getElementById("marker-name").value;
+    let iconPath = getIconPath();
+    let maxBubbleNumber = parseInt(document.getElementById("max-bubble").value);
+    let markerName = document.getElementById("marker-name").value;
     let radius = selectCircleRadius();
     let color = clickColorList("color-dd");
 
@@ -72,7 +72,7 @@ function runBubble(pointer, data = BUBBLE_JSON, store = TEXT_DATA) {
         let latlng = userInputLatLng();
         let point = new qq.maps.LatLng(latlng[0], latlng[1]);
         loadMap(point, 14);
-        addMarker(MAP, point, markerName, path + "pointer.png");
+        addMarker(MAP, point, markerName, iconPath + "pointer.png");
         for (let j = 0; j < radius.length; ++j) {
             addCircle(MAP, point, radius[j], fillWeight = 0.04, color = "#0040FF", option = "circle");
         }
