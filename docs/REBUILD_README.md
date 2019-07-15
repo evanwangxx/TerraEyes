@@ -3,12 +3,14 @@ time：2019/07/15
 
 ####基本规则:
 ##### code-style： google style
+
     class： Marker
     function： setMarker
     variable： storeInShenzhen
     global-variable： SHENZHEN_MAP
 
 ##### 基本流程：使用 test-environment
+
      1. fork 本项目至本人项目 P
      2. 使用 git/ Github-Desktop，将 项目P pull 至本地 （每次修改前都需要 pull）
      3. 本地修改，本地测试通过
@@ -19,6 +21,7 @@ time：2019/07/15
 
 ####时间规划:
 #####p0: 07/15 - 07/28： 完成所有基础 object 类的开发，并提供相应的测试代码
+
     * map
         bubble： lynx
         circle： lynx
@@ -37,6 +40,7 @@ time：2019/07/15
         converter: xipeng + neptune
     
 #####p1: 07/29 - 08/11： 进行所有功能的融合，完成初步功能使用
+
     * map
         气泡图
         多边形
@@ -51,4 +55,5 @@ time：2019/07/15
         圈层分析
 
 #####p2：08/11 - 08/26： 修改 UI，完成相应使用文档
+
     * TBD
