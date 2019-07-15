@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>设置marker属性</title>
+    <script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp&key=DDNBZ-VUNKF-VVJJA-NSN2B-66R5H-VFF23"></script>
+
+</head>
+
+<body onLoad="init()">
+<script>
+    function init() {
+        const Marker = class {
+            constructor(map, iconImage = "http://webapi.amap.com/theme/v1.3/markers/n/mark_b.png") {
+                this.map = map;
+                this.icon = new qq.maps.MarkerImage(iconImage);
+                this.height = 1000
+            }
+
+            setMarker(center, text) {
+                let marker = new qq.maps.Marker({
+                    map: this.map,
+                    position: center,
+                    animation: qq.maps.MarkerAnimation.DROP,
+                    zIndex: this.height,
+                    icon: this.icon,
+                    // shadow: null
+                });
+
+                qq.maps.event.addListener(marker, 'click', function () {
+                    let info = new qq.maps.InfoWindow({map: map});
+                    info.open();
+                    info.setContent('<div style="text-align:center;white-space:nowrap;' + 'margin:10px;">' + text + '</div>');
+                    info.setPosition(marker.getPosition());
+                });
+            }
+
+            setMarkerLayer(data) {
+                for (var i = 0; i < data.length; i++) {
+                    let row = data[i];
+                    let center = new qq.maps.LatLng(row.lat, row.lng);
+                    let text = row.text;
+                    this.setMarker(center, text);
+                }
+
+                // $('#isCircleChecked').click(function () {
+                //     let radius = [3000];
+                //     for (let j = 0; j < radius.length; j++) {
+                //         // TODO: addCircle(****);
+                //     }
+                // });
+                //
+                // $('#isReachRadiusChecked').click(function () {
+                //     /* TODO
+                // let path1 = covertPointListToPath(markerData[i].path1);
+                // let path2 = covertPointListToPath(markerData[i].path2);
+                // let path3 = covertPointListToPath(markerData[i].path3);
+                // addPolyline(map, path1, strokeColor = '#610206', strokeWeight = 3);
+                // addPolyline(map, path2, strokeColor = '#611300', strokeWeight = 2);
+                // addPolyline(map, path3, strokeColor = '#8a2200', strokeWeight = 1);
+                //  */
+                // });
+            }
+        };
+
+        var center = new qq.maps.LatLng(39.982163, 116.306070);
+        var map = new qq.maps.Map(document.getElementById("container"), {
+            center: center,
+            zoom: 13
+        });
+
+        var data = [
+            {lat: 39.982163, lng: 116.306070, text: "center"},
+            {lat: 39.972152, lng: 116.306071, text: "a"},
+            {lat: 39.975141, lng: 116.306072, text: "b"},
+            {lat: 39.989130, lng: 116.306073, text: "c"},
+            {lat: 39.981119, lng: 116.306074, text: "d"}];
+        var marker = new Marker(map);
+        marker.setMarker(center, "test");
+        marker.setMarkerLayer(data)
+    }
+
+</script>
+<div style="width:603px;height:300px" id="container"></div>
+
+</body>
+</html>

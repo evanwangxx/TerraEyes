@@ -77,7 +77,7 @@ function jsonToTable(json, id, num = 10) {
 }
 
 function processDataToJSON(csv, header, split = ',') {
-    csv = csv.replace(/^\n+|\n+$/g,"")
+    csv = csv.replace(/^\n+|\n+$/g,"");
     var allTextLines = csv.split(/\r\n|\n/);
     var lines = [];
     for (var i = 0; i < allTextLines.length; i++) {

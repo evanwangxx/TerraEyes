@@ -117,6 +117,10 @@
         <div class="col-sm-1 sidenav"></div>
 
         <div class="col-sm-10 text-center">
+            <marquee behavior="scroll" direction="right">
+                通知：当前处于维护期间，会出现部分功能不稳定！
+            </marquee>
+
             <div class="col-sm-4 text-left">
                 <label>输入文本数据</label><span class="glyphicon glyphicon-info-sign" title="粘贴数据至输入框"></span>
                 <h5>
@@ -125,19 +129,19 @@
             </div>
             <div class="col-sm-8"></div>
 
-            <textarea class="form-control" rows="10" id="text-input"></textarea>
+            <textarea class="form-control" rows="10"></textarea>
 
             <table class="table table-striped" id="trans_data"></table>
             <div class="col-sm-3">
                 <label for="inputlg">半径</label>
-                <select id="circle_1"></select>
-                <select id="circle_2"></select>
-                <select id="circle_3"></select>
+                <select id="pointer-map-dropdown-circle-a"></select>
+                <select id="pointer-map-dropdown-circle-b"></select>
+                <select id="pointer-map-dropdown-circle-c"></select>
                 <span class="glyphicon glyphicon-info-sign" title="打点覆盖半径"></span>
             </div>
             <div class="col-sm-3">
                 <label for="inputlg">颜色</label>
-                <select id="color-dd"></select>
+                <select id="pointer-map-dropdown-color"></select>
             </div>
             <div class="col-sm-6">
                 <select id="lat-lng-convert">
@@ -146,11 +150,18 @@
                     <option>转化为百度系（BD09）</option>
                 </select>
 
-                <button type="button" class="btn btn-primary btn-sm" onclick="getPasteText()"><span
+                <!--                <button type="button" class="btn btn-primary btn-sm" onclick="getPasteText()"><span-->
+                <!--                        class="glyphicon glyphicon-share-alt"></span>转化数据-->
+                <!--                </button>-->
+
+                <!--                <button type="button" class="btn btn-primary btn-sm" onclick="runPoint()"><span-->
+                <!--                        class="glyphicon glyphicon-globe"></span>生成地图-->
+                <!--                </button>-->
+                <button id="pointer-map-parse-data" type="button" class="btn btn-primary btn-sm"><span
                         class="glyphicon glyphicon-share-alt"></span>转化数据
                 </button>
 
-                <button type="button" class="btn btn-primary btn-sm" onclick="runPoint()"><span
+                <button id="pointer-map-draw-map" type="button" class="btn btn-primary btn-sm"><span
                         class="glyphicon glyphicon-globe"></span>生成地图
                 </button>
             </div>

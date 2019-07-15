@@ -2,8 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2ce75f86-6e78-4352-a6a2-f81e92c92d9d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/docs/bin/map/object/bubble.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/bin/map/object/circle.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/bin/map/object/geohash.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/bin/map/object/label.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/bin/map/object/marker.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/bin/map/object/polygon.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/bin/map/object/text.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/test.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/bin/utilcommon.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/bin/utilcommon.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/bin/graphtool/wordcloud.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/bin/graphtool/wordcloud.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/bin/map/func/bubble.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/bin/map/func/bubble.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/bin/map/func/pointer.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/bin/map/func/pointer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/html/map_bubble.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/html/map_bubble.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/html/map_geohash.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/html/map_geohash.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/html/map_pointer.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/html/map_pointer.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -14,48 +27,75 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DockManager">
+    <window id="1">
+      <content type="file-editors">
+        <state>
+          <leaf>
+            <file pinned="false" current-in-tab="true">
+              <entry file="file://$PROJECT_DIR$/docs/bin/map/basic.js">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state relative-caret-position="764">
+                    <caret line="232" column="7" lean-forward="true" selection-start-line="232" selection-start-column="7" selection-end-line="232" selection-end-column="7" />
+                    <folding>
+                      <element signature="n#!!doc" expanded="true" />
+                      <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+                      <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+                    </folding>
+                  </state>
+                </provider>
+              </entry>
+            </file>
+            <file pinned="false" current-in-tab="false">
+              <entry file="file://$PROJECT_DIR$/docs/bin/map/layer.js">
+                <provider selected="true" editor-type-id="text-editor">
+                  <state relative-caret-position="836">
+                    <caret line="81" column="79" lean-forward="true" selection-start-line="76" selection-start-column="12" selection-end-line="81" selection-end-column="79" />
+                    <folding>
+                      <element signature="n#!!doc" expanded="true" />
+                    </folding>
+                  </state>
+                </provider>
+              </entry>
+            </file>
+          </leaf>
+        </state>
+      </content>
+    </window>
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/docs/bin/map/basic.js">
+        <entry file="file://$PROJECT_DIR$/docs/bin/map/object/marker.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="113" column="46" lean-forward="true" selection-start-line="113" selection-start-column="46" selection-end-line="113" selection-end-column="46" />
+            <state relative-caret-position="234">
+              <caret line="13" column="29" lean-forward="true" selection-start-line="13" selection-start-column="29" selection-end-line="13" selection-end-column="29" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/docs/bin/map/func/pointer.js">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/docs/test.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="702">
-              <caret line="39" column="17" selection-start-line="39" selection-start-column="4" selection-end-line="39" selection-end-column="17" />
+            <state relative-caret-position="1404">
+              <caret line="78" column="57" lean-forward="true" selection-start-line="78" selection-start-column="57" selection-end-line="78" selection-end-column="57" />
               <folding>
-                <element signature="n#!!doc" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/docs/html/map_pointer.html">
+        <entry file="file://$PROJECT_DIR$/docs/bin/dropdown.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1399">
-              <caret line="148" column="90" selection-start-line="148" selection-start-column="78" selection-end-line="148" selection-end-column="90" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/docs/bin/converter.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="20" column="49" selection-start-line="20" selection-start-column="49" selection-end-line="20" selection-end-column="49" />
+            <state relative-caret-position="1962">
+              <caret line="109" column="4" selection-start-line="109" selection-start-column="4" selection-end-line="109" selection-end-column="4" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -66,8 +106,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/docs/html/strategy_segmentation_analysis.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3276">
-              <caret line="182" column="48" selection-start-line="182" selection-start-column="40" selection-end-line="182" selection-end-column="48" />
+            <state relative-caret-position="288">
+              <caret line="16" column="71" selection-start-line="16" selection-start-column="71" selection-end-line="16" selection-end-column="106" />
               <folding>
                 <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -82,11 +122,29 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/docs/bin/utilcommon.js">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/docs/bin/map/object/bubble.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="70" column="17" lean-forward="true" selection-start-line="70" selection-start-column="17" selection-end-line="70" selection-end-column="17" />
+            <state relative-caret-position="18">
+              <caret line="1" column="7" selection-start-line="1" selection-start-column="7" selection-end-line="1" selection-end-column="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/docs/bin/map/object/circle.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="18">
+              <caret line="1" column="7" selection-start-line="1" selection-start-column="7" selection-end-line="1" selection-end-column="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/docs/bin/map/object/label.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="72">
+              <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -95,46 +153,28 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/docs/bin/map/func/geohash.js">
+        <entry file="file://$PROJECT_DIR$/docs/bin/map/object/geohash.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="612">
-              <caret line="37" column="10" selection-start-line="37" selection-start-column="10" selection-end-line="37" selection-end-column="10" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
+            <state relative-caret-position="18">
+              <caret line="1" column="14" selection-start-line="1" selection-start-column="14" selection-end-line="1" selection-end-column="14" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/docs/html/map_geohash.html">
+        <entry file="file://$PROJECT_DIR$/docs/bin/map/object/polygon.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1944">
-              <caret line="108" selection-start-line="108" selection-end-line="109" />
-              <folding>
-                <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
+            <state relative-caret-position="18">
+              <caret line="1" column="14" selection-start-line="1" selection-start-column="14" selection-end-line="1" selection-end-column="14" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/docs/bin/map/layer.js">
+        <entry file="file://$PROJECT_DIR$/docs/bin/map/object/text.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1062">
-              <caret line="62" column="78" lean-forward="true" selection-start-line="62" selection-start-column="78" selection-end-line="62" selection-end-column="78" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/docs/bin/map/func/bubble.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="792">
-              <caret line="47" column="38" lean-forward="true" selection-start-line="47" selection-start-column="38" selection-end-line="47" selection-end-column="38" />
+            <state relative-caret-position="72">
+              <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -147,8 +187,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="JavaScript File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -204,18 +244,14 @@
         <option value="$PROJECT_DIR$/docs/css/wordcloud/echarts-wordcloud.min.js" />
         <option value="$PROJECT_DIR$/docs/bin/map/func/polygon.js" />
         <option value="$PROJECT_DIR$/docs/bin/interaction.js" />
-        <option value="$PROJECT_DIR$/docs/bin/map/func/bubble.js" />
         <option value="$PROJECT_DIR$/docs/bin/map/func/geohash.js" />
-        <option value="$PROJECT_DIR$/docs/bin/map/func/pointer.js" />
         <option value="$PROJECT_DIR$/docs/bin/map/func/arcgis.js" />
         <option value="$PROJECT_DIR$/docs/bin/heatmap.js" />
         <option value="$PROJECT_DIR$/docs/bin/jquery.min.js" />
         <option value="$PROJECT_DIR$/docs/bin/jquery-1.10.2.js" />
         <option value="$PROJECT_DIR$/docs/bin/papaparse.min.js" />
         <option value="$PROJECT_DIR$/docs/bin/converter.js" />
-        <option value="$PROJECT_DIR$/docs/html/map_bubble.html" />
         <option value="$PROJECT_DIR$/docs/html/map_heat.html" />
-        <option value="$PROJECT_DIR$/docs/html/map_pointer.html" />
         <option value="$PROJECT_DIR$/docs/html/map_polygon.html" />
         <option value="$PROJECT_DIR$/docs/html/strategy_locationDecision.html" />
         <option value="$PROJECT_DIR$/docs/html/home.html" />
@@ -223,7 +259,6 @@
         <option value="$PROJECT_DIR$/docs/html/graph_wordcloud.html" />
         <option value="$PROJECT_DIR$/docs/bin/dropdown.js" />
         <option value="$PROJECT_DIR$/docs/bin/map/layer.js" />
-        <option value="$PROJECT_DIR$/docs/html/map_geohash.html" />
         <option value="$PROJECT_DIR$/docs/README.md" />
         <option value="$PROJECT_DIR$/docs/html/strategy_segmentation_analysis.html" />
         <option value="$PROJECT_DIR$/docs/index.html" />
@@ -232,6 +267,20 @@
         <option value="$PROJECT_DIR$/docs/bin/strategy/segmentation.js" />
         <option value="$PROJECT_DIR$/docs/bin/map/basic.js" />
         <option value="$PROJECT_DIR$/docs/bin/utilcommon.js" />
+        <option value="$PROJECT_DIR$/docs/html/map_pointer.html" />
+        <option value="$PROJECT_DIR$/docs/bin/map/func/pointer.js" />
+        <option value="$PROJECT_DIR$/docs/html/map_geohash.html" />
+        <option value="$PROJECT_DIR$/docs/html/map_bubble.html" />
+        <option value="$PROJECT_DIR$/docs/bin/map/func/bubble.js" />
+        <option value="$PROJECT_DIR$/docs/bin/graphtool/wordcloud.js" />
+        <option value="$PROJECT_DIR$/docs/bin/map/object/geohash.js" />
+        <option value="$PROJECT_DIR$/docs/bin/map/object/label.js" />
+        <option value="$PROJECT_DIR$/docs/bin/map/object/polygon.js" />
+        <option value="$PROJECT_DIR$/docs/bin/map/object/text.js" />
+        <option value="$PROJECT_DIR$/docs/bin/map/object/bubble.js" />
+        <option value="$PROJECT_DIR$/docs/bin/map/object/circle.js" />
+        <option value="$PROJECT_DIR$/docs/bin/map/object/marker.js" />
+        <option value="$PROJECT_DIR$/docs/test.html" />
       </list>
     </option>
   </component>
@@ -240,6 +289,9 @@
     <option name="y" value="110" />
     <option name="width" value="1874" />
     <option name="height" value="1096" />
+  </component>
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -269,13 +321,6 @@
               <item name="Terra-Eyes" type="462c0819:PsiDirectoryNode" />
               <item name="docs" type="462c0819:PsiDirectoryNode" />
               <item name="bin" type="462c0819:PsiDirectoryNode" />
-              <item name="graphtool" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Terra-Eyes" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Terra-Eyes" type="462c0819:PsiDirectoryNode" />
-              <item name="docs" type="462c0819:PsiDirectoryNode" />
-              <item name="bin" type="462c0819:PsiDirectoryNode" />
               <item name="map" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -284,14 +329,7 @@
               <item name="docs" type="462c0819:PsiDirectoryNode" />
               <item name="bin" type="462c0819:PsiDirectoryNode" />
               <item name="map" type="462c0819:PsiDirectoryNode" />
-              <item name="func" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Terra-Eyes" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Terra-Eyes" type="462c0819:PsiDirectoryNode" />
-              <item name="docs" type="462c0819:PsiDirectoryNode" />
-              <item name="bin" type="462c0819:PsiDirectoryNode" />
-              <item name="strategy" type="462c0819:PsiDirectoryNode" />
+              <item name="object" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Terra-Eyes" type="b2602c69:ProjectViewProjectNode" />
@@ -357,18 +395,21 @@
       <workItem from="1559815679160" duration="386000" />
       <workItem from="1560151545276" duration="1876000" />
       <workItem from="1560156033606" duration="2419000" />
-      <workItem from="1560393791213" duration="854000" />
+      <workItem from="1560393791213" duration="1495000" />
+      <workItem from="1560491601081" duration="5009000" />
+      <workItem from="1561019550487" duration="398000" />
+      <workItem from="1563173012354" duration="3848000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="65836000" />
+    <option name="totallyTimeSpent" value="75732000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1096" height="1936" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12570888" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16824196" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -410,11 +451,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/html/heatmap.html" />
-    <entry file="file://$PROJECT_DIR$/bin/map_loader.js" />
-    <entry file="file://$PROJECT_DIR$/bin/jquery.min.js" />
-    <entry file="file://$PROJECT_DIR$/bin/jquery-1.10.2.js" />
-    <entry file="file://$PROJECT_DIR$/bin/interaction.js" />
     <entry file="file://$PROJECT_DIR$/docs/login.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="522">
@@ -422,13 +458,6 @@
           <folding>
             <element signature="n#style#0;n#input#0;n#td#0;n#tr#3;n#table#0;n#div#0;n#form#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.dom.d.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="479">
-          <caret line="9860" column="10" selection-start-line="9860" selection-start-column="10" selection-end-line="9860" selection-end-column="10" />
         </state>
       </provider>
     </entry>
@@ -443,25 +472,8 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/bin/initial/colordropdown.js" />
-    <entry file="file://$PROJECT_DIR$/docs/bin/graphtool/wordcloud.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="479">
-          <caret line="80" column="36" lean-forward="true" selection-start-line="80" selection-start-column="36" selection-end-line="80" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/docs/bin/maploader.js" />
     <entry file="file://$PROJECT_DIR$/docs/bin/interaction.js" />
-    <entry file="file://$PROJECT_DIR$/docs/bin/map/func/arcgis.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/lib/platform-impl.jar!/resources/html5-schema/html5/common.rnc">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="592">
@@ -489,16 +501,6 @@
           <caret line="51" column="25" lean-forward="true" selection-start-line="51" selection-start-column="25" selection-end-line="51" selection-end-column="84" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/docs/html/map_bubble.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="553">
-          <caret line="76" column="24" selection-start-line="76" selection-start-column="24" selection-end-line="76" selection-end-column="71" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -535,13 +537,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="612">
           <caret line="67" column="71" selection-start-line="67" selection-start-column="71" selection-end-line="67" selection-end-column="71" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/docs/html/graph_wordcloud.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="702">
-          <caret line="75" column="71" selection-start-line="75" selection-start-column="71" selection-end-line="75" selection-end-column="71" />
         </state>
       </provider>
     </entry>
@@ -598,16 +593,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/docs/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="877">
-            <caret line="65" column="43" selection-start-line="65" selection-start-column="43" selection-end-line="65" selection-end-column="43" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/docs/bin/map/func/areaselect.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="414">
@@ -618,109 +603,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/docs/bin/strategy/segmentation.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3006">
-          <caret line="170" column="12" selection-start-line="170" selection-start-column="12" selection-end-line="170" selection-end-column="41" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/docs/bin/dropdown.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1908">
-          <caret line="109" column="4" selection-start-line="109" selection-start-column="4" selection-end-line="109" selection-end-column="4" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/docs/html/strategy_segmentation_analysis.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3276">
-          <caret line="182" column="48" selection-start-line="182" selection-start-column="40" selection-end-line="182" selection-end-column="48" />
-          <folding>
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#h4#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#h4#0;n#div#0;n#div#0;n#div#1;n#div#1;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#h4#0;n#div#1;n#div#0;n#div#1;n#div#1;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#h4#0;n#div#2;n#div#1;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/docs/bin/map/func/geohash.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="37" column="10" selection-start-line="37" selection-start-column="10" selection-end-line="37" selection-end-column="10" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/docs/html/map_geohash.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1944">
-          <caret line="108" selection-start-line="108" selection-end-line="109" />
-          <folding>
-            <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/docs/bin/map/layer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1062">
-          <caret line="62" column="78" lean-forward="true" selection-start-line="62" selection-start-column="78" selection-end-line="62" selection-end-column="78" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/docs/bin/map/func/bubble.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="792">
-          <caret line="47" column="38" lean-forward="true" selection-start-line="47" selection-start-column="38" selection-end-line="47" selection-end-column="38" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/docs/bin/map/basic.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="113" column="46" lean-forward="true" selection-start-line="113" selection-start-column="46" selection-end-line="113" selection-end-column="46" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/docs/bin/map/func/pointer.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="702">
-          <caret line="39" column="17" selection-start-line="39" selection-start-column="4" selection-end-line="39" selection-end-column="17" />
+        <state relative-caret-position="288">
+          <caret line="16" column="57" selection-start-line="16" selection-start-column="57" selection-end-line="16" selection-end-column="57" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/docs/html/map_pointer.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1399">
-          <caret line="148" column="90" selection-start-line="148" selection-start-column="78" selection-end-line="148" selection-end-column="90" />
         </state>
       </provider>
     </entry>
@@ -734,12 +623,229 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/docs/bin/utilcommon.js">
+    <entry file="file://$PROJECT_DIR$/docs/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="1170">
+            <caret line="65" column="43" selection-start-line="65" selection-start-column="43" selection-end-line="65" selection-end-column="43" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/bin/map/func/arcgis.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="70" column="17" lean-forward="true" selection-start-line="70" selection-start-column="17" selection-end-line="70" selection-end-column="17" />
+        <state relative-caret-position="126">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/bin/map/func/geohash.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/html/map_geohash.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="119" column="22" selection-start-line="119" selection-start-column="22" selection-end-line="119" selection-end-column="22" />
+          <folding>
+            <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/bin/map/func/bubble.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="774">
+          <caret line="43" column="54" lean-forward="true" selection-start-line="43" selection-start-column="54" selection-end-line="43" selection-end-column="54" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/html/map_bubble.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="157">
+          <caret line="126" column="24" lean-forward="true" selection-start-line="126" selection-start-column="24" selection-end-line="126" selection-end-column="118" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/html/graph_wordcloud.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="454">
+          <caret line="126" column="29" lean-forward="true" selection-start-line="124" selection-start-column="21" selection-end-line="126" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/bin/utilcommon.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="490">
+          <caret line="237" column="30" lean-forward="true" selection-start-line="237" selection-start-column="30" selection-end-line="237" selection-end-column="30" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/bin/graphtool/wordcloud.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="18" column="23" selection-start-line="18" selection-start-column="23" selection-end-line="18" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/bin/strategy/segmentation.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="31" column="14" selection-start-line="31" selection-start-column="14" selection-end-line="31" selection-end-column="14" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/html/map_pointer.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="16" column="106" selection-start-line="16" selection-start-column="33" selection-end-line="16" selection-end-column="106" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.dom.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="533">
+          <caret line="9849" column="13" lean-forward="true" selection-start-line="9849" selection-start-column="13" selection-end-line="9849" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/bin/map/layer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="836">
+          <caret line="81" column="79" lean-forward="true" selection-start-line="76" selection-start-column="12" selection-end-line="81" selection-end-column="79" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/bin/map/object/bubble.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="7" selection-start-line="1" selection-start-column="7" selection-end-line="1" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/bin/map/object/circle.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="7" selection-start-line="1" selection-start-column="7" selection-end-line="1" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/bin/map/object/geohash.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="14" selection-start-line="1" selection-start-column="14" selection-end-line="1" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/bin/map/object/label.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/bin/map/object/polygon.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="14" selection-start-line="1" selection-start-column="14" selection-end-line="1" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/bin/map/basic.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="764">
+          <caret line="232" column="7" lean-forward="true" selection-start-line="232" selection-start-column="7" selection-end-line="232" selection-end-column="7" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/bin/map/object/text.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/html/strategy_segmentation_analysis.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="16" column="71" selection-start-line="16" selection-start-column="71" selection-end-line="16" selection-end-column="106" />
+          <folding>
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#h4#0;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#h4#0;n#div#0;n#div#0;n#div#1;n#div#1;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#h4#0;n#div#1;n#div#0;n#div#1;n#div#1;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#h4#0;n#div#2;n#div#1;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/bin/dropdown.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1962">
+          <caret line="109" column="4" selection-start-line="109" selection-start-column="4" selection-end-line="109" selection-end-column="4" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/bin/map/object/marker.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="13" column="29" lean-forward="true" selection-start-line="13" selection-start-column="29" selection-end-line="13" selection-end-column="29" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/test.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1404">
+          <caret line="78" column="57" lean-forward="true" selection-start-line="78" selection-start-column="57" selection-end-line="78" selection-end-column="57" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
