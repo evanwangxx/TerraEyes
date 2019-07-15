@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2ce75f86-6e78-4352-a6a2-f81e92c92d9d" name="Default Changelist" comment="">
+<<<<<<< Updated upstream
       <change afterPath="$PROJECT_DIR$/docs/bin/map/object/bubble.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/docs/bin/map/object/circle.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/docs/bin/map/object/geohash.js" afterDir="false" />
@@ -17,6 +18,10 @@
       <change beforePath="$PROJECT_DIR$/docs/html/map_bubble.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/html/map_bubble.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/html/map_geohash.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/html/map_geohash.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/html/map_pointer.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/html/map_pointer.html" afterDir="false" />
+=======
+      <change afterPath="$PROJECT_DIR$/docs/REBUILD_README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+>>>>>>> Stashed changes
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -66,6 +71,7 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
+<<<<<<< Updated upstream
         <entry file="file://$PROJECT_DIR$/docs/bin/map/object/marker.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="234">
@@ -83,6 +89,12 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1404">
               <caret line="78" column="57" lean-forward="true" selection-start-line="78" selection-start-column="57" selection-end-line="78" selection-end-column="57" />
+=======
+        <entry file="file://$PROJECT_DIR$/docs/bin/dropdown.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1962">
+              <caret line="109" column="4" selection-start-line="109" selection-start-column="4" selection-end-line="109" selection-end-column="4" />
+>>>>>>> Stashed changes
               <folding>
                 <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -91,6 +103,7 @@
           </provider>
         </entry>
       </file>
+<<<<<<< Updated upstream
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/docs/bin/dropdown.js">
           <provider selected="true" editor-type-id="text-editor">
@@ -99,6 +112,16 @@
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
+=======
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/docs/REBUILD_README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="54">
+                <caret line="3" column="12" selection-start-line="3" selection-start-column="12" selection-end-line="3" selection-end-column="12" />
+              </first_editor>
+              <second_editor />
+>>>>>>> Stashed changes
             </state>
           </provider>
         </entry>
@@ -122,6 +145,7 @@
           </provider>
         </entry>
       </file>
+<<<<<<< Updated upstream
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/docs/bin/map/object/bubble.js">
           <provider selected="true" editor-type-id="text-editor">
@@ -182,6 +206,8 @@
           </provider>
         </entry>
       </file>
+=======
+>>>>>>> Stashed changes
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -267,6 +293,7 @@
         <option value="$PROJECT_DIR$/docs/bin/strategy/segmentation.js" />
         <option value="$PROJECT_DIR$/docs/bin/map/basic.js" />
         <option value="$PROJECT_DIR$/docs/bin/utilcommon.js" />
+<<<<<<< Updated upstream
         <option value="$PROJECT_DIR$/docs/html/map_pointer.html" />
         <option value="$PROJECT_DIR$/docs/bin/map/func/pointer.js" />
         <option value="$PROJECT_DIR$/docs/html/map_geohash.html" />
@@ -281,6 +308,9 @@
         <option value="$PROJECT_DIR$/docs/bin/map/object/circle.js" />
         <option value="$PROJECT_DIR$/docs/bin/map/object/marker.js" />
         <option value="$PROJECT_DIR$/docs/test.html" />
+=======
+        <option value="$PROJECT_DIR$/docs/REBUILD_README.md" />
+>>>>>>> Stashed changes
       </list>
     </option>
   </component>
@@ -321,6 +351,7 @@
               <item name="Terra-Eyes" type="462c0819:PsiDirectoryNode" />
               <item name="docs" type="462c0819:PsiDirectoryNode" />
               <item name="bin" type="462c0819:PsiDirectoryNode" />
+<<<<<<< Updated upstream
               <item name="map" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -330,6 +361,9 @@
               <item name="bin" type="462c0819:PsiDirectoryNode" />
               <item name="map" type="462c0819:PsiDirectoryNode" />
               <item name="object" type="462c0819:PsiDirectoryNode" />
+=======
+              <item name="map" type="462c0819:PsiDirectoryNode" />
+>>>>>>> Stashed changes
             </path>
             <path>
               <item name="Terra-Eyes" type="b2602c69:ProjectViewProjectNode" />
@@ -403,13 +437,20 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< Updated upstream
     <option name="totallyTimeSpent" value="75732000" />
+=======
+    <option name="totallyTimeSpent" value="66166000" />
+>>>>>>> Stashed changes
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1096" height="1936" extended-state="6" />
-    <editor active="true" />
     <layout>
+<<<<<<< Updated upstream
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16824196" />
+=======
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19848771" />
+>>>>>>> Stashed changes
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -655,6 +696,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/html/map_geohash.html">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
         <state relative-caret-position="414">
           <caret line="119" column="22" selection-start-line="119" selection-start-column="22" selection-end-line="119" selection-end-column="22" />
           <folding>
@@ -667,6 +709,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="774">
           <caret line="43" column="54" lean-forward="true" selection-start-line="43" selection-start-column="54" selection-end-line="43" selection-end-column="54" />
+=======
+        <state relative-caret-position="1962">
+          <caret line="109" column="4" selection-start-line="109" selection-start-column="4" selection-end-line="109" selection-end-column="4" />
+>>>>>>> Stashed changes
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
@@ -675,8 +721,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/html/map_bubble.html">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
         <state relative-caret-position="157">
           <caret line="126" column="24" lean-forward="true" selection-start-line="126" selection-start-column="24" selection-end-line="126" selection-end-column="118" />
+=======
+        <state relative-caret-position="288">
+          <caret line="16" column="71" selection-start-line="16" selection-start-column="71" selection-end-line="16" selection-end-column="106" />
+>>>>>>> Stashed changes
           <folding>
             <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
@@ -847,6 +898,16 @@
             <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/REBUILD_README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="54">
+            <caret line="3" column="12" selection-start-line="3" selection-start-column="12" selection-end-line="3" selection-end-column="12" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
