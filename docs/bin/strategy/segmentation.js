@@ -234,9 +234,9 @@ function runSegmentation(pointer, geohashData = GEOHASH_JSON, polyData = POLYGON
                     if (path.length !== 0) {
                         let containOrNot = polygon.getBounds().contains(center);
                         console.log(containOrNot, typeof containOrNot);
-                        if (containOrNot == True) {
+                        if (containOrNot == true) {
                             sumOfGeohashInBound = sumOfGeohashInBound + parseInt(rawScore);
-                            console.log(sumOfGeohashInBound, rawScore)
+                            console.log(sumOfGeohashInBound, rawScore, containOrNot)
                         }
                     }
                 }
