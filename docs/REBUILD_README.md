@@ -15,7 +15,7 @@ time：2019/07/15
      2. 使用 git/ Github-Desktop，将 项目P pull 至本地 （每次修改前都需要 pull）
      3. 本地修改，本地测试通过
      4. git/Github-Desktop commit 项目P, push 其至本人项目中
-     5. 线上发起 merge： 申请将本人项目 merge 至 主项目的 test-environment brunch
+     5. 线上发起 merge： 申请将本人项目 merge 至 主项目的 test-environment branch
      6. approve 后 merge 至测试环境主干，修改结束，反之重新修改
 
 
