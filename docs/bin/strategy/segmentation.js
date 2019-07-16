@@ -227,16 +227,16 @@ function runSegmentation(pointer, geohashData = GEOHASH_JSON, polyData = POLYGON
                     let geohash = dataGeohashFilter[i]["geohash"];
                     let rawScore = dataGeohashFilter[i]["score"];
 
-                    this.box = decodeGeoHash(geohash);
+                    let box = decodeGeoHash(geohash);
                     let center = new qq.maps.LatLng(
-                        (this.box.latitude[1] + this.box.latitude[0]) / 2.0, (this.box.longitude[1] + this.box.longitude[0]) / 2);
+                        (box.latitude[1] + box.latitude[0]) / 2.0, (box.longitude[1] + box.longitude[0]) / 2);
 
                     if (path.length !== 0) {
                         let containOrNot = polygon.getBounds().contains(center);
-                        console.log(containOrNot, typeof containOrNot);
+                        console.log(geohash, containOrNot, typeof containOrNot);
                         if (containOrNot == true) {
                             sumOfGeohashInBound = sumOfGeohashInBound + parseInt(rawScore);
-                            console.log(sumOfGeohashInBound, rawScore, containOrNot)
+                            console.log(i, geohash, sumOfGeohashInBound, rawScore, containOrNot)
                         }
                     }
                 }
