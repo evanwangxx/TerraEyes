@@ -9,13 +9,18 @@ const Text = class {
         this.height = 900;
         this.color = "#000";
         this.fontWeight = "dash";
-        this.backgroundColor = null
+        this.fontSize = "4";
+        this.backgroundColor = null;
     };
 
-    setText(center, text, fontSize = "4", elementId = "visible-text") {
+    setFontSize(size) {
+        this.fontSize = size.toString();
+    };
+
+    addText(center, text, elementId = "visible-text") {
         let cssP = {
             color: this.color,
-            fontSize: fontSize + "px",
+            fontSize: this.fontSize + "px",
             fontWeight: this.fontWeight,
             backgroundColor: this.backgroundColor
         };
