@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>设置text属性</title>
+    <script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp&key=DDNBZ-VUNKF-VVJJA-NSN2B-66R5H-VFF23"></script>
+
+</head>
+
+<body onLoad="init()">
+<button id="visible-text" type="button" class="btn btn-default btn-sm">显示全量文本信息</button>
+<script>
+    function init() {
+        const Text = class {
+            constructor(map) {
+                this.map = map;
+                this.height = 900;
+                this.color = "#000";
+                this.fontWeight = "dash";
+                this.fontSize = "4";
+                this.backgroundColor = null;
+            };
+
+            setFontSize(size) {
+                this.fontSize = size.toString();
+            };
+
+            addText(center, text, elementId = "visible-text") {
+                let cssP = {
+                    color: this.color,
+                    fontSize: this.fontSize + "px",
+                    fontWeight: this.fontWeight,
+                    backgroundColor: this.backgroundColor
+                };
+
+                let textBlock = new qq.maps.Label({
+                    position: center,
+                    map: this.map,
+                    content: text,
+                    zIndex: this.height
+                });
+
+                textBlock.setStyle(cssP);
+
+                try {
+                    let visibleF = document.getElementById(elementId);
+                    qq.maps.event.addDomListener(visibleF, "click", function () {
+                        if (textBlock.getVisible()) {
+                            textBlock.setVisible(false);
+                        } else {
+                            textBlock.setVisible(true);
+                        }
+                    });
+                } catch (err) {
+                    console.log(err.message);
+                }
+            }
+        };
+
+
+        var center = new qq.maps.LatLng(39.982163, 116.306070);
+        var map = new qq.maps.Map(document.getElementById("container"), {
+            center: center,
+            zoom: 13
+        });
+
+        var text = new Text(map);
+        text.addText(center, "test", elementId = "visible-text");
+        center = new qq.maps.LatLng(39.983163, 116.303070);
+        text.setFontSize(30);
+        text.addText(center, "hhaa", elementId = "visible-text");
+    }
+
+</script>
+<div style="width:603px;height:300px" id="container"></div>
+
+</body>
+</html>
