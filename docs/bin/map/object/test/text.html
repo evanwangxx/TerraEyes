@@ -15,16 +15,15 @@
 <script>
     function init() {
         const Text = class {
-            constructor(map, elementId="visible-text") {
+            constructor(map) {
                 this.map = map;
                 this.height = 900;
                 this.color = "#000";
                 this.fontWeight = "dash";
-                this.backgroundColor = null;
-                this.elementId = elementId
+                this.backgroundColor = null
             };
 
-            setText(center, text, fontSize="4") {
+            setText(center, text, fontSize = "4", elementId = "visible-text") {
                 let cssP = {
                     color: this.color,
                     fontSize: fontSize + "px",
@@ -41,18 +40,17 @@
 
                 textBlock.setStyle(cssP);
 
-                try{
-                    let visibleF = document.getElementById(this.elementId);
-                    qq.maps.event.addDomListener(visibleF, "click", function() {
+                try {
+                    let visibleF = document.getElementById(elementId);
+                    qq.maps.event.addDomListener(visibleF, "click", function () {
                         if (textBlock.getVisible()) {
                             textBlock.setVisible(false);
                         } else {
                             textBlock.setVisible(true);
                         }
                     });
-                }
-                catch (err) {
-                    console.log(err.message)
+                } catch (err) {
+                    console.log(err.message);
                 }
             }
         };
@@ -63,7 +61,7 @@
             zoom: 13
         });
 
-        var text = new Text(map, elementId="viible-text");
+        var text = new Text(map, elementId = "viible-text");
         text.setText(center, "test");
     }
 
