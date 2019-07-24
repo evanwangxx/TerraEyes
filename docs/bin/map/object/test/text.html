@@ -22,13 +22,20 @@
                 this.fontWeight = "dash";
                 this.fontSize = "4";
                 this.backgroundColor = null;
+                this.elementId = "visible-text"
             };
 
             setFontSize(size) {
                 this.fontSize = size.toString();
             };
 
-            addText(center, text, elementId = "visible-text") {
+            /**
+             * 添加文案
+             *
+             * @param {Object} center 需添加文案的位置，经纬度点qq.maps.LatLng
+             * @param {string} text 具体文案
+             */
+            addText(center, text) {
                 let cssP = {
                     color: this.color,
                     fontSize: this.fontSize + "px",
@@ -46,7 +53,7 @@
                 textBlock.setStyle(cssP);
 
                 try {
-                    let visibleF = document.getElementById(elementId);
+                    let visibleF = document.getElementById(this.elementId);
                     qq.maps.event.addDomListener(visibleF, "click", function () {
                         if (textBlock.getVisible()) {
                             textBlock.setVisible(false);
@@ -60,7 +67,6 @@
             }
         };
 
-
         var center = new qq.maps.LatLng(39.982163, 116.306070);
         var map = new qq.maps.Map(document.getElementById("container"), {
             center: center,
@@ -68,14 +74,14 @@
         });
 
         var text = new Text(map);
-        text.addText(center, "test", elementId = "visible-text");
+        text.addText(center, "test");
         center = new qq.maps.LatLng(39.983163, 116.303070);
         text.setFontSize(30);
-        text.addText(center, "hhaa", elementId = "visible-text");
+        text.addText(center, "hhaa");
     }
 
 </script>
-<div style="width:603px;height:300px" id="container"></div>
+<div style="width:1200px;height:800px" id="container"></div>
 
 </body>
 </html>

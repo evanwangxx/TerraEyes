@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>设置polygon属性</title>
+    <script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp&key=DDNBZ-VUNKF-VVJJA-NSN2B-66R5H-VFF23"></script>
+
+</head>
+<body onLoad="init()">
+<button id="visible-polygon" type="button" class="btn btn-default btn-sm">显示多边形</button>
+
+<script>
+    function init() {
+        const Polygon = class {
+            constructor(map) {
+                this.map = map;
+                this.height = 900;
+                this.strokeWeight = 2;
+                this.zIndex = 100;
+                this.elementId = "visible-polygon";
+            };
+
+            setStrokeWeight(strokeWeight) {
+                this.strokeWeight = parseInt(strokeWeight);
+            };
+
+            setElementId(elementId) {
+                this.elementId = elementId;
+            };
+
+            setZIndex(zIndex) {
+                this.zIndex = parseInt(zIndex);
+            };
+
+            /**
+             * 绘制多边形
+             *
+             * @param {Array} polygonArray 多边形经纬度点组成的数组
+             * @param {string} color 边框和区域的填充颜色
+             * @param {number} fillOpacity 区域填充的不透明度，取值[0, 1]，1表示完全不透明
+             */
+            addPolygon(polygonArray, color, fillOpacity) {
+                let polygon = new qq.maps.Polygon({
+                    map: this.map,
+                    path: polygonArray,
+                    strokeColor: color,
+                    strokeWeight: this.strokeWeight,
+                    fillColor: qq.maps.Color.fromHex(color, fillOpacity),
+                    zIndex: this.zIndex
+                });
+
+                try {
+                    let visible = document.getElementById(this.elementId);
+                    qq.maps.event.addDomListener(visible, "click", function () {
+                        polygon.setMap(map);
+                        if (polygon.getVisible()) {
+                            polygon.setVisible(false)
+                        } else {
+                            polygon.setVisible(true)
+                        }
+                    });
+                } catch (err) {
+                    console.log(err.message);
+                }
+            }
+        };
+
+        // 地图初始化
+        var center = new qq.maps.LatLng(39.922296, 116.392233);
+        var map = new qq.maps.Map(document.getElementById("container"), {
+            center: center,
+            zoom: 13
+        });
+
+        // 准备多边形测试数据
+        var polygonStr = "39.922296,116.392233;39.913343,116.392490;39.913080,116.401674;39.922362,116.402275";
+        var pointArr = polygonStr.split(';');
+        var polygonArr = new Array();
+        for(var i=0; i<pointArr.length; i++){
+            point = pointArr[i].split(',');
+            lat = parseFloat(point[0]);
+            lng = parseFloat(point[1]);
+            var point = new qq.maps.LatLng(lat,lng);
+            polygonArr.push(point);
+        }
+
+        // 绘制多边形
+        var polygon = new Polygon(map);
+        // polygon.setElementId('null');
+        // polygon.setStrokeWeight(6);
+        polygon.addPolygon(polygonArr, '#FFB90F', 0.5);
+    }
+</script>
+<div style="width:1200px;height:800px" id="container"></div>
+
+</body>
+</html>

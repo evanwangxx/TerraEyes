@@ -11,13 +11,20 @@ const Text = class {
         this.fontWeight = "dash";
         this.fontSize = "4";
         this.backgroundColor = null;
+        this.elementId = "visible-text"
     };
 
     setFontSize(size) {
         this.fontSize = size.toString();
     };
 
-    addText(center, text, elementId = "visible-text") {
+    /**
+     * 添加文案
+     *
+     * @param {Object} center 需添加文案的位置，经纬度点qq.maps.LatLng
+     * @param {string} text 具体文案
+     */
+    addText(center, text) {
         let cssP = {
             color: this.color,
             fontSize: this.fontSize + "px",
@@ -35,7 +42,7 @@ const Text = class {
         textBlock.setStyle(cssP);
 
         try {
-            let visibleF = document.getElementById(elementId);
+            let visibleF = document.getElementById(this.elementId);
             qq.maps.event.addDomListener(visibleF, "click", function () {
                 if (textBlock.getVisible()) {
                     textBlock.setVisible(false);
