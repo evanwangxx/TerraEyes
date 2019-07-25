@@ -5,6 +5,7 @@
 // Copyright © 1998 - 2019 Tencent. All Rights Reserved.
 
 const Bubble = class {
+    // 这里的level不确定是否是必须要的
     constructor(map, level) {
         this.map = map;
         this.height = 1000;
@@ -26,6 +27,12 @@ const Bubble = class {
         this.strokColor = strokColor
     }
 
+    /**
+     * 绘制气泡图
+     *
+     * @param {object} point 经纬度点 
+     * @param {number} radius 气泡的半径 
+     */
     setBubble(point, radius) {
         let level = this.level;
         let option = {
@@ -46,6 +53,11 @@ const Bubble = class {
         });
     }
 
+    /**
+     * 绘制多个气泡图
+     *
+     * @param {array} data 例子:[{lat:31, lng:32, radius:100}]
+     */
     setBubbleLayer(data){
         for (var i = 0; i < data.length; i++) {
             let row = data[i];
