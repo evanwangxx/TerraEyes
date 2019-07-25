@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>设置label属性</title>
+    <script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp&key=DDNBZ-VUNKF-VVJJA-NSN2B-66R5H-VFF23"></script>
+
+</head>
+
+<body onLoad="init()">
+<button id="visible-label" type="button" class="btn btn-default btn-sm">显示label</button>
+
+<script>
+    function init() {
+        const Label = class {
+            constructor(map, elementId="visible-label") {
+                this.map = map;
+                this.height = 1000;
+                this.style = {color: "#242424", fontWeight: "bold"};
+                this.elementId = elementId
+            }
+
+            setLabel(center, text) {
+                let label = new qq.maps.Label({
+                    map: this.map,
+                    position: center,
+                    zIndex: this.height,
+                    content: text,
+                    style: this.style
+                });
+
+                let visible = document.getElementById(this.elementId);
+                qq.maps.event.addDomListener(visible, "click", function () {
+                    label.setMap(map);
+                    if (label.getVisible()) {
+                        label.setVisible(false)
+                    } else {
+                        label.setVisible(true)
+                    }
+                });
+            }
+
+            setLabelLayer(data) {
+                for (var i = 0; i < data.length; i++) {
+                    let row = data[i];
+                    let center = new qq.maps.LatLng(row.lat, row.lng);
+                    let text = row.text;
+                    this.setLabel(center, text);
+                }
+            }
+        };
+
+        var center = new qq.maps.LatLng(39.982163, 116.306070);
+        var map = new qq.maps.Map(document.getElementById("container"), {
+            center: center,
+            zoom: 13
+        });
+
+        var data = [
+            {lat: 39.982163, lng: 116.306070, text: "cdd"},
+            {lat: 39.962152, lng: 116.306071, text: "a"},
+            {lat: 39.975141, lng: 116.306072, text: "b"},
+            {lat: 39.989130, lng: 116.306073, text: "c"},
+            {lat: 39.981119, lng: 116.306074, text: "d"}];
+        var label = new Label(map, elementId="visible-label");
+        label.setLabel(center, "test");
+        label.setLabelLayer(data)
+    }
+
+</script>
+<div style="width:603px;height:300px" id="container"></div>
+
+</body>
+</html>
