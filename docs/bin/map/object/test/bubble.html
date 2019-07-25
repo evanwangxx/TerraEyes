@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>设置bubble属性</title>
+    <script charset="utf-8" src="https://map.qq.com/api/js?v=2.exp&key=DDNBZ-VUNKF-VVJJA-NSN2B-66R5H-VFF23"></script>
+
+</head>
+
+<body onLoad="init()">
+<script>
+    function init() { 
+        const Bubble = class {
+            constructor(map, level) {
+                this.map = map;
+                this.height = 1000;
+                this.strokeWeight = 0;
+                this.strokColor = "#FA5858";
+                this.level = level;
+                this.alpha = 0.5
+            }
+
+            setAlpha(alpha){
+                this.alpha = parseFloat(alpha)
+            }
+
+            setStrokeWeight(strokeWeight){
+                this.strokeWeight = parseFloat(strokeWeight)
+            }
+
+            setStrokColor(strokColor){
+                this.strokColor = strokColor
+            }
+
+            setBubble(point, radius) {
+                let level = this.level;
+                let option = {
+                    map: this.map,
+                    center: point,
+                    radius: radius,
+                    strokColor: qq.maps.Color.fromHex(this.strokColor, this.alpha),
+                    strokWeight: this.strokeWeight,
+                    visible: true,
+                    fillColor: qq.maps.Color.fromHex(this.strokColor, this.alpha)
+                };
+
+                qq.maps.event.addListener(new qq.maps.Circle(option), 'click', function () {
+                    let info = new qq.maps.InfoWindow({map: this.map});
+                    info.open();
+                    info.setContent('<div style="text-align:center;white-space:nowrap;' + 'margin:10px;">' + "量级：" + level + "<br>半径：" + radius.toFixed(2) + '</div>');
+                    info.setPosition(point);
+                });
+            }
+
+            setBubbleLayer(data){
+                for (var i = 0; i < data.length; i++) {
+                    let row = data[i];
+                    let point = new qq.maps.LatLng(row.lat, row.lng);
+                    let radius = row.radius;
+                    this.setBubble(point, radius);
+                }
+            }
+        };   
+
+        var center = new qq.maps.LatLng(39.982163, 116.306070);
+        var map = new qq.maps.Map(document.getElementById("container"), {
+            center: center,
+            zoom: 13
+        });
+
+        var data = [
+            {lat: 39.982163, lng: 116.306070, radius: 700},
+            {lat: 39.962152, lng: 116.306071, radius: 800},
+            {lat: 39.975141, lng: 116.306072, radius: 1300},
+            {lat: 39.989130, lng: 116.306073, radius: 2200},
+            {lat: 39.981119, lng: 116.306074, radius: 1400}];
+        var bubble = new Bubble(map, 9);
+        // bubble.setBubble(center, 1000);
+        bubble.setAlpha(0.2)
+        bubble.setStrokeWeight(3)
+        bubble.setBubbleLayer(data)
+    }
+
+</script>
+<div style="width:603px;height:300px" id="container"></div>
+
+</body>
+</html>
