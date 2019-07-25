@@ -1,5 +1,6 @@
 // bubble.js
 // map-bubble library for TerraEyes
+// (c) 2019 Hongbo Wang
 // (c) 2019 Lynxchen
 // Copyright © 1998 - 2019 Tencent. All Rights Reserved.
 
