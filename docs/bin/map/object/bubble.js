@@ -9,7 +9,7 @@ const Bubble = class {
         this.map = map;
         this.height = 700;
         this.strokeWeight = 0;
-        this.strokColor = "#FA5858";
+        this.strokeColor = "#FA5858";
         this.alpha = 0.5
     }
 
@@ -21,8 +21,8 @@ const Bubble = class {
         this.strokeWeight = parseFloat(strokeWeight)
     }
 
-    setStrokColor(strokColor){
-        this.strokColor = strokColor
+    setStrokeColor(strokeColor){
+        this.strokeColor = strokeColor
     }
 
     /**
@@ -31,16 +31,15 @@ const Bubble = class {
      * @param {object} point 经纬度点 
      * @param {number} radius 气泡的半径 
      */
-    setBubble(point, radius) {
-        let level = this.level;
+    addBubble(point, radius) {
         let option = {
             map: this.map,
             center: point,
             radius: radius,
-            strokColor: qq.maps.Color.fromHex(this.strokColor, this.alpha),
-            strokWeight: this.strokeWeight,
+            strokeColor: qq.maps.Color.fromHex(this.strokeColor, this.alpha),
+            strokeWeight: this.strokeWeight,
             visible: true,
-            fillColor: qq.maps.Color.fromHex(this.strokColor, this.alpha)
+            fillColor: qq.maps.Color.fromHex(this.strokeColor, this.alpha)
         };
 
         qq.maps.event.addListener(new qq.maps.Circle(option), 'click', function () {
@@ -56,12 +55,12 @@ const Bubble = class {
      *
      * @param {array} data 例子:[{lat:31, lng:32, radius:100}]
      */
-    setBubbleLayer(data){
+    addBubbleLayer(data){
         for (var i = 0; i < data.length; i++) {
             let row = data[i];
             let point = new qq.maps.LatLng(row.lat, row.lng);
             let radius = row.radius;
-            this.setBubble(point, radius);
+            this.addBubble(point, radius);
         }
     }
 };   

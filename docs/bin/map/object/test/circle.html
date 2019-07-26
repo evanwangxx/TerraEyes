@@ -64,7 +64,7 @@
             }
 
             addCircleLayer(data, option="other") {
-                for (var i = 0; i < data.length; i++) {
+                for (let i = 0; i < data.length; i++) {
                     let row = data[i];
                     let center = new qq.maps.LatLng(row.lat, row.lng);
                     let radius = row.radius;
@@ -77,19 +77,19 @@
             }
         };
 
-        var center = new qq.maps.LatLng(39.982163, 116.306070);
-        var map = new qq.maps.Map(document.getElementById("container"), {
+        let center = new qq.maps.LatLng(39.982163, 116.306070);
+        let map = new qq.maps.Map(document.getElementById("container"), {
             center: center,
             zoom: 13
         });
 
-        var data = [
+        let data = [
             {lat: 39.982163, lng: 116.306070, radius: 100},
             {lat: 39.962152, lng: 116.306071, radius: 200},
             {lat: 39.975141, lng: 116.306072, radius: 300},
             {lat: 39.989130, lng: 116.306073, radius: 200},
             {lat: 39.981119, lng: 116.306074, radius: 100}];
-        var circle = new Circle(map, 'other');
+        let circle = new Circle(map, 'other');
 
         // circle.addCircle(center, 1000);
         circle.addCircleLayer(data)

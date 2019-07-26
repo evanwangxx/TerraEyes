@@ -12,13 +12,13 @@
 
 <body onLoad="init()">
 <script>
-    function init() { 
+    function init() {
         const Bubble = class {
             constructor(map, level) {
                 this.map = map;
                 this.height = 700;
                 this.strokeWeight = 0;
-                this.strokColor = "#FA5858";
+                this.strokeColor = "#FA5858";
                 this.alpha = 0.5
             }
 
@@ -30,20 +30,25 @@
                 this.strokeWeight = parseFloat(strokeWeight)
             }
 
-            setStrokColor(strokColor){
-                this.strokColor = strokColor
+            setStrokeColor(strokeColor){
+                this.strokeColor = strokeColor
             }
 
+            /**
+             * 绘制气泡图
+             *
+             * @param {object} point 经纬度点
+             * @param {number} radius 气泡的半径
+             */
             addBubble(point, radius) {
-                let level = this.level;
                 let option = {
                     map: this.map,
                     center: point,
                     radius: radius,
-                    strokColor: qq.maps.Color.fromHex(this.strokColor, this.alpha),
-                    strokWeight: this.strokeWeight,
+                    strokeColor: qq.maps.Color.fromHex(this.strokeColor, this.alpha),
+                    strokeWeight: this.strokeWeight,
                     visible: true,
-                    fillColor: qq.maps.Color.fromHex(this.strokColor, this.alpha)
+                    fillColor: qq.maps.Color.fromHex(this.strokeColor, this.alpha)
                 };
 
                 qq.maps.event.addListener(new qq.maps.Circle(option), 'click', function () {
@@ -54,15 +59,20 @@
                 });
             }
 
+            /**
+             * 绘制多个气泡图
+             *
+             * @param {array} data 例子:[{lat:31, lng:32, radius:100}]
+             */
             addBubbleLayer(data){
                 for (var i = 0; i < data.length; i++) {
                     let row = data[i];
                     let point = new qq.maps.LatLng(row.lat, row.lng);
                     let radius = row.radius;
-                    this.setBubble(point, radius);
+                    this.addBubble(point, radius);
                 }
             }
-        };   
+        };
 
         var center = new qq.maps.LatLng(39.982163, 116.306070);
         var map = new qq.maps.Map(document.getElementById("container"), {
@@ -79,7 +89,7 @@
         var bubble = new Bubble(map, 9);
         // bubble.setBubble(center, 1000);
         bubble.setAlpha(0.2)
-        bubble.addStrokeWeight(3)
+        bubble.setStrokeWeight(3)
         bubble.addBubbleLayer(data)
     }
 

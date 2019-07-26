@@ -55,7 +55,7 @@ const Circle = class {
     }
 
     addCircleLayer(data, option="other") {
-        for (var i = 0; i < data.length; i++) {
+        for (let i = 0; i < data.length; i++) {
             let row = data[i];
             let center = new qq.maps.LatLng(row.lat, row.lng);
             let radius = row.radius;
