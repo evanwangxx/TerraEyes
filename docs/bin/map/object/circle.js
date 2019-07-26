@@ -5,26 +5,28 @@
 // Copyright © 1998 - 2019 Tencent. All Rights Reserved.
 
 const Circle = class {
-    constructor(map, option = "other") {
+    constructor(map) {
         this.map = map;
         this.height = 1000;
         this.strokeWeight = 1;
         this.fillWeight = 0.05;
-        this.option = option
+        this.color = "FA5858"
     }
 
-    setFillWeight(fillWeight){
+    setFillWeight(fillWeight) {
         this.fillWeight = parseInt(fillWeight)
     }
 
-    setStrokeWeight(strokeWeight){
+    setStrokeWeight(strokeWeight) {
         this.strokeWeight = parseInt(strokeWeight)
     }
 
+    setColor(color){
+        this.color = color
+    }
 
-    setCircle(center, radius, color = '#FA5858') {
-        if (this.option === 'dashcircle') {
-            this.option = {
+    addDashCircle(center, radius) {
+        let option = {
                 map: this.map,
                 center: center,
                 radius: radius,
@@ -32,29 +34,36 @@ const Circle = class {
                 strokeDashStyle: 'dash',
                 cursor: 'pointer',
                 visible: true,
-                fillColor: qq.maps.Color.fromHex(color, this.fillWeight),
+                fillColor: qq.maps.Color.fromHex(this.color, this.fillWeight),
                 zIndex: this.height
-            }
-        } else {
-            this.option = {
-                map: this.map,
-                center: center,
-                radius: radius,
-                strokeColor: color,
-                fillColor: null,
-                strokeDashStyle: 'dash',
-                strokeWeight: this.strokeWeight
-            }
-        };
-        new qq.maps.Circle(this.option)
+            };
+        new qq.maps.Circle(option)
+
     }
 
-    setCircleLayer(data) {
+    addCircle(center, radius) {
+        let option = {
+            map: this.map,
+            center: center,
+            radius: radius,
+            strokeColor: this.color,
+            fillColor: null,
+            strokeDashStyle: 'dash',
+            strokeWeight: this.strokeWeight
+        };
+        new qq.maps.Circle(option)
+    }
+
+    addCircleLayer(data, option="other") {
         for (var i = 0; i < data.length; i++) {
             let row = data[i];
             let center = new qq.maps.LatLng(row.lat, row.lng);
             let radius = row.radius;
-            this.setCircle(center, radius);
+            if (option === "dashcircle") {
+                this.addDashCircle(center, radius)
+            } else {
+                this.addCircle(center, radius)
+            }
         }
     }
 };

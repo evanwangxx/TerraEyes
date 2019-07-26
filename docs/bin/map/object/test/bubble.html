@@ -16,10 +16,9 @@
         const Bubble = class {
             constructor(map, level) {
                 this.map = map;
-                this.height = 1000;
+                this.height = 700;
                 this.strokeWeight = 0;
                 this.strokColor = "#FA5858";
-                this.level = level;
                 this.alpha = 0.5
             }
 
@@ -35,7 +34,7 @@
                 this.strokColor = strokColor
             }
 
-            setBubble(point, radius) {
+            addBubble(point, radius) {
                 let level = this.level;
                 let option = {
                     map: this.map,
@@ -50,12 +49,12 @@
                 qq.maps.event.addListener(new qq.maps.Circle(option), 'click', function () {
                     let info = new qq.maps.InfoWindow({map: this.map});
                     info.open();
-                    info.setContent('<div style="text-align:center;white-space:nowrap;' + 'margin:10px;">' + "量级：" + level + "<br>半径：" + radius.toFixed(2) + '</div>');
+                    info.setContent('<div style="text-align:center;white-space:nowrap;' + 'margin:10px;">' + "<br>半径：" + radius.toFixed(2) + '</div>');
                     info.setPosition(point);
                 });
             }
 
-            setBubbleLayer(data){
+            addBubbleLayer(data){
                 for (var i = 0; i < data.length; i++) {
                     let row = data[i];
                     let point = new qq.maps.LatLng(row.lat, row.lng);
@@ -80,8 +79,8 @@
         var bubble = new Bubble(map, 9);
         // bubble.setBubble(center, 1000);
         bubble.setAlpha(0.2)
-        bubble.setStrokeWeight(3)
-        bubble.setBubbleLayer(data)
+        bubble.addStrokeWeight(3)
+        bubble.addBubbleLayer(data)
     }
 
 </script>

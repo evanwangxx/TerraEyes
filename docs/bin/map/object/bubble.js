@@ -5,13 +5,11 @@
 // Copyright © 1998 - 2019 Tencent. All Rights Reserved.
 
 const Bubble = class {
-    // 这里的level不确定是否是必须要的
     constructor(map, level) {
         this.map = map;
-        this.height = 1000;
+        this.height = 700;
         this.strokeWeight = 0;
         this.strokColor = "#FA5858";
-        this.level = level;
         this.alpha = 0.5
     }
 
@@ -48,7 +46,7 @@ const Bubble = class {
         qq.maps.event.addListener(new qq.maps.Circle(option), 'click', function () {
             let info = new qq.maps.InfoWindow({map: this.map});
             info.open();
-            info.setContent('<div style="text-align:center;white-space:nowrap;' + 'margin:10px;">' + "量级：" + level + "<br>半径：" + radius.toFixed(2) + '</div>');
+            info.setContent('<div style="text-align:center;white-space:nowrap;' + 'margin:10px;">' + "<br>半径：" + radius.toFixed(2) + '</div>');
             info.setPosition(point);
         });
     }
