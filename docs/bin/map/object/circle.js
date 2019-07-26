@@ -59,7 +59,7 @@ const Circle = class {
             let row = data[i];
             let center = new qq.maps.LatLng(row.lat, row.lng);
             let radius = row.radius;
-            if (option === "dashcircle") {
+            if (option === "dashCircle") {
                 this.addDashCircle(center, radius)
             } else {
                 this.addCircle(center, radius)
