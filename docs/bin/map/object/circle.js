@@ -7,10 +7,11 @@
 const Circle = class {
     constructor(map) {
         this.map = map;
-        this.height = 1000;
+        this.height = 700;
         this.strokeWeight = 1;
-        this.fillWeight = 0.05;
-        this.color = "FA5858"
+        this.color = "FA5858";
+        this.fillWeight = 0.5;
+        this.visibleElementId = "visible-circle";
     }
 
     setFillWeight(fillWeight) {
@@ -21,24 +22,8 @@ const Circle = class {
         this.strokeWeight = parseInt(strokeWeight)
     }
 
-    setColor(color){
+    setColor(color) {
         this.color = color
-    }
-
-    addDashCircle(center, radius) {
-        let option = {
-                map: this.map,
-                center: center,
-                radius: radius,
-                strokeWeight: this.strokeWeight,
-                strokeDashStyle: 'dash',
-                cursor: 'pointer',
-                visible: true,
-                fillColor: qq.maps.Color.fromHex(this.color, this.fillWeight),
-                zIndex: this.height
-            };
-        new qq.maps.Circle(option)
-
     }
 
     addCircle(center, radius) {
@@ -48,17 +33,50 @@ const Circle = class {
             radius: radius,
             strokeColor: this.color,
             fillColor: null,
-            strokeDashStyle: 'dash',
-            strokeWeight: this.strokeWeight
+            strokeWeight: this.strokeWeight,
+            zIndex: this.height
         };
-        new qq.maps.Circle(option)
+        let circle = new qq.maps.Circle(option);
+
+        try {
+            let visible = document.getElementById(this.visibleElementId);
+            setVisibleOption(visible, circle, "click");
+        } catch (err) {
+            console.log(err.message);
+        }
+
+        return circle
     }
 
-    addCircleLayer(data, option="other") {
+    addDashCircle(center, radius) {
+        let option = {
+            map: this.map,
+            center: center,
+            radius: radius,
+            strokeWeight: this.strokeWeight,
+            strokeDashStyle: 'dash',
+            cursor: 'pointer',
+            fillColor: qq.maps.Color.fromHex(this.color, this.fillWeight),
+            zIndex: this.height
+        };
+        let dashCircle = new qq.maps.Circle(option);
+
+        try {
+            let visible = document.getElementById(this.visibleElementId);
+            setVisibleOption(visible, dashCircle, "click");
+        } catch (err) {
+            console.log(err.message);
+        }
+
+        return dashCircle
+    }
+
+    addCircleLayer(data, option = "other") {
         for (let i = 0; i < data.length; i++) {
             let row = data[i];
             let center = new qq.maps.LatLng(row.lat, row.lng);
             let radius = row.radius;
+
             if (option === "dashCircle") {
                 this.addDashCircle(center, radius)
             } else {

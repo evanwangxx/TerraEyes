@@ -39,21 +39,22 @@ time：2019/07/15
         util: lynx + neptune
         converter: xipeng + neptune
     
-#####p1: 07/29 - 08/11： 进行所有功能的融合，完成初步功能使用
+#####p1: 07/29 - 08/19： 进行所有功能的融合，完成初步功能使用
 
-    * map
-        气泡图
-        多边形
-        geohash 热力图
-        arg 热力图
+    * job
+        坐标转换： neptune (pointer.js)
+        气泡图: lynx (bubble.js)
+        多边形: lynx, neptune  (polygon.js + areaselect.js)
+        geohash 热力图: xipeng  (geohash.js)
+        arg 热力图: lynx  (arcgis.js)
         
     * graph
-        词云图
-        circus
+        词云图: neptune  
+        circus: neptune
     
     * strategy
-        圈层分析
+        圈层分析: neptunewang + lynx
 
-#####p2：08/11 - 08/26： 修改 UI，完成相应使用文档
+#####p2：08/20 - 08/26： 修改 UI，完成相应使用文档
 
     * TBD

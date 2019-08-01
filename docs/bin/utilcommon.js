@@ -4,56 +4,59 @@
 // Copyright © 1998 - 2019 Tencent. All Rights Reserved.
 
 
-function getIconPath() {
-    const js = document.scripts;
-    let path = js[js.length - 1].src.substring(0, js[js.length - 1].src.lastIndexOf("/"));
-    path = path.substring(0, path.lastIndexOf("bin")) + "/css/icon/";
 
-    return path
-}
 
 // Data statistics and sort
-function average(data) {
-    let sum = data.reduce(function (sum, value) {
-        return sum + value;
-    }, 0);
-    return sum / data.length
-}
-
-function standardDeviation(values) {
-    let avg = average(values);
-    let squareDiffs = values.map(function (value) {
-        let diff = value - avg;
-        return diff * diff
-    });
-    let avgSquareDiff = average(squareDiffs);
-    return Math.sqrt(avgSquareDiff)
-}
-
-function quickSort(data, by = 'score') {
-    if (data.length <= 1) {
-        return data;
-    }
-    let pivotIndex = Math.floor(data.length / 2);
-    let pivot = data.splice(pivotIndex, 1)[0];
-    let left = [];
-    let right = [];
-
-    for (let i = 0; i < data.length; ++i) {
-        if (parseInt(data[i][by]) >= parseInt(pivot[by])) {
-            left.push(data[i]);
-        } else {
-            right.push(data[i]);
-        }
-    }
-
-    return quickSort(left).concat([pivot], quickSort(right));
-}
+// function average(data) {
+//     let sum = data.reduce(function (sum, value) {
+//         return sum + value;
+//     }, 0);
+//     return sum / data.length
+// }
+//
+// function standardDeviation(values) {
+//     let avg = average(values);
+//     let squareDiffs = values.map(function (value) {
+//         let diff = value - avg;
+//         return diff * diff
+//     });
+//     let avgSquareDiff = average(squareDiffs);
+//     return Math.sqrt(avgSquareDiff)
+// }
+//
+// function quickSort(data, by = 'score') {
+//     if (data.length <= 1) {
+//         return data;
+//     }
+//     let pivotIndex = Math.floor(data.length / 2);
+//     let pivot = data.splice(pivotIndex, 1)[0];
+//     let left = [];
+//     let right = [];
+//
+//     for (let i = 0; i < data.length; ++i) {
+//         if (parseInt(data[i][by]) >= parseInt(pivot[by])) {
+//             left.push(data[i]);
+//         } else {
+//             right.push(data[i]);
+//         }
+//     }
+//
+//     return quickSort(left).concat([pivot], quickSort(right));
+// }
 
 
 // data interaction
-let TEXT_DATA;
 
+// function getIconPath() {
+// //     const js = document.scripts;
+// //     let path = js[js.length - 1].src.substring(0, js[js.length - 1].src.lastIndexOf("/"));
+// //     path = path.substring(0, path.lastIndexOf("bin")) + "/css/icon/";
+// //
+// //     return path
+// // }
+// //
+// // let TEXT_DATA;
+// //
 function getPasteText(table_id = "#trans_data") {
     $("text-input").ready(function () {
         let text = $.trim($("textarea").val());
@@ -156,7 +159,7 @@ function userInputLatLng() {
     return [Number(lat), Number(lng)];
 }
 
-function $$(str) {
+function $(str) {
     return document.getElementById(str);
 }
 
@@ -258,4 +261,16 @@ function clickMarkerList(id) {
     let index = myselect.selectedIndex;
     let marker = myselect.options[index].value;
     return Number(marker);
+}
+
+
+function covertPointListToPath(pointPathString, sep = "|") {
+    var all_point = pointPathString.split(sep);
+    var path = [];
+
+    for (var i = 0; i < all_point.length; i++) {
+        let point = all_point[i].split(";");
+        path.push(new qq.maps.LatLng(point[0], point[1]));
+    }
+    return path;
 }

@@ -11,7 +11,7 @@ const Marker = class {
         this.height = 1000
     }
 
-    setMarker(center, text) {
+    addMarker(center, text) {
         let marker = new qq.maps.Marker({
             map: this.map,
             position: center,
@@ -21,7 +21,7 @@ const Marker = class {
             // shadow: null
         });
 
-        qq.maps.event.addListener(marker, 'click', function () {
+        qq.maps.event.addDomListener(marker, 'click', function () {
             let info = new qq.maps.InfoWindow({map: map});
             info.open();
             info.setContent('<div style="text-align:center;white-space:nowrap;' + 'margin:10px;">' + text + '</div>');
@@ -29,11 +29,11 @@ const Marker = class {
         });
     }
 
-    setMarkerLayer(data) {
-        for (var i = 0; i < data.length; i++) {
+    addMarkerLayer(data) {
+        for (let i = 0; i < data.length; i++) {
             let row = data[i];
             let center = new qq.maps.LatLng(row.lat, row.lng);
-            let text = row.text;
+            let text = row.util;
             this.setMarker(center, text);
         }
 

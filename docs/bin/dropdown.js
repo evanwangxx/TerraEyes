@@ -1,9 +1,153 @@
-// DropDown.js
+// dropdown.js
 // Dropdown library for Terra Eyes
 // (c) 2018 Hongbo Wang
 // Copyright © 1998 - 2018 Tencent. All Rights Reserved.
 
 
+/**
+ * Drop-down menu Interactions
+ * @type {DataParser}
+ */
+LocationDropDown = class {
+    constructor() {
+        this.provinceMenu = $("province_dropdown");
+        this.cityMenu = $("city_dropdown");
+        this.district = $("country_dropdown");
+
+        this.currentLocationOutput = $("location_select_show");
+        this.currentLocation = {prov: "", city: "", country: ""};
+    }
+
+    showProvince() {
+        // BTN.disabled = false;
+        for (let i = 0; i < PROVINCE_CITY_COUNTRY.length; i++) {
+            let province_option = document.createElement("option");
+            province_option.innerText = PROVINCE_CITY_COUNTRY[i]["name"];
+            province_option.value = i;
+
+            this.provinceMenu.appendChild(province_option);
+        }
+    }
+
+    showCity(object) {
+        let value = object.options[object.selectedIndex].value;
+
+        if (value !== this.currentLocation.prov) {
+            this.currentLocation.prov = value;
+            this.currentLocationOutput.value = "";
+        }
+        if (value != null) {
+            CITY_DROPDOWN.length = 1;
+
+            for (let i = 0; i < PROVINCE_CITY_COUNTRY[value]["city"].length; i++) {
+                let city_option = document.createElement("option");
+                city_option.innerText = PROVINCE_CITY_COUNTRY[value]["city"][i].name;
+                city_option.value = i;
+                this.cityMenu.appendChild(city_option);
+            }
+        }
+    }
+
+    showCountry(object) {
+        let value = object.options[object.selectedIndex].value;
+        this.currentLocation.city = value;
+
+        if (value != null) {
+            let length = PROVINCE_CITY_COUNTRY[this.currentLocation.prov]["city"][value].districtAndCounty.length;
+
+            if (length === 0) {
+                this.currentLocationOutput.value = PROVINCE_CITY_COUNTRY[this.currentLocation.prov].name +
+                    PROVINCE_CITY_COUNTRY[this.currentLocation.prov]["city"][this.currentLocation.city].name;
+            }
+            // for (let i = 0; i < length; i++) {
+            //     let country_option = document.createElement("option");
+            //     country_option.innerText = PROVINCE_CITY_COUNTRY[this.currentLocation.prov]["city"][value].districtAndCounty[i];
+            //     country_option.value = i;
+            // }
+        }
+    }
+
+    selectCountry(object) {
+        this.currentLocation.country = object.options[object.selectedIndex].value;
+        if ((this.currentLocation.city != null)) {
+            BTN.disabled = false;
+        }
+    }
+};
+
+
+function getMenuValue(id) {
+    const myselect = document.getElementById(id);
+    let index = myselect.selectedIndex;
+    return myselect.options[index].value;
+}
+
+
+ColorDropDown = class {
+    constructor() {
+        this.colorDropDownId = "color-dd-menu";
+    };
+
+    initialColorMenu(defaultIndex = 6) {
+        const color_drop_down = document.getElementById(this.colorDropDownId);
+        for (let i = 0; i < CORLOR_DROP_DOWN.length; i++) {
+            color_drop_down.options
+                .add(new Option(CORLOR_DROP_DOWN[i].name, CORLOR_DROP_DOWN[i].length));
+            if (i === defaultIndex) {
+                color_drop_down.options[i].selected = true;
+            }
+        }
+    };
+};
+
+
+CircleDropDown = class {
+    constructor() {
+        this.circleId1 = "circle-dd-menu-1";
+        this.circleId2 = "circle-dd-menu-2";
+        this.circleId3 = "circle-dd-menu-3";
+    };
+
+    setCircleId(ids) {
+        this.circleId1 = ids[0];
+        this.circleId2 = ids[1];
+        this.circleId3 = ids[2];
+    }
+
+    selectCircleRadius() {
+        const dd = new DropDown();
+        let circleLength1 = dd.getMenuValue(this.circleId1);
+        let circleLength2 = dd.getMenuValue(this.circleId2);
+        let circleLength3 = dd.getMenuValue(this.circleId3);
+        return [Number(circleLength1), Number(circleLength2), Number(circleLength3)]
+    };
+
+    initialCircleMenu() {
+        let circleDropDownA = document.getElementById(this.circleId1);
+        let circleDropDownB = document.getElementById(this.circleId2);
+        let circleDropDownC = document.getElementById(this.circleId3);
+
+        for (let i = 0; i < CIRCLE_DROP_DOWN.length; i++) {
+            circleDropDownA.options.add(new Option(CIRCLE_DROP_DOWN[i].name, CIRCLE_DROP_DOWN[i].length));
+            circleDropDownB.options.add(new Option(CIRCLE_DROP_DOWN[i].name, CIRCLE_DROP_DOWN[i].length));
+            circleDropDownC.options.add(new Option(CIRCLE_DROP_DOWN[i].name, CIRCLE_DROP_DOWN[i].length));
+
+            if (i === 3) {
+                circleDropDownA.options[i].selected = true;
+            } else if (i === 5) {
+                circleDropDownB.options[i].selected = true;
+            } else if (i === 7) {
+                circleDropDownC.options[i].selected = true;
+            }
+        }
+    };
+};
+
+
+/**
+ * Drop-down data, DO NOT CHANGE STRUCTURE!
+ * @type {*[]}
+ */
 const CIRCLE_DROP_DOWN = [{
     name: "=无=",
     length: 0

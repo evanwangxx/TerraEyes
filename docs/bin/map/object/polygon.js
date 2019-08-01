@@ -43,14 +43,7 @@ const Polygon = class {
 
         try {
             let visible = document.getElementById(this.elementId);
-            qq.maps.event.addDomListener(visible, "click", function () {
-                polygon.setMap(map);
-                if (polygon.getVisible()) {
-                    polygon.setVisible(false)
-                } else {
-                    polygon.setVisible(true)
-                }
-            });
+            setVisibleOption(visible, polygon, "click")
         } catch (err) {
             console.log(err.message);
         }
@@ -62,12 +55,12 @@ const Polygon = class {
      *   [{"pointsArray": pointsArr1, "color": "#FEB90F", "fillOpacity": 0.5},
      *    {"pointsArray": pointsArr2, "color": "#FEB90F", "fillOpacity": 0.1}]
      * */
-    addLayerOfPolygon(polygonArray) {
+    addPolygonLayer(polygonArray) {
         for (let i = 0; i < polygonArray.length; i++) {
-            console.log(polygonArray[i])
-            let pointsArray = polygonArray[i]["pointsArray"];
-            let color = polygonArray[i]["color"];
-            let fillOpacity = parseFloat(polygonArray[i]["fillOpacity"]);
+            let unit = polygonArray[i];       // i-th unit
+            let pointsArray = unit["pointsArray"];
+            let color = unit["color"];
+            let fillOpacity = parseFloat(unit["fillOpacity"]);
             this.addPolygon(pointsArray, color, fillOpacity);
         }
     }

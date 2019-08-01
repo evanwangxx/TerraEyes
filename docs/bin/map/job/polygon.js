@@ -1,5 +1,5 @@
 // polygon.js
-// polygon func for TerraEyes
+// polygon job for TerraEyes
 // (c) 2019 Hongbo Wang, Xipeng Liu
 // Copyright © 1998 - 2019 Tencent. All Rights Reserved.
 

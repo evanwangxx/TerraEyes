@@ -39,10 +39,10 @@
             }
 
             setMarkerLayer(data) {
-                for (var i = 0; i < data.length; i++) {
+                for (let i = 0; i < data.length; i++) {
                     let row = data[i];
                     let center = new qq.maps.LatLng(row.lat, row.lng);
-                    let text = row.text;
+                    let text = row.util;
                     this.setMarker(center, text);
                 }
 

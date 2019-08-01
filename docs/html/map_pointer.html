@@ -134,14 +134,14 @@
             <table class="table table-striped" id="trans_data"></table>
             <div class="col-sm-3">
                 <label for="inputlg">半径</label>
-                <select id="pointer-map-dropdown-circle-a"></select>
-                <select id="pointer-map-dropdown-circle-b"></select>
-                <select id="pointer-map-dropdown-circle-c"></select>
+                <select id="circle-dd-menu-1"></select>
+                <select id="circle-dd-menu-2"></select>
+                <select id="circle-dd-menu-3"></select>
                 <span class="glyphicon glyphicon-info-sign" title="打点覆盖半径"></span>
             </div>
             <div class="col-sm-3">
                 <label for="inputlg">颜色</label>
-                <select id="pointer-map-dropdown-color"></select>
+                <select id="color-dd-menu"></select>
             </div>
             <div class="col-sm-6">
                 <select id="lat-lng-convert">
@@ -150,13 +150,6 @@
                     <option>转化为百度系（BD09）</option>
                 </select>
 
-                <!--                <button type="button" class="btn btn-primary btn-sm" onclick="getPasteText()"><span-->
-                <!--                        class="glyphicon glyphicon-share-alt"></span>转化数据-->
-                <!--                </button>-->
-
-                <!--                <button type="button" class="btn btn-primary btn-sm" onclick="runPoint()"><span-->
-                <!--                        class="glyphicon glyphicon-globe"></span>生成地图-->
-                <!--                </button>-->
                 <button id="pointer-map-parse-data" type="button" class="btn btn-primary btn-sm"><span
                         class="glyphicon glyphicon-share-alt"></span>转化数据
                 </button>
@@ -181,8 +174,7 @@
 <script src="https://d3js.org/d3.v5.min.js"></script>
 <script src="../bin/dropdown.js"></script>
 <script src="../bin/converter.js"></script>
-<script src="../bin/utilcommon.js"></script>
-<script src="../bin/map/basic.js"></script>
-<script src="../bin/map/layer.js"></script>
-<script src="../bin/map/func/pointer.js"></script>
+<script src="../bin/common.js"></script>
+<script src="../bin/map/object/marker.js"></script>
+<script src="../bin/map/job/pointer.js"></script>
 </html>
